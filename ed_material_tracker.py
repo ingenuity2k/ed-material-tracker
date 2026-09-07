@@ -54,7 +54,7 @@ FONT_TITLE = ("Consolas", 14, "bold")
 FONT_CAT   = ("Consolas", 11, "bold")
 FONT_HEAD  = ("Consolas", 9, "bold")
 
-__VERSION__ = "1.0.4-debug"
+__VERSION__ = "1.0.5"
 
 
 # ── Material Display Names ──────────────────────────────────────────────────
@@ -241,7 +241,6 @@ def pretty_name(raw: str) -> str:
 
 def parse_materials(entry: dict) -> dict:
     """Parse a Materials event into {category: {name: count}}."""
-    _dbg(f"\n=== parse_materials @ {datetime.now().isoformat()} ===")
     result = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
 
     for item in entry.get("Raw", []):
@@ -262,8 +261,6 @@ def parse_materials(entry: dict) -> dict:
         count = item.get("Count", 0)
         result["Manufactured"][name] = count
 
-    _dbg(f"Encoded names: {list(result['Encoded'].keys())}")
-    _dbg(f"Manufactured names: {list(result['Manufactured'].keys())}")
     return result
 
 
@@ -288,8 +285,15 @@ class MaterialTracker:
         self._build_tree()
         self._build_status()
 
-        # Ask for journal directory
-        self.root.after(100, self._pick_directory)
+        # Auto-detect journal directory, only prompt if not found
+        default = os.path.expandvars(r"%USERPROFILE%\Saved Games\Frontier Developments\Elite Dangerous")
+        if os.path.isdir(default):
+            self.journal_path = default
+            self.path_var.set(default if len(default) < 60 else "…" + default[-57:])
+            self.root.after(100, self._poll_once)
+            self._start_polling()
+        else:
+            self.root.after(100, self._pick_directory)
 
     # ── Styles ──────────────────────────────────────────────────────────────
 
