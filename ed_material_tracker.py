@@ -2,50 +2,30 @@
 """
 ED Material Tracker — Elite Dangerous Engineering Material Monitor
 Polls journal files every 5 minutes and displays material stock in a dark E:D-themed GUI.
+Applies MaterialTrade/MaterialCollected/MaterialDiscarded deltas on top of the last
+Materials snapshot so the display stays current between game loads.
 """
 
 import json
 import os
 import sys
 import glob
-import time
-import threading
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+from tkinter import ttk, filedialog
 from datetime import datetime
 
-_DEBUG_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "debug.log")
 
-# Clear debug log on startup
-try:
-    open(_DEBUG_LOG, "w").close()
-except OSError:
-    pass
-
-def _dbg(msg: str):
-    """Append debug line to debug.log."""
-    try:
-        with open(_DEBUG_LOG, "a", encoding="utf-8") as f:
-            f.write(msg + "\n")
-    except OSError:
-        pass
-
-
-# ── E:D Orange Dark Theme ───────────────────────────────────────────────────
+# ── Theme ───────────────────────────────────────────────────────────────────
 
 COLORS = {
-    "bg":           "#0d0d0d",
-    "bg_light":     "#1a1a1a",
-    "bg_panel":     "#141414",
-    "orange":       "#ff7100",
-    "orange_dim":   "#cc5a00",
-    "text":         "#e0e0e0",
-    "text_dim":     "#888888",
-    "text_bright":  "#ffffff",
-    "green":        "#00ff7f",
-    "row_even":     "#1a1a1a",
-    "row_odd":      "#141414",
-    "border":       "#2a2a2a",
+    "bg":          "#0d0d0d",
+    "bg_light":    "#1a1a1a",
+    "bg_panel":    "#141414",
+    "orange":      "#ff7100",
+    "orange_dim":  "#cc5a00",
+    "text":        "#e0e0e0",
+    "text_dim":    "#888888",
+    "text_bright": "#ffffff",
 }
 
 FONT       = ("Consolas", 10)
@@ -54,16 +34,28 @@ FONT_TITLE = ("Consolas", 14, "bold")
 FONT_CAT   = ("Consolas", 11, "bold")
 FONT_HEAD  = ("Consolas", 9, "bold")
 
-__VERSION__ = "1.0.5"
+__VERSION__ = "1.1.0"
+
+_DEBUG_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "debug.log")
+try:
+    open(_DEBUG_LOG, "w").close()
+except OSError:
+    pass
+
+def _dbg(msg: str):
+    try:
+        with open(_DEBUG_LOG, "a", encoding="utf-8") as f:
+            f.write(msg + "\n")
+    except OSError:
+        pass
 
 
-# ── Material Display Names ──────────────────────────────────────────────────
-# Key = journal internal name lowercased with spaces/underscores stripped.
-# Value = human-readable display name.
-# Based on actual Materials event journal data from ED v4.x+.
+# ── Material Names ──────────────────────────────────────────────────────────
+# ALL keys are lowercased with spaces AND underscores stripped.
+# The pretty_name function normalizes the same way before lookup.
 
 MATERIAL_NAMES: dict[str, str] = {
-    # ── Raw ──
+    # Raw
     "carbon": "Carbon", "iron": "Iron", "nickel": "Nickel",
     "phosphorus": "Phosphorus", "sulphur": "Sulphur", "lead": "Lead",
     "rhenium": "Rhenium", "chromium": "Chromium", "manganese": "Manganese",
@@ -72,19 +64,19 @@ MATERIAL_NAMES: dict[str, str] = {
     "ruthenium": "Ruthenium", "tin": "Tin", "tungsten": "Tungsten",
     "mercury": "Mercury", "niobium": "Niobium", "zirconium": "Zirconium",
     "tellurium": "Tellurium", "arsenic": "Arsenic", "antimony": "Antimony",
-    # ── Encoded — Wake ──
+    # Encoded — Wake
     "disruptedwakeechoes": "Atypical Disrupted Wake Echoes",
     "fsdtelemetry": "Anomalous FSD Telemetry",
     "wakesolutions": "Strange Wake Solutions",
     "hyperspacetrajectories": "Eccentric Hyperspace Trajectories",
     "dataminedwake": "Datamined Wake Exceptions",
-    # ── Encoded — Shield ──
+    # Encoded — Shield
     "shieldcyclerecordings": "Distorted Shield Cycle Recordings",
     "shieldpatternanalysis": "Aberrant Shield Pattern Analysis",
     "shielddensityreports": "Unexpected Shield Data",
     "shieldsoakanalysis": "Inconsistent Shield Soak Analysis",
     "shieldfrequencydata": "Decoded Shield Data",
-    # ── Encoded — Scan ──
+    # Encoded — Scan
     "modifiedconsumerfirmware": "Modified Consumer Firmware",
     "compactscandata": "Compact Scan Data",
     "bulkscandata": "Anomalous Bulk Scan Data",
@@ -95,14 +87,14 @@ MATERIAL_NAMES: dict[str, str] = {
     "specialisedlegacyfirmware": "Specialised Legacy Firmware",
     "taggedencryptioncodes": "Tagged Encryption Codes",
     "unusualencryptedfiles": "Unusual Encrypted Files",
-    # ── Encoded — Emission ──
+    # Encoded — Emission
     "scrambledemissiondata": "Exceptional Scrambled Emission Data",
     "archivedemissiondata": "Irregular Emission Data",
     "emissiondata": "Unexpected Emission Data",
     "decodedemissiondata": "Decoded Emission Data",
     "compactemissionsdata": "Abnormal Compact Emissions Data",
     "securityfirmware": "Security Firmware Patch",
-    # ── Encoded — Firmware ──
+    # Encoded — Firmware
     "crackedindustrialfirmware": "Cracked Industrial Firmware",
     "modifiedembeddedfirmware": "Modified Embedded Firmware",
     "consumerfirmware": "Consumer Firmware",
@@ -110,83 +102,80 @@ MATERIAL_NAMES: dict[str, str] = {
     "embeddedfirmware": "Embedded Firmware",
     "adaptiveencryptors": "Adaptive Encryptors Capture",
     "encryptionarchives": "Tagged Encryption Codes",
-    # ── Encoded — Guardian Ancient ──
+    # Encoded — Guardian Ancient
     "ancienthistoricaldata": "Guardian Historical Data",
     "ancientbiologicaldata": "Guardian Biological Data",
     "ancienttechnologicaldata": "Guardian Technological Data",
     "ancientlanguagedata": "Guardian Language Data",
     "ancientculturaldata": "Guardian Cultural Data",
-    # ── Manufactured — Chemical ──
+    # Manufactured — Chemical
     "chemicalstorageunits": "Chemical Storage Units",
     "chemicalprocessors": "Chemical Processors",
     "chemicaldistillery": "Chemical Distillery",
     "chemicalmanipulators": "Chemical Manipulators",
     "chemicalworkshop": "Chemical Workshop",
-    # ── Manufactured — Thermic ──
+    # Manufactured — Thermic
     "heatconductionwiring": "Heat Conduction Wiring",
     "heatdispersionplate": "Heat Dispersion Plate",
     "heatexchangers": "Heat Exchangers",
     "heatvanes": "Heat Vanes",
     "protoheatradiators": "Proto Heat Radiators",
-    # ── Manufactured — Alloys ──
+    # Manufactured — Alloys
     "temperedalloys": "Tempered Alloys",
     "precipitatedalloys": "Precipitated Alloys",
     "salvagedalloys": "Salvaged Alloys",
     "galvanisingalloys": "Galvanising Alloys",
     "phasealloys": "Phase Alloys",
-    # ── Manufactured — Focus Crystals ──
+    # Manufactured — Focus Crystals
     "refinedfocuscrystals": "Refined Focus Crystals",
     "exquisitefocuscrystals": "Exquisite Focus Crystals",
     "dazzlingfocuscrystals": "Dazzling Focus Crystals",
     "focuscrystals": "Focus Crystals",
     "uncutfocuscrystals": "Flawed Focus Crystals",
     "crystalshards": "Crystal Shards",
-    # ── Manufactured — Conductive ──
+    # Manufactured — Conductive
     "basicconductors": "Basic Conductors",
     "conductivecomponents": "Conductive Components",
     "conductiveceramics": "Conductive Ceramics",
     "conductivepolymers": "Conductive Polymers",
-    # ── Manufactured — Mechanical ──
+    # Manufactured — Mechanical
     "mechanicalscrap": "Mechanical Scrap",
     "mechanicalequipment": "Mechanical Equipment",
     "mechanicalcomponents": "Mechanical Components",
     "configurablecomponents": "Configurable Components",
-    # ── Manufactured — Shielding ──
+    # Manufactured — Shielding
     "wornshieldemitters": "Worn Shield Emitters",
     "shieldemitters": "Shield Emitters",
     "shieldingsensors": "Shielding Sensors",
     "compoundshielding": "Compound Shielding",
-    # ── Manufactured — High Tech ──
+    # Manufactured — High Tech
     "gridresistors": "Grid Resistors",
     "hybridcapacitors": "Hybrid Capacitors",
     "electrochemicalarrays": "Electrochemical Arrays",
     "polymercapacitors": "Polymer Capacitors",
     "militarysupercapacitors": "Military Supercapacitors",
-    # ── Manufactured — Composites ──
+    # Manufactured — Composites
     "highdensitycomposites": "High Density Composites",
     "proprietorycomposites": "Proprietary Composites",
     "proprietarycomposites": "Proprietary Composites",
     "imperialshielding": "Imperial Shielding",
     "coredynamicscomposites": "Core Dynamics Composites",
     "fedcorecomposites": "Core Dynamics Composites",
-    # ── Manufactured — Proto ──
+    # Manufactured — Proto
     "protoradiolicalloys": "Proto Radiolic Alloys",
     "protolightalloys": "Proto Light Alloys",
-    # ── Manufactured — Bio ──
+    # Manufactured — Bio
     "biotechconductors": "Biotech Conductors",
     "pharmaceuticalisolators": "Pharmaceutical Isolators",
-    # ── Manufactured — Guardian ──
+    # Manufactured — Guardian (all underscore variants normalized)
     "guardianpowerconduit": "Guardian Power Conduit",
     "guardiantechnologycomponent": "Guardian Technology Component",
+    "guardiantechcomponent": "Guardian Technology Component",
     "guardianpowercell": "Guardian Power Cell",
     "guardianwreckagecomponents": "Guardian Wreckage Components",
+    "guardiansentinelwreckagecomponents": "Guardian Wreckage Components",
     "guardiansentinelweaponparts": "Guardian Sentinel Weapon Parts",
-    "guardian_powerconduit": "Guardian Power Conduit",
-    "guardian_techcomponent": "Guardian Technology Component",
-    "guardian_powercell": "Guardian Power Cell",
-    "guardian_sentinel_wreckagecomponents": "Guardian Wreckage Components",
-    "guardian_sentinel_weaponparts": "Guardian Sentinel Weapon Parts",
-    # ── Manufactured — Thargoid / Misc ──
+    # Manufactured — Thargoid / Misc
     "sensorfragment": "Sensor Fragment",
     "unknowntechnology": "Unknown Technology",
     "unknowncarapace": "Unknown Carapace",
@@ -195,17 +184,45 @@ MATERIAL_NAMES: dict[str, str] = {
     "unknownfragment": "Unknown Fragment",
 }
 
+# Category detection for MaterialTrade events (maps Category field → our bucket)
+_CAT_MAP = {
+    "$MICRORESOURCE_category_raw;": "Raw",
+    "$MICRORESOURCE_category_encoded;": "Encoded",
+    "$MICRORESOURCE_category_manufactured;": "Manufactured",
+}
 
-# ── Journal Parser ───────────────────────────────────────────────────────────
 
-def find_latest_materials_event(journal_path: str) -> dict | None:
-    """Scan journal files for the most recent Materials event."""
+# ── Helpers ─────────────────────────────────────────────────────────────────
+
+def pretty_name(raw: str) -> str:
+    key = raw.strip().replace(" ", "").replace("_", "").lower()
+    result = MATERIAL_NAMES.get(key)
+    if result is not None:
+        return result
+    result = raw.strip().replace("_", " ").title()
+    _dbg(f"MISS: {raw!r} -> key={key!r} -> fallback={result!r}")
+    return result
+
+
+def _classify(item: dict) -> str | None:
+    """Return 'Raw'/'Encoded'/'Manufactured' from a journal item's Category field."""
+    cat = item.get("Category", "")
+    return _CAT_MAP.get(cat)
+
+
+# ── Journal Scan ────────────────────────────────────────────────────────────
+
+def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
+    """Return current material stock by applying deltas on top of the latest
+    Materials snapshot, scanning all journal files chronologically."""
     pattern = os.path.join(journal_path, "Journal.*.log")
     files = sorted(glob.glob(pattern))
     if not files:
-        return None
+        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}
 
-    latest = None
+    # Phase 1: find the LATEST Materials snapshot across all files
+    snapshot: dict | None = None
+    snapshot_file: str | None = None
     for fpath in reversed(files):
         try:
             with open(fpath, "r", encoding="utf-8") as f:
@@ -218,57 +235,107 @@ def find_latest_materials_event(journal_path: str) -> dict | None:
                     except json.JSONDecodeError:
                         continue
                     if entry.get("event") == "Materials":
-                        latest = entry
-            if latest:
-                return latest
+                        snapshot = entry
+                        snapshot_file = fpath
+                        break
+            if snapshot:
+                break
         except OSError:
             continue
-    return latest
 
+    if not snapshot:
+        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}
 
-def pretty_name(raw: str) -> str:
-    """Convert journal internal name to human-readable display name.
-    Strips spaces and underscores, lowercases, then looks up in table.
-    Falls back to title case if not found.
-    """
-    key = raw.strip().replace(" ", "").replace("_", "").lower()
-    result = MATERIAL_NAMES.get(key, None)
-    if result is None:
-        result = raw.strip().replace("_", " ").title()
-        _dbg(f"MISS: {raw!r} -> key={key!r} -> fallback={result!r}")
-    return result
+    # Parse snapshot into mutable stock dict  {display_name: (category, count)}
+    stock: dict[str, tuple[str, int]] = {}
+    for cat in ("Raw", "Encoded", "Manufactured"):
+        for item in snapshot.get(cat, []):
+            name = pretty_name(item.get("Name", "Unknown"))
+            count = item.get("Count", 0)
+            stock[name] = (cat, count)
 
+    # Phase 2: scan forward from snapshot for delta events
+    snapshot_ts = snapshot.get("timestamp", "")
+    # Files to scan: snapshot file onward
+    files_to_scan = files[files.index(snapshot_file):] if snapshot_file in files else files
 
-def parse_materials(entry: dict) -> dict:
-    """Parse a Materials event into {category: {name: count}}."""
-    result = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
+    for fpath in files_to_scan:
+        try:
+            with open(fpath, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        entry = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    event = entry.get("event", "")
+                    ts = entry.get("timestamp", "")
 
-    for item in entry.get("Raw", []):
-        raw_name = item.get("Name", "Unknown")
-        name = pretty_name(raw_name)
-        count = item.get("Count", 0)
-        result["Raw"][name] = count
+                    # Only process events AFTER the snapshot
+                    if fpath == snapshot_file and ts <= snapshot_ts:
+                        continue
 
-    for item in entry.get("Encoded", []):
-        raw_name = item.get("Name", "Unknown")
-        name = pretty_name(raw_name)
-        count = item.get("Count", 0)
-        result["Encoded"][name] = count
+                    if event == "Materials":
+                        # New snapshot — reset stock
+                        stock.clear()
+                        for cat in ("Raw", "Encoded", "Manufactured"):
+                            for item in entry.get(cat, []):
+                                name = pretty_name(item.get("Name", "Unknown"))
+                                count = item.get("Count", 0)
+                                stock[name] = (cat, count)
 
-    for item in entry.get("Manufactured", []):
-        raw_name = item.get("Name", "Unknown")
-        name = pretty_name(raw_name)
-        count = item.get("Count", 0)
-        result["Manufactured"][name] = count
+                    elif event == "MaterialCollected":
+                        name = pretty_name(entry.get("Name", "Unknown"))
+                        cat = _classify(entry) or "Manufactured"
+                        qty = entry.get("Count", 1)
+                        if name in stock:
+                            old_cat, old_qty = stock[name]
+                            stock[name] = (old_cat, old_qty + qty)
+                        else:
+                            stock[name] = (cat, qty)
 
+                    elif event == "MaterialDiscarded":
+                        name = pretty_name(entry.get("Name", "Unknown"))
+                        cat = _classify(entry) or "Manufactured"
+                        qty = entry.get("Count", 1)
+                        if name in stock:
+                            old_cat, old_qty = stock[name]
+                            stock[name] = (old_cat, max(0, old_qty - qty))
+
+                    elif event == "MaterialTrade":
+                        paid = entry.get("Paid", {})
+                        received = entry.get("Received", {})
+                        if paid:
+                            pname = pretty_name(paid.get("Material", ""))
+                            pqty = paid.get("Quantity", 0)
+                            if pname in stock:
+                                old_cat, old_qty = stock[pname]
+                                stock[pname] = (old_cat, max(0, old_qty - pqty))
+                        if received:
+                            rname = pretty_name(received.get("Material", ""))
+                            rqty = received.get("Quantity", 0)
+                            rcat = _classify(received) or "Manufactured"
+                            if rname in stock:
+                                old_cat, old_qty = stock[rname]
+                                stock[rname] = (old_cat, old_qty + rqty)
+                            else:
+                                stock[rname] = (rcat, rqty)
+        except OSError:
+            continue
+
+    # Convert to {category: {name: count}}
+    result: dict[str, dict[str, int]] = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
+    for name, (cat, count) in stock.items():
+        if count > 0:
+            result[cat][name] = count
     return result
 
 
 # ── GUI ─────────────────────────────────────────────────────────────────────
 
 class MaterialTracker:
-    """Main application window."""
-
     def __init__(self):
         self.root = tk.Tk()
         self.root.title(f"ED Material Tracker v{__VERSION__}")
@@ -285,7 +352,7 @@ class MaterialTracker:
         self._build_tree()
         self._build_status()
 
-        # Auto-detect journal directory, only prompt if not found
+        # Auto-detect or prompt
         default = os.path.expandvars(r"%USERPROFILE%\Saved Games\Frontier Developments\Elite Dangerous")
         if os.path.isdir(default):
             self.journal_path = default
@@ -295,71 +362,45 @@ class MaterialTracker:
         else:
             self.root.after(100, self._pick_directory)
 
-    # ── Styles ──────────────────────────────────────────────────────────────
+    # ── Styles ──
 
     def _configure_styles(self):
         style = ttk.Style()
         style.theme_use("clam")
-
         style.configure(".", background=COLORS["bg"], foreground=COLORS["text"], font=FONT)
         style.configure("TFrame", background=COLORS["bg"])
         style.configure("TLabel", background=COLORS["bg"], foreground=COLORS["text"], font=FONT)
         style.configure("Title.TLabel", font=FONT_TITLE, foreground=COLORS["orange"])
         style.configure("Status.TLabel", font=FONT, foreground=COLORS["text_dim"])
         style.configure("Path.TLabel", font=("Consolas", 9), foreground=COLORS["text_dim"])
-
-        style.configure("TButton",
-                         background=COLORS["orange"],
-                         foreground=COLORS["text_bright"],
-                         font=FONT_BOLD,
-                         borderwidth=0,
-                         padding=(12, 6))
-        style.map("TButton",
-                  background=[("active", COLORS["orange_dim"])],
+        style.configure("TButton", background=COLORS["orange"], foreground=COLORS["text_bright"],
+                         font=FONT_BOLD, borderwidth=0, padding=(12, 6))
+        style.map("TButton", background=[("active", COLORS["orange_dim"])],
                   foreground=[("active", COLORS["text_bright"])])
-
-        style.configure("Treeview",
-                         background=COLORS["bg_light"],
-                         foreground=COLORS["text"],
-                         fieldbackground=COLORS["bg_light"],
-                         font=FONT,
-                         rowheight=22,
-                         borderwidth=0)
-        style.configure("Treeview.Heading",
-                         background=COLORS["bg_panel"],
-                         foreground=COLORS["orange"],
-                         font=FONT_HEAD,
-                         borderwidth=0)
-        style.map("Treeview",
-                  background=[("selected", COLORS["orange_dim"])],
+        style.configure("Treeview", background=COLORS["bg_light"], foreground=COLORS["text"],
+                         fieldbackground=COLORS["bg_light"], font=FONT, rowheight=22, borderwidth=0)
+        style.configure("Treeview.Heading", background=COLORS["bg_panel"],
+                         foreground=COLORS["orange"], font=FONT_HEAD, borderwidth=0)
+        style.map("Treeview", background=[("selected", COLORS["orange_dim"])],
                   foreground=[("selected", COLORS["text_bright"])])
 
-    # ── Toolbar ─────────────────────────────────────────────────────────────
+    # ── Toolbar ──
 
     def _build_toolbar(self):
         tb = ttk.Frame(self.root)
         tb.pack(fill=tk.X, padx=10, pady=(10, 0))
-
         ttk.Label(tb, text="◆ ED Material Tracker", style="Title.TLabel").pack(side=tk.LEFT)
-
         btn_frame = ttk.Frame(tb)
         btn_frame.pack(side=tk.RIGHT)
+        ttk.Button(btn_frame, text="⟳ Refresh", command=self._manual_refresh).pack(side=tk.LEFT, padx=(0, 6))
+        ttk.Button(btn_frame, text="📋 Copy JSON", command=self._export_json).pack(side=tk.LEFT, padx=(0, 6))
+        ttk.Button(btn_frame, text="📁 Change Dir", command=self._pick_directory).pack(side=tk.LEFT)
 
-        self.refresh_btn = ttk.Button(btn_frame, text="⟳ Refresh", command=self._manual_refresh)
-        self.refresh_btn.pack(side=tk.LEFT, padx=(0, 6))
-
-        self.export_btn = ttk.Button(btn_frame, text="📋 Copy JSON", command=self._export_json)
-        self.export_btn.pack(side=tk.LEFT, padx=(0, 6))
-
-        self.dir_btn = ttk.Button(btn_frame, text="📁 Change Dir", command=self._pick_directory)
-        self.dir_btn.pack(side=tk.LEFT)
-
-    # ── Tree ────────────────────────────────────────────────────────────────
+    # ── Tree ──
 
     def _build_tree(self):
         container = ttk.Frame(self.root)
         container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-
         self.tree = ttk.Treeview(container, columns=("qty", "bar"), show="tree headings", selectmode="none")
         self.tree.heading("#0", text="Material", anchor=tk.W)
         self.tree.heading("qty", text="Qty", anchor=tk.E)
@@ -367,69 +408,49 @@ class MaterialTracker:
         self.tree.column("#0", width=350, minwidth=200)
         self.tree.column("qty", width=50, minwidth=50, anchor=tk.E)
         self.tree.column("bar", width=200, minwidth=100)
-
         vsb = ttk.Scrollbar(container, orient=tk.VERTICAL, command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
-
-        # Tags
         self.tree.tag_configure("cat_raw",         font=FONT_CAT, foreground="#ff9e3d")
         self.tree.tag_configure("cat_encoded",     font=FONT_CAT, foreground="#ff7100")
         self.tree.tag_configure("cat_manufactured", font=FONT_CAT, foreground="#cc5a00")
         self.tree.tag_configure("item",            font=FONT,     foreground=COLORS["text"])
         self.tree.tag_configure("item_alt",        font=FONT,     foreground=COLORS["text_dim"])
 
-    # ── Status Bar ──────────────────────────────────────────────────────────
+    # ── Status ──
 
     def _build_status(self):
         sf = ttk.Frame(self.root)
         sf.pack(fill=tk.X, padx=10, pady=(0, 8))
-
         self.status_var = tk.StringVar(value="No journal loaded")
         self.path_var   = tk.StringVar(value="")
         self.timer_var  = tk.StringVar(value="")
-
         ttk.Label(sf, textvariable=self.status_var, style="Status.TLabel").pack(side=tk.LEFT)
         ttk.Label(sf, textvariable=self.timer_var,  style="Status.TLabel").pack(side=tk.RIGHT)
-        ttk.Label(sf, textvariable=self.path_var,    style="Path.TLabel").pack(side=tk.LEFT, padx=(12, 0))
+        ttk.Label(sf, textvariable=self.path_var,   style="Path.TLabel").pack(side=tk.LEFT, padx=(12, 0))
 
-    # ── Directory Picker ────────────────────────────────────────────────────
+    # ── Directory ──
 
     def _pick_directory(self):
         default = os.path.expandvars(r"%USERPROFILE%\Saved Games\Frontier Developments\Elite Dangerous")
         if not os.path.isdir(default):
             default = os.path.expanduser("~")
-
-        path = filedialog.askdirectory(
-            title="Select Elite Dangerous Journal Directory",
-            initialdir=default,
-        )
+        path = filedialog.askdirectory(title="Select ED Journal Directory", initialdir=default)
         if path:
             self.journal_path = path
-            short = path if len(path) < 60 else "…" + path[-57:]
-            self.path_var.set(short)
+            self.path_var.set(path if len(path) < 60 else "…" + path[-57:])
             self._poll_once()
             self._start_polling()
 
-    # ── Polling ─────────────────────────────────────────────────────────────
+    # ── Polling ──
 
     def _poll_once(self):
         if not self.journal_path:
             return
-        entry = find_latest_materials_event(self.journal_path)
-        if entry:
-            self.materials = parse_materials(entry)
-            ts = entry.get("timestamp", "")
-            try:
-                dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
-                ts = dt.strftime("%Y-%m-%d %H:%M:%S")
-            except (ValueError, AttributeError):
-                pass
-            total = sum(sum(v.values()) for v in self.materials.values())
-            self.status_var.set(f"✔ {total} materials loaded  |  Last journal: {ts}")
-        else:
-            self.status_var.set("⚠ No Materials event found — play ED and collect some mats!")
+        self.materials = scan_journal(self.journal_path)
+        total = sum(sum(v.values()) for v in self.materials.values())
+        self.status_var.set(f"✔ {total} materials tracked  |  Last scan: {datetime.now().strftime('%H:%M:%S')}")
         self._refresh_tree()
         self._update_countdown()
 
@@ -443,21 +464,18 @@ class MaterialTracker:
         if not self.polling:
             return
         self._poll_once()
-        self.root.after(300_000, self._schedule_poll)  # 5 min
+        self.root.after(300_000, self._schedule_poll)
 
     def _manual_refresh(self):
         self._poll_once()
 
     def _export_json(self):
-        """Fresh poll, then copy all materials as JSON to clipboard."""
         self._poll_once()
         export = {
             "timestamp": datetime.now().isoformat(),
             "journal_path": self.journal_path,
             "materials": self.materials,
-            "totals": {
-                cat: sum(mats.values()) for cat, mats in self.materials.items()
-            },
+            "totals": {cat: sum(mats.values()) for cat, mats in self.materials.items()},
         }
         blob = json.dumps(export, indent=2, ensure_ascii=False)
         self.root.clipboard_clear()
@@ -475,48 +493,26 @@ class MaterialTracker:
         self.timer_var.set(f"⟳ Next poll: {m}:{s:02d}")
         self.root.after(1000, self._tick_countdown, secs - 1)
 
-    # ── Tree Refresh ────────────────────────────────────────────────────────
+    # ── Tree Refresh ──
 
     def _refresh_tree(self):
         self.tree.delete(*self.tree.get_children())
-
-        cat_tags = {
-            "Raw":          "cat_raw",
-            "Encoded":      "cat_encoded",
-            "Manufactured": "cat_manufactured",
-        }
-
+        cat_tags = {"Raw": "cat_raw", "Encoded": "cat_encoded", "Manufactured": "cat_manufactured"}
         for cat in ("Raw", "Encoded", "Manufactured"):
             mats = self.materials.get(cat, {})
             if not mats:
                 continue
             total = sum(mats.values())
-            parent = self.tree.insert(
-                "", tk.END,
-                text=f"  {cat.upper()}  ({total})",
-                values=("", ""),
-                tags=(cat_tags[cat],),
-                open=True,
-            )
+            parent = self.tree.insert("", tk.END, text=f"  {cat.upper()}  ({total})",
+                                       values=("", ""), tags=(cat_tags[cat],), open=True)
             for i, (name, qty) in enumerate(sorted(mats.items())):
                 tag = "item_alt" if i % 2 else "item"
-                bar_len = min(qty, 100)
-                bar = "█" * (bar_len // 5) + "░" * (20 - bar_len // 5)
-                self.tree.insert(
-                    parent, tk.END,
-                    text=f"    {name}",
-                    values=(qty, bar),
-                    tags=(tag,),
-                )
-
-    # ── Run ─────────────────────────────────────────────────────────────────
+                bar = "█" * (min(qty, 100) // 5) + "░" * (20 - min(qty, 100) // 5)
+                self.tree.insert(parent, tk.END, text=f"    {name}", values=(qty, bar), tags=(tag,))
 
     def run(self):
         self.root.mainloop()
 
 
-# ── Entry Point ─────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
-    app = MaterialTracker()
-    app.run()
+    MaterialTracker().run()
