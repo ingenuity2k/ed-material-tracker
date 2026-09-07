@@ -158,6 +158,7 @@ MATERIAL_NAMES: dict[str, str] = {
     "highdensitycomposites": "High Density Composites",
     "proprietorycomposites": "Proprietary Composites",
     "proprietarycomposites": "Proprietary Composites",
+    "fedproprietarycomposites": "Proprietary Composites",
     "imperialshielding": "Imperial Shielding",
     "coredynamicscomposites": "Core Dynamics Composites",
     "fedcorecomposites": "Core Dynamics Composites",
