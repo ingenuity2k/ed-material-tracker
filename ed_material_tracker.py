@@ -155,22 +155,29 @@ def find_latest_materials_event(journal_path: str) -> dict | None:
     return latest
 
 
+def pretty_name(raw: str) -> str:
+    """Convert journal internal name to title case.
+    e.g. 'atypical disrupted wake echoes' → 'Atypical Disrupted Wake Echoes'
+    """
+    return raw.strip().title()
+
+
 def parse_materials(entry: dict) -> dict:
     """Parse a Materials event into {category: {name: count}}."""
     result = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
 
     for item in entry.get("Raw", []):
-        name = item.get("Name", "Unknown")
+        name = pretty_name(item.get("Name", "Unknown"))
         count = item.get("Count", 0)
         result["Raw"][name] = count
 
     for item in entry.get("Encoded", []):
-        name = item.get("Name", "Unknown")
+        name = pretty_name(item.get("Name", "Unknown"))
         count = item.get("Count", 0)
         result["Encoded"][name] = count
 
     for item in entry.get("Manufactured", []):
-        name = item.get("Name", "Unknown")
+        name = pretty_name(item.get("Name", "Unknown"))
         count = item.get("Count", 0)
         result["Manufactured"][name] = count
 
