@@ -40,12 +40,12 @@ FONT_HEAD  = ("Consolas", 9, "bold")
 
 
 # ── Material Display Names ──────────────────────────────────────────────────
-# Key = journal name lowercased with spaces stripped → value = display name.
-# Handles both spaced ("atypical disrupted wake echoes") and non-spaced
-# ("atypicaldisruptedwakeechoes") journal formats.
+# Key = journal internal name lowercased with spaces/underscores stripped.
+# Value = human-readable display name.
+# Based on actual Materials event journal data from ED v4.x+.
 
 MATERIAL_NAMES: dict[str, str] = {
-    # Raw
+    # ── Raw ──
     "carbon": "Carbon", "iron": "Iron", "nickel": "Nickel",
     "phosphorus": "Phosphorus", "sulphur": "Sulphur", "lead": "Lead",
     "rhenium": "Rhenium", "chromium": "Chromium", "manganese": "Manganese",
@@ -54,109 +54,121 @@ MATERIAL_NAMES: dict[str, str] = {
     "ruthenium": "Ruthenium", "tin": "Tin", "tungsten": "Tungsten",
     "mercury": "Mercury", "niobium": "Niobium", "zirconium": "Zirconium",
     "tellurium": "Tellurium", "arsenic": "Arsenic", "antimony": "Antimony",
-    # Encoded — Wake
-    "atypicaldisruptedwakeechoes": "Atypical Disrupted Wake Echoes",
-    "anomalousfsdtelemetry": "Anomalous FSD Telemetry",
-    "strangewakesolutions": "Strange Wake Solutions",
-    "eccentrichyperspacetrajectories": "Eccentric Hyperspace Trajectories",
-    "dataminedwakeexceptions": "Datamined Wake Exceptions",
-    # Encoded — Shield
-    "distortedshieldcyclerecordings": "Distorted Shield Cycle Recordings",
-    "aberrantshieldpatternanalysis": "Aberrant Shield Pattern Analysis",
-    "unexpectedshielddata": "Unexpected Shield Data",
-    "inconsistentshieldsoakanalysis": "Inconsistent Shield Soak Analysis",
-    "decodedshielddata": "Decoded Shield Data",
-    # Encoded — Scan
+    # ── Encoded — Wake ──
+    "disruptedwakeechoes": "Atypical Disrupted Wake Echoes",
+    "fsdtelemetry": "Anomalous FSD Telemetry",
+    "wakesolutions": "Strange Wake Solutions",
+    "hyperspacetrajectories": "Eccentric Hyperspace Trajectories",
+    "dataminedwake": "Datamined Wake Exceptions",
+    # ── Encoded — Shield ──
+    "shieldcyclerecordings": "Distorted Shield Cycle Recordings",
+    "shieldpatternanalysis": "Aberrant Shield Pattern Analysis",
+    "shielddensityreports": "Unexpected Shield Data",
+    "shieldsoakanalysis": "Inconsistent Shield Soak Analysis",
+    "shieldfrequencydata": "Decoded Shield Data",
+    # ── Encoded — Scan ──
     "modifiedconsumerfirmware": "Modified Consumer Firmware",
-    "opensymmetrickeys": "Open Symmetric Keys",
     "compactscandata": "Compact Scan Data",
-    "anomalousbulkscandata": "Anomalous Bulk Scan Data",
-    "classifiedscandatabanks": "Classified Scan Databanks",
-    "detailedscandata": "Detailed Scan Data",
+    "bulkscandata": "Anomalous Bulk Scan Data",
+    "scandatabanks": "Classified Scan Databanks",
+    "encodedscandata": "Detailed Scan Data",
+    "scanarchives": "Classified Scan Fragment",
     "legacyfirmware": "Legacy Firmware",
     "specialisedlegacyfirmware": "Specialised Legacy Firmware",
     "taggedencryptioncodes": "Tagged Encryption Codes",
     "unusualencryptedfiles": "Unusual Encrypted Files",
-    "classifiedscanfragment": "Classified Scan Fragment",
-    # Encoded — Emission
-    "exceptionalscrambledemissiondata": "Exceptional Scrambled Emission Data",
-    "irregularemissiondata": "Irregular Emission Data",
-    "unexpectedemissiondata": "Unexpected Emission Data",
+    # ── Encoded — Emission ──
+    "scrambledemissiondata": "Exceptional Scrambled Emission Data",
+    "archivedemissiondata": "Irregular Emission Data",
+    "emissiondata": "Unexpected Emission Data",
     "decodedemissiondata": "Decoded Emission Data",
-    "abnormalcompactemissionsdata": "Abnormal Compact Emissions Data",
-    "securityfirmwarepatch": "Security Firmware Patch",
-    # Encoded — Firmware
+    "compactemissionsdata": "Abnormal Compact Emissions Data",
+    "securityfirmware": "Security Firmware Patch",
+    # ── Encoded — Firmware ──
     "crackedindustrialfirmware": "Cracked Industrial Firmware",
     "modifiedembeddedfirmware": "Modified Embedded Firmware",
     "consumerfirmware": "Consumer Firmware",
     "industrialfirmware": "Industrial Firmware",
     "embeddedfirmware": "Embedded Firmware",
-    "adaptiveencryptorscapture": "Adaptive Encryptors Capture",
-    # Manufactured — Chemical
+    "adaptiveencryptors": "Adaptive Encryptors Capture",
+    "encryptionarchives": "Tagged Encryption Codes",
+    # ── Encoded — Guardian Ancient ──
+    "ancienthistoricaldata": "Guardian Historical Data",
+    "ancientbiologicaldata": "Guardian Biological Data",
+    "ancienttechnologicaldata": "Guardian Technological Data",
+    "ancientlanguagedata": "Guardian Language Data",
+    "ancientculturaldata": "Guardian Cultural Data",
+    # ── Manufactured — Chemical ──
     "chemicalstorageunits": "Chemical Storage Units",
     "chemicalprocessors": "Chemical Processors",
     "chemicaldistillery": "Chemical Distillery",
     "chemicalmanipulators": "Chemical Manipulators",
     "chemicalworkshop": "Chemical Workshop",
-    # Manufactured — Thermic
+    # ── Manufactured — Thermic ──
     "heatconductionwiring": "Heat Conduction Wiring",
     "heatdispersionplate": "Heat Dispersion Plate",
     "heatexchangers": "Heat Exchangers",
     "heatvanes": "Heat Vanes",
     "protoheatradiators": "Proto Heat Radiators",
-    # Manufactured — Heat / Alloys
+    # ── Manufactured — Alloys ──
     "temperedalloys": "Tempered Alloys",
     "precipitatedalloys": "Precipitated Alloys",
+    "salvagedalloys": "Salvaged Alloys",
+    "galvanisingalloys": "Galvanising Alloys",
+    "phasealloys": "Phase Alloys",
+    # ── Manufactured — Focus Crystals ──
     "refinedfocuscrystals": "Refined Focus Crystals",
     "exquisitefocuscrystals": "Exquisite Focus Crystals",
     "dazzlingfocuscrystals": "Dazzling Focus Crystals",
-    # Manufactured — Conductive
+    "focuscrystals": "Focus Crystals",
+    "uncutfocuscrystals": "Flawed Focus Crystals",
+    "crystalshards": "Crystal Shards",
+    # ── Manufactured — Conductive ──
     "basicconductors": "Basic Conductors",
     "conductivecomponents": "Conductive Components",
     "conductiveceramics": "Conductive Ceramics",
     "conductivepolymers": "Conductive Polymers",
-    # Manufactured — Mechanical
+    # ── Manufactured — Mechanical ──
     "mechanicalscrap": "Mechanical Scrap",
     "mechanicalequipment": "Mechanical Equipment",
     "mechanicalcomponents": "Mechanical Components",
     "configurablecomponents": "Configurable Components",
-    # Manufactured — Shielding
+    # ── Manufactured — Shielding ──
     "wornshieldemitters": "Worn Shield Emitters",
     "shieldemitters": "Shield Emitters",
     "shieldingsensors": "Shielding Sensors",
     "compoundshielding": "Compound Shielding",
-    # Manufactured — High Tech
+    # ── Manufactured — High Tech ──
     "gridresistors": "Grid Resistors",
     "hybridcapacitors": "Hybrid Capacitors",
     "electrochemicalarrays": "Electrochemical Arrays",
     "polymercapacitors": "Polymer Capacitors",
     "militarysupercapacitors": "Military Supercapacitors",
-    # Manufactured — Alloys
-    "salvagedalloys": "Salvaged Alloys",
-    "galvanisingalloys": "Galvanising Alloys",
-    "phasealloys": "Phase Alloys",
+    # ── Manufactured — Composites ──
+    "highdensitycomposites": "High Density Composites",
     "proprietorycomposites": "Proprietary Composites",
     "proprietarycomposites": "Proprietary Composites",
     "imperialshielding": "Imperial Shielding",
     "coredynamicscomposites": "Core Dynamics Composites",
-    "highdensitycomposites": "High Density Composites",
-    # Manufactured — Crystals
-    "crystalshards": "Crystal Shards",
-    "focuscrystals": "Focus Crystals",
-    "flawedfocuscrystals": "Flawed Focus Crystals",
-    # Manufactured — Proto
+    "fedcorecomposites": "Core Dynamics Composites",
+    # ── Manufactured — Proto ──
     "protoradiolicalloys": "Proto Radiolic Alloys",
     "protolightalloys": "Proto Light Alloys",
-    # Manufactured — Bio
+    # ── Manufactured — Bio ──
     "biotechconductors": "Biotech Conductors",
     "pharmaceuticalisolators": "Pharmaceutical Isolators",
-    # Manufactured — Guardian
+    # ── Manufactured — Guardian ──
     "guardianpowerconduit": "Guardian Power Conduit",
     "guardiantechnologycomponent": "Guardian Technology Component",
     "guardianpowercell": "Guardian Power Cell",
     "guardianwreckagecomponents": "Guardian Wreckage Components",
     "guardiansentinelweaponparts": "Guardian Sentinel Weapon Parts",
-    # Manufactured — Thargoid / Misc
+    "guardian_powerconduit": "Guardian Power Conduit",
+    "guardian_techcomponent": "Guardian Technology Component",
+    "guardian_powercell": "Guardian Power Cell",
+    "guardian_sentinel_wreckagecomponents": "Guardian Wreckage Components",
+    "guardian_sentinel_weaponparts": "Guardian Sentinel Weapon Parts",
+    # ── Manufactured — Thargoid / Misc ──
     "sensorfragment": "Sensor Fragment",
     "unknowntechnology": "Unknown Technology",
     "unknowncarapace": "Unknown Carapace",
@@ -198,12 +210,14 @@ def find_latest_materials_event(journal_path: str) -> dict | None:
 
 def pretty_name(raw: str) -> str:
     """Convert journal internal name to human-readable display name.
-    Tries lookup table first (handles no-space names), falls back to title case.
+    Strips spaces and underscores, lowercases, then looks up in table.
+    Falls back to title case if not found.
     """
-    key = raw.strip().replace(" ", "").lower()
+    key = raw.strip().replace(" ", "").replace("_", "").lower()
     if key in MATERIAL_NAMES:
         return MATERIAL_NAMES[key]
-    return raw.strip().title()
+    # Fallback: title case, replace underscores with spaces
+    return raw.strip().replace("_", " ").title()
 
 
 def parse_materials(entry: dict) -> dict:
