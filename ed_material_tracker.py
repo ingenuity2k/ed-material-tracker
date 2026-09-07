@@ -155,11 +155,22 @@ def find_latest_materials_event(journal_path: str) -> dict | None:
     return latest
 
 
+# Acronyms / special-case words for pretty_name
+_ACRONYMS = {"fsd", "hge", "srv", "sli", "cnc", "xeno"}
+
 def pretty_name(raw: str) -> str:
-    """Convert journal internal name to title case.
+    """Convert journal internal name to title case with acronym fix.
     e.g. 'atypical disrupted wake echoes' → 'Atypical Disrupted Wake Echoes'
+         'anomalous fsd telemetry'          → 'Anomalous FSD Telemetry'
     """
-    return raw.strip().title()
+    words = raw.strip().split()
+    result = []
+    for w in words:
+        if w.lower() in _ACRONYMS:
+            result.append(w.upper())
+        else:
+            result.append(w.capitalize())
+    return " ".join(result)
 
 
 def parse_materials(entry: dict) -> dict:
@@ -261,6 +272,9 @@ class MaterialTracker:
         self.refresh_btn = ttk.Button(btn_frame, text="⟳ Refresh", command=self._manual_refresh)
         self.refresh_btn.pack(side=tk.LEFT, padx=(0, 6))
 
+        self.export_btn = ttk.Button(btn_frame, text="📋 Copy JSON", command=self._export_json)
+        self.export_btn.pack(side=tk.LEFT, padx=(0, 6))
+
         self.dir_btn = ttk.Button(btn_frame, text="📁 Change Dir", command=self._pick_directory)
         self.dir_btn.pack(side=tk.LEFT)
 
@@ -357,6 +371,22 @@ class MaterialTracker:
 
     def _manual_refresh(self):
         self._poll_once()
+
+    def _export_json(self):
+        """Fresh poll, then copy all materials as JSON to clipboard."""
+        self._poll_once()
+        export = {
+            "timestamp": datetime.now().isoformat(),
+            "journal_path": self.journal_path,
+            "materials": self.materials,
+            "totals": {
+                cat: sum(mats.values()) for cat, mats in self.materials.items()
+            },
+        }
+        blob = json.dumps(export, indent=2, ensure_ascii=False)
+        self.root.clipboard_clear()
+        self.root.clipboard_append(blob)
+        self.status_var.set("📋 JSON copied to clipboard!")
 
     def _update_countdown(self):
         self.timer_var.set("⟳ Next poll: 5:00")
