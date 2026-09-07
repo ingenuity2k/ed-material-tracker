@@ -14,6 +14,22 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from datetime import datetime
 
+_DEBUG_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "debug.log")
+
+# Clear debug log on startup
+try:
+    open(_DEBUG_LOG, "w").close()
+except OSError:
+    pass
+
+def _dbg(msg: str):
+    """Append debug line to debug.log."""
+    try:
+        with open(_DEBUG_LOG, "a", encoding="utf-8") as f:
+            f.write(msg + "\n")
+    except OSError:
+        pass
+
 
 # ── E:D Orange Dark Theme ───────────────────────────────────────────────────
 
@@ -37,6 +53,8 @@ FONT_BOLD  = ("Consolas", 10, "bold")
 FONT_TITLE = ("Consolas", 14, "bold")
 FONT_CAT   = ("Consolas", 11, "bold")
 FONT_HEAD  = ("Consolas", 9, "bold")
+
+__VERSION__ = "1.0.4-debug"
 
 
 # ── Material Display Names ──────────────────────────────────────────────────
@@ -214,31 +232,38 @@ def pretty_name(raw: str) -> str:
     Falls back to title case if not found.
     """
     key = raw.strip().replace(" ", "").replace("_", "").lower()
-    if key in MATERIAL_NAMES:
-        return MATERIAL_NAMES[key]
-    # Fallback: title case, replace underscores with spaces
-    return raw.strip().replace("_", " ").title()
+    result = MATERIAL_NAMES.get(key, None)
+    if result is None:
+        result = raw.strip().replace("_", " ").title()
+        _dbg(f"MISS: {raw!r} -> key={key!r} -> fallback={result!r}")
+    return result
 
 
 def parse_materials(entry: dict) -> dict:
     """Parse a Materials event into {category: {name: count}}."""
+    _dbg(f"\n=== parse_materials @ {datetime.now().isoformat()} ===")
     result = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
 
     for item in entry.get("Raw", []):
-        name = pretty_name(item.get("Name", "Unknown"))
+        raw_name = item.get("Name", "Unknown")
+        name = pretty_name(raw_name)
         count = item.get("Count", 0)
         result["Raw"][name] = count
 
     for item in entry.get("Encoded", []):
-        name = pretty_name(item.get("Name", "Unknown"))
+        raw_name = item.get("Name", "Unknown")
+        name = pretty_name(raw_name)
         count = item.get("Count", 0)
         result["Encoded"][name] = count
 
     for item in entry.get("Manufactured", []):
-        name = pretty_name(item.get("Name", "Unknown"))
+        raw_name = item.get("Name", "Unknown")
+        name = pretty_name(raw_name)
         count = item.get("Count", 0)
         result["Manufactured"][name] = count
 
+    _dbg(f"Encoded names: {list(result['Encoded'].keys())}")
+    _dbg(f"Manufactured names: {list(result['Manufactured'].keys())}")
     return result
 
 
@@ -249,7 +274,7 @@ class MaterialTracker:
 
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("ED Material Tracker")
+        self.root.title(f"ED Material Tracker v{__VERSION__}")
         self.root.geometry("700x850")
         self.root.configure(bg=COLORS["bg"])
         self.root.resizable(True, True)
