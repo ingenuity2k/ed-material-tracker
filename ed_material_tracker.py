@@ -445,12 +445,10 @@ class MaterialTracker:
     def _build_tree(self):
         container = ttk.Frame(self.root)
         container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-        self.tree = ttk.Treeview(container, columns=("qty", "info"), show="tree headings", selectmode="none")
-        self.tree.heading("#0", text="Material", anchor=tk.W)
-        self.tree.heading("qty", text="Qty", anchor=tk.E)
+        self.tree = ttk.Treeview(container, columns=("info",), show="tree headings", selectmode="none")
+        self.tree.heading("#0", text="Qty  Material", anchor=tk.W)
         self.tree.heading("info", text="Grade / Capacity", anchor=tk.W)
-        self.tree.column("#0", width=300, minwidth=180)
-        self.tree.column("qty", width=50, minwidth=50, anchor=tk.E)
+        self.tree.column("#0", width=350, minwidth=200)
         self.tree.column("info", width=300, minwidth=150)
         vsb = ttk.Scrollbar(container, orient=tk.VERTICAL, command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
@@ -550,7 +548,7 @@ class MaterialTracker:
                 continue
             total = sum(mats.values())
             parent = self.tree.insert("", tk.END, text=f"  {cat.upper()}  ({total})",
-                                       values=("", ""), tags=(cat_tags[cat],), open=True)
+                                       values=("",), tags=(cat_tags[cat],), open=True)
             for i, (name, qty) in enumerate(sorted(mats.items())):
                 tag = "item_alt" if i % 2 else "item"
                 # Look up grade and max capacity from MATERIAL_DATA
@@ -570,8 +568,8 @@ class MaterialTracker:
                 # Insert: qty first, then name with grade
                 gcolor = grade_colors.get(grade, "#888888")
                 item_id = self.tree.insert(parent, tk.END,
-                    text=f"  {name}",
-                    values=(qty, f"{grade_label}  {bar}  {qty}/{max_cap}"),
+                    text=f"  {qty:>5}  {name}",
+                    values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
                     tags=(tag,))
                 # Apply grade color to the grade column via tag
                 self.tree.tag_configure(f"grade_{grade}_{i}", foreground=gcolor)
