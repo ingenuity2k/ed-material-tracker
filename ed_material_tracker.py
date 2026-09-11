@@ -429,8 +429,23 @@ class MaterialTracker:
     # ── Tree ──
 
     def _build_tree(self):
+        # Tab bar for category switching
+        self.tab_frame = ttk.Frame(self.root)
+        self.tab_frame.pack(fill=tk.X, padx=10, pady=(10, 0))
+        self.active_tab = tk.StringVar(value="ALL")
+        self.tab_buttons = {}
+        for cat in ("ALL", "RAW", "ENCODED", "MANUFACTURED"):
+            btn = tk.Label(self.tab_frame, text=cat, font=FONT_BOLD,
+                          bg=COLORS["bg_panel"], fg=COLORS["text_dim"],
+                          padx=16, pady=6, cursor="hand2")
+            btn.pack(side=tk.LEFT, padx=(0, 2))
+            btn.bind("<Button-1>", lambda e, c=cat: self._switch_tab(c))
+            self.tab_buttons[cat] = btn
+        self._highlight_tab("ALL")
+
+        # Tree container
         container = ttk.Frame(self.root)
-        container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        container.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 10))
         self.tree = ttk.Treeview(container, columns=("info",), show="tree headings", selectmode="none")
         self.tree.heading("#0", text="Qty  Material", anchor=tk.W)
         self.tree.heading("info", text="Grade / Capacity", anchor=tk.W)
@@ -440,12 +455,22 @@ class MaterialTracker:
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
-        self.tree.tag_configure("cat_raw",         font=FONT_CAT, foreground="#ff9e3d")
-        self.tree.tag_configure("cat_encoded",     font=FONT_CAT, foreground="#ff7100")
-        self.tree.tag_configure("cat_manufactured", font=FONT_CAT, foreground="#cc5a00")
         for g, c in GRADE_COLORS.items():
             self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT)
         self.tree.tag_configure("grade_0", foreground=COLORS["text"], font=FONT)
+        self.tree.tag_configure("cat_header", font=FONT_CAT, foreground=COLORS["orange"])
+
+    def _highlight_tab(self, active):
+        for cat, btn in self.tab_buttons.items():
+            if cat == active:
+                btn.configure(bg=COLORS["orange"], fg=COLORS["text_bright"])
+            else:
+                btn.configure(bg=COLORS["bg_panel"], fg=COLORS["text_dim"])
+
+    def _switch_tab(self, cat):
+        self.active_tab.set(cat)
+        self._highlight_tab(cat)
+        self._refresh_tree()
 
     # ── Status ──
 
@@ -526,16 +551,17 @@ class MaterialTracker:
 
     def _refresh_tree(self):
         self.tree.delete(*self.tree.get_children())
-        cat_tags = {"Raw": "cat_raw", "Encoded": "cat_encoded", "Manufactured": "cat_manufactured"}
-        # Grade color bands (bright = high grade)
-        # Grade color bands (bright = high grade)
-        for cat in ("Raw", "Encoded", "Manufactured"):
+        tab = self.active_tab.get()
+        cat_map = {"RAW": "Raw", "ENCODED": "Encoded", "MANUFACTURED": "Manufactured"}
+        cats = [cat_map[tab]] if tab != "ALL" else ["Raw", "Encoded", "Manufactured"]
+        for cat in cats:
             mats = self.materials.get(cat, {})
             if not mats:
                 continue
-            total = sum(mats.values())
+            total = sum(max(0, v) for v in mats.values())
+            # Category header
             parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
-                                       values=("",), tags=(cat_tags[cat],), open=True)
+                                       values=("",), tags=("cat_header",), open=True)
             # Sort: non-zero first (desc), then zero-qty alphabetically
             sorted_items = sorted(mats.items(), key=lambda x: (-x[1], x[0]))
             for i, (name, qty) in enumerate(sorted_items):
