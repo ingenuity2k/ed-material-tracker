@@ -28,7 +28,7 @@ COLORS = {
     "text_bright": "#ffffff",
 }
 
-FONT       = ("Consolas", 10, "Manufactured")
+FONT       = ("Consolas", 10)
 FONT_BOLD  = ("Consolas", 10, "bold")
 FONT_TITLE = ("Consolas", 14, "bold")
 FONT_CAT   = ("Consolas", 11, "bold")
