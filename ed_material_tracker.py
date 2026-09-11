@@ -28,7 +28,7 @@ COLORS = {
     "text_bright": "#ffffff",
 }
 
-FONT       = ("Consolas", 10)
+FONT       = ("Consolas", 10, "Manufactured")
 FONT_BOLD  = ("Consolas", 10, "bold")
 FONT_TITLE = ("Consolas", 14, "bold")
 FONT_CAT   = ("Consolas", 11, "bold")
@@ -66,150 +66,130 @@ def _max_cap(grade: int, category: str) -> int:
     return {1: 300, 2: 250, 3: 200, 4: 150, 5: 100}.get(grade, 300)
 
 # key = normalized name (lowercase, no spaces/underscores), value = (display_name, grade)
-MATERIAL_DATA: dict[str, tuple[str, int]] = {
+MATERIAL_DATA: dict[str, tuple[str, int, str]] = {
     # ── Raw (4 grades, max 150 at G4) ──
-    # G1 Very Common
-    "carbon":    ("Carbon", 1),    "iron":      ("Iron", 1),
-    "nickel":    ("Nickel", 1),    "phosphorus": ("Phosphorus", 1),
-    "sulphur":   ("Sulphur", 1),   "lead":      ("Lead", 1),
-    # G2 Common
-    "rhenium":   ("Rhenium", 2),   "chromium":  ("Chromium", 2),
-    "manganese": ("Manganese", 2), "zinc":      ("Zinc", 2),
-    "germanium": ("Germanium", 2), "vanadium":  ("Vanadium", 2),
-    # G3 Standard
-    "selenium":  ("Selenium", 3),  "cadmium":   ("Cadmium", 3),
-    "molybdenum":("Molybdenum",3), "ruthenium": ("Ruthenium", 3),
-    "tin":       ("Tin", 3),       "tungsten":  ("Tungsten", 3),
-    "mercury":   ("Mercury", 3),   "niobium":   ("Niobium", 3),
-    "zirconium": ("Zirconium", 3),
-    # G4 Rare
-    "tellurium": ("Tellurium", 4), "arsenic":   ("Arsenic", 4),
-    "antimony":  ("Antimony", 4),
+    "carbon":    ("Carbon", 1, "Raw"),    "iron":      ("Iron", 1, "Raw"),
+    "nickel":    ("Nickel", 1, "Raw"),    "phosphorus": ("Phosphorus", 1, "Raw"),
+    "sulphur":   ("Sulphur", 1, "Raw"),   "lead":      ("Lead", 1, "Raw"),
+    "rhenium":   ("Rhenium", 2, "Raw"),   "chromium":  ("Chromium", 2, "Raw"),
+    "manganese": ("Manganese", 2, "Raw"), "zinc":      ("Zinc", 2, "Raw"),
+    "germanium": ("Germanium", 2, "Raw"), "vanadium":  ("Vanadium", 2, "Raw"),
+    "selenium":  ("Selenium", 3, "Raw"),  "cadmium":   ("Cadmium", 3, "Raw"),
+    "molybdenum":("Molybdenum",3, "Raw"), "ruthenium": ("Ruthenium", 3, "Raw"),
+    "tin":       ("Tin", 3, "Raw"),       "tungsten":  ("Tungsten", 3, "Raw"),
+    "mercury":   ("Mercury", 3, "Raw"),   "niobium":   ("Niobium", 3, "Raw"),
+    "zirconium": ("Zirconium", 3, "Raw"), "boron":     ("Boron", 3, "Raw"),
+    "tellurium": ("Tellurium", 4, "Raw"), "arsenic":   ("Arsenic", 4, "Raw"),
+    "antimony":  ("Antimony", 4, "Raw"),  "polonium":  ("Polonium", 4, "Raw"),
+    "yttrium":   ("Yttrium", 4, "Raw"),   "technetium":("Technetium", 4, "Raw"),
 
     # ── Encoded (5 grades) ──
-    # Wake
-    "disruptedwakeechoes":    ("Atypical Disrupted Wake Echoes", 1),
-    "fsdtelemetry":           ("Anomalous FSD Telemetry", 2),
-    "wakesolutions":          ("Strange Wake Solutions", 3),
-    "hyperspacetrajectories": ("Eccentric Hyperspace Trajectories", 4),
-    "dataminedwake":          ("Datamined Wake Exceptions", 5),
-    # Shield
-    "shieldcyclerecordings":  ("Distorted Shield Cycle Recordings", 1),
-    "shieldpatternanalysis":  ("Aberrant Shield Pattern Analysis", 2),
-    "shielddensityreports":   ("Unexpected Shield Data", 3),
-    "shieldsoakanalysis":     ("Inconsistent Shield Soak Analysis", 4),
-    "shieldfrequencydata":    ("Decoded Shield Data", 5),
-    # Scan
-    "modifiedconsumerfirmware": ("Modified Consumer Firmware", 1),
-    "compactscandata":         ("Compact Scan Data", 2),
-    "bulkscandata":            ("Anomalous Bulk Scan Data", 3),
-    "scandatabanks":           ("Classified Scan Databanks", 4),
-    "encodedscandata":         ("Detailed Scan Data", 5),
-    "scanarchives":            ("Classified Scan Fragment", 5),
-    # Firmware / Legacy
-    "legacyfirmware":           ("Legacy Firmware", 1),
-    "specialisedlegacyfirmware": ("Specialised Legacy Firmware", 2),
-    # Emission
-    "scrambledemissiondata":   ("Exceptional Scrambled Emission Data", 1),
-    "archivedemissiondata":    ("Irregular Emission Data", 2),
-    "emissiondata":            ("Unexpected Emission Data", 3),
-    "decodedemissiondata":     ("Decoded Emission Data", 4),
-    "compactemissionsdata":    ("Abnormal Compact Emissions Data", 5),
-    # Encryption / Security
-    "securityfirmware":        ("Security Firmware Patch", 5),
-    "taggedencryptioncodes":   ("Tagged Encryption Codes", 3),
-    "unusualencryptedfiles":   ("Unusual Encrypted Files", 4),
-    # Firmware
-    "crackedindustrialfirmware": ("Cracked Industrial Firmware", 3),
-    "modifiedembeddedfirmware":  ("Modified Embedded Firmware", 5),
-    "consumerfirmware":          ("Consumer Firmware", 2),
-    "industrialfirmware":        ("Industrial Firmware", 3),
-    "embeddedfirmware":          ("Embedded Firmware", 4),
-    "adaptiveencryptors":        ("Adaptive Encryptors Capture", 5),
-    "encryptionarchives":        ("Tagged Encryption Codes", 3),
-    # Guardian Ancient
-    "ancienthistoricaldata":    ("Guardian Historical Data", 3),
-    "ancientbiologicaldata":    ("Guardian Biological Data", 3),
-    "ancienttechnologicaldata": ("Guardian Technological Data", 3),
-    "ancientlanguagedata":      ("Guardian Language Data", 3),
-    "ancientculturaldata":      ("Guardian Cultural Data", 3),
+    "disruptedwakeechoes":    ("Atypical Disrupted Wake Echoes", 1, "Encoded"),
+    "fsdtelemetry":           ("Anomalous FSD Telemetry", 2, "Encoded"),
+    "wakesolutions":          ("Strange Wake Solutions", 3, "Encoded"),
+    "hyperspacetrajectories": ("Eccentric Hyperspace Trajectories", 4, "Encoded"),
+    "dataminedwake":          ("Datamined Wake Exceptions", 5, "Encoded"),
+    "shieldcyclerecordings":  ("Distorted Shield Cycle Recordings", 1, "Encoded"),
+    "shieldpatternanalysis":  ("Aberrant Shield Pattern Analysis", 2, "Encoded"),
+    "shielddensityreports":   ("Unexpected Shield Data", 3, "Encoded"),
+    "shieldsoakanalysis":     ("Inconsistent Shield Soak Analysis", 4, "Encoded"),
+    "shieldfrequencydata":    ("Decoded Shield Data", 5, "Encoded"),
+    "modifiedconsumerfirmware": ("Modified Consumer Firmware", 1, "Encoded"),
+    "compactscandata":         ("Compact Scan Data", 2, "Encoded"),
+    "bulkscandata":            ("Anomalous Bulk Scan Data", 3, "Encoded"),
+    "scandatabanks":           ("Classified Scan Databanks", 4, "Encoded"),
+    "encodedscandata":         ("Detailed Scan Data", 5, "Encoded"),
+    "scanarchives":            ("Classified Scan Fragment", 5, "Encoded"),
+    "divergentscandata":       ("Divergent Scan Data", 3, "Encoded"),
+    "legacyfirmware":           ("Legacy Firmware", 1, "Encoded"),
+    "specialisedlegacyfirmware": ("Specialised Legacy Firmware", 2, "Encoded"),
+    "scrambledemissiondata":   ("Exceptional Scrambled Emission Data", 1, "Encoded"),
+    "archivedemissiondata":    ("Irregular Emission Data", 2, "Encoded"),
+    "emissiondata":            ("Unexpected Emission Data", 3, "Encoded"),
+    "decodedemissiondata":     ("Decoded Emission Data", 4, "Encoded"),
+    "compactemissionsdata":    ("Abnormal Compact Emissions Data", 5, "Encoded"),
+    "securityfirmware":        ("Security Firmware Patch", 5, "Encoded"),
+    "taggedencryptioncodes":   ("Tagged Encryption Codes", 3, "Encoded"),
+    "unusualencryptedfiles":   ("Unusual Encrypted Files", 4, "Encoded"),
+    "crackedindustrialfirmware": ("Cracked Industrial Firmware", 3, "Encoded"),
+    "modifiedembeddedfirmware":  ("Modified Embedded Firmware", 5, "Encoded"),
+    "consumerfirmware":          ("Consumer Firmware", 2, "Encoded"),
+    "industrialfirmware":        ("Industrial Firmware", 3, "Encoded"),
+    "embeddedfirmware":          ("Embedded Firmware", 4, "Encoded"),
+    "adaptiveencryptors":        ("Adaptive Encryptors Capture", 5, "Encoded"),
+    "encryptionarchives":        ("Tagged Encryption Codes", 3, "Encoded"),
+    "ancienthistoricaldata":    ("Guardian Historical Data", 3, "Encoded"),
+    "ancientbiologicaldata":    ("Guardian Biological Data", 3, "Encoded"),
+    "ancienttechnologicaldata": ("Guardian Technological Data", 3, "Encoded"),
+    "ancientlanguagedata":      ("Guardian Language Data", 3, "Encoded"),
+    "ancientculturaldata":      ("Guardian Cultural Data", 3, "Encoded"),
+    "guardianmoduleblueprintfragment": ("Guardian Module Blueprint Fragment", 5, "Encoded"),
+    "guardianvesselblueprintfragment": ("Guardian Vessel Blueprint Fragment", 5, "Encoded"),
 
     # ── Manufactured (5 grades) ──
-    # Chemical
-    "chemicalstorageunits":    ("Chemical Storage Units", 1),
-    "chemicalprocessors":      ("Chemical Processors", 2),
-    "chemicaldistillery":      ("Chemical Distillery", 3),
-    "chemicalmanipulators":    ("Chemical Manipulators", 4),
-    "chemicalworkshop":        ("Chemical Workshop", 4),
-    # Thermic
-    "heatconductionwiring":    ("Heat Conduction Wiring", 1),
-    "heatdispersionplate":     ("Heat Dispersion Plate", 2),
-    "heatexchangers":          ("Heat Exchangers", 3),
-    "heatvanes":               ("Heat Vanes", 4),
-    "protoheatradiators":      ("Proto Heat Radiators", 5),
-    # Alloys
-    "temperedalloys":          ("Tempered Alloys", 1),
-    "precipitatedalloys":      ("Precipitated Alloys", 2),
-    "salvagedalloys":          ("Salvaged Alloys", 3),
-    "galvanisingalloys":       ("Galvanising Alloys", 4),
-    "phasealloys":             ("Phase Alloys", 5),
-    # Focus Crystals
-    "crystalshards":           ("Crystal Shards", 1),
-    "uncutfocuscrystals":      ("Flawed Focus Crystals", 2),
-    "focuscrystals":           ("Focus Crystals", 3),
-    "refinedfocuscrystals":    ("Refined Focus Crystals", 4),
-    "dazzlingfocuscrystals":   ("Dazzling Focus Crystals", 4),
-    "exquisitefocuscrystals":  ("Exquisite Focus Crystals", 5),
-    # Conductive
-    "basicconductors":         ("Basic Conductors", 1),
-    "conductivecomponents":    ("Conductive Components", 2),
-    "conductiveceramics":      ("Conductive Ceramics", 3),
-    "conductivepolymers":      ("Conductive Polymers", 4),
-    # Mechanical
-    "mechanicalscrap":         ("Mechanical Scrap", 1),
-    "mechanicalequipment":     ("Mechanical Equipment", 2),
-    "mechanicalcomponents":    ("Mechanical Components", 3),
-    "configurablecomponents":  ("Configurable Components", 4),
-    # Shielding
-    "wornshieldemitters":      ("Worn Shield Emitters", 1),
-    "shieldemitters":          ("Shield Emitters", 2),
-    "shieldingsensors":        ("Shielding Sensors", 3),
-    "compoundshielding":       ("Compound Shielding", 4),
-    # High Tech
-    "gridresistors":           ("Grid Resistors", 1),
-    "hybridcapacitors":        ("Hybrid Capacitors", 2),
-    "electrochemicalarrays":   ("Electrochemical Arrays", 3),
-    "polymercapacitors":       ("Polymer Capacitors", 4),
-    "militarysupercapacitors": ("Military Supercapacitors", 5),
-    # Composites
-    "highdensitycomposites":   ("High Density Composites", 4),
-    "proprietorycomposites":   ("Proprietary Composites", 4),
-    "proprietarycomposites":   ("Proprietary Composites", 4),
-    "fedproprietarycomposites":("Proprietary Composites", 4),
-    "imperialshielding":       ("Imperial Shielding", 5),
-    "coredynamicscomposites":  ("Core Dynamics Composites", 5),
-    "fedcorecomposites":       ("Core Dynamics Composites", 5),
-    # Proto Radiolic / Light
-    "protoradiolicalloys":     ("Proto Radiolic Alloys", 4),
-    "protolightalloys":        ("Proto Light Alloys", 4),
-    # Bio
-    "biotechconductors":       ("Biotech Conductors", 4),
-    "pharmaceuticalisolators": ("Pharmaceutical Isolators", 5),
-    # Guardian
-    "guardianpowerconduit":               ("Guardian Power Conduit", 3),
-    "guardiantechnologycomponent":        ("Guardian Technology Component", 3),
-    "guardiantechcomponent":              ("Guardian Technology Component", 3),
-    "guardianpowercell":                  ("Guardian Power Cell", 3),
-    "guardianwreckagecomponents":         ("Guardian Wreckage Components", 3),
-    "guardiansentinelwreckagecomponents": ("Guardian Wreckage Components", 3),
-    "guardiansentinelweaponparts":        ("Guardian Sentinel Weapon Parts", 3),
-    # Thargoid / Misc
-    "sensorfragment":           ("Sensor Fragment", 3),
-    "unknowntechnology":        ("Unknown Technology", 3),
-    "unknowncarapace":          ("Unknown Carapace", 3),
-    "unknownorganiccircuitry":  ("Unknown Organic Circuitry", 3),
-    "unknownenergysource":      ("Unknown Energy Source", 3),
-    "unknownfragment":          ("Unknown Fragment", 3),
+    "chemicalstorageunits":    ("Chemical Storage Units", 1, "Manufactured"),
+    "chemicalprocessors":      ("Chemical Processors", 2, "Manufactured"),
+    "chemicaldistillery":      ("Chemical Distillery", 3, "Manufactured"),
+    "chemicalmanipulators":    ("Chemical Manipulators", 4, "Manufactured"),
+    "chemicalworkshop":        ("Chemical Workshop", 4, "Manufactured"),
+    "heatconductionwiring":    ("Heat Conduction Wiring", 1, "Manufactured"),
+    "heatdispersionplate":     ("Heat Dispersion Plate", 2, "Manufactured"),
+    "heatexchangers":          ("Heat Exchangers", 3, "Manufactured"),
+    "heatvanes":               ("Heat Vanes", 4, "Manufactured"),
+    "protoheatradiators":      ("Proto Heat Radiators", 5, "Manufactured"),
+    "temperedalloys":          ("Tempered Alloys", 1, "Manufactured"),
+    "precipitatedalloys":      ("Precipitated Alloys", 2, "Manufactured"),
+    "salvagedalloys":          ("Salvaged Alloys", 3, "Manufactured"),
+    "galvanisingalloys":       ("Galvanising Alloys", 4, "Manufactured"),
+    "phasealloys":             ("Phase Alloys", 5, "Manufactured"),
+    "crystalshards":           ("Crystal Shards", 1, "Manufactured"),
+    "uncutfocuscrystals":      ("Flawed Focus Crystals", 2, "Manufactured"),
+    "focuscrystals":           ("Focus Crystals", 3, "Manufactured"),
+    "refinedfocuscrystals":    ("Refined Focus Crystals", 4, "Manufactured"),
+    "dazzlingfocuscrystals":   ("Dazzling Focus Crystals", 4, "Manufactured"),
+    "exquisitefocuscrystals":  ("Exquisite Focus Crystals", 5, "Manufactured"),
+    "basicconductors":         ("Basic Conductors", 1, "Manufactured"),
+    "conductivecomponents":    ("Conductive Components", 2, "Manufactured"),
+    "conductiveceramics":      ("Conductive Ceramics", 3, "Manufactured"),
+    "conductivepolymers":      ("Conductive Polymers", 4, "Manufactured"),
+    "mechanicalscrap":         ("Mechanical Scrap", 1, "Manufactured"),
+    "mechanicalequipment":     ("Mechanical Equipment", 2, "Manufactured"),
+    "mechanicalcomponents":    ("Mechanical Components", 3, "Manufactured"),
+    "configurablecomponents":  ("Configurable Components", 4, "Manufactured"),
+    "wornshieldemitters":      ("Worn Shield Emitters", 1, "Manufactured"),
+    "shieldemitters":          ("Shield Emitters", 2, "Manufactured"),
+    "shieldingsensors":        ("Shielding Sensors", 3, "Manufactured"),
+    "compoundshielding":       ("Compound Shielding", 4, "Manufactured"),
+    "gridresistors":           ("Grid Resistors", 1, "Manufactured"),
+    "hybridcapacitors":        ("Hybrid Capacitors", 2, "Manufactured"),
+    "electrochemicalarrays":   ("Electrochemical Arrays", 3, "Manufactured"),
+    "polymercapacitors":       ("Polymer Capacitors", 4, "Manufactured"),
+    "militarysupercapacitors": ("Military Supercapacitors", 5, "Manufactured"),
+    "highdensitycomposites":   ("High Density Composites", 4, "Manufactured"),
+    "proprietorycomposites":   ("Proprietary Composites", 4, "Manufactured"),
+    "proprietarycomposites":   ("Proprietary Composites", 4, "Manufactured"),
+    "fedproprietarycomposites":("Proprietary Composites", 4, "Manufactured"),
+    "imperialshielding":       ("Imperial Shielding", 5, "Manufactured"),
+    "coredynamicscomposites":  ("Core Dynamics Composites", 5, "Manufactured"),
+    "fedcorecomposites":       ("Core Dynamics Composites", 5, "Manufactured"),
+    "protoradiolicalloys":     ("Proto Radiolic Alloys", 4, "Manufactured"),
+    "protolightalloys":        ("Proto Light Alloys", 4, "Manufactured"),
+    "biotechconductors":       ("Biotech Conductors", 4, "Manufactured"),
+    "pharmaceuticalisolators": ("Pharmaceutical Isolators", 5, "Manufactured"),
+    "guardianpowerconduit":               ("Guardian Power Conduit", 3, "Manufactured"),
+    "guardiantechnologycomponent":        ("Guardian Technology Component", 3, "Manufactured"),
+    "guardiantechcomponent":              ("Guardian Technology Component", 3, "Manufactured"),
+    "guardianpowercell":                  ("Guardian Power Cell", 3, "Manufactured"),
+    "guardianwreckagecomponents":         ("Guardian Wreckage Components", 3, "Manufactured"),
+    "guardiansentinelwreckagecomponents": ("Guardian Wreckage Components", 3, "Manufactured"),
+    "guardiansentinelweaponparts":        ("Guardian Sentinel Weapon Parts", 3, "Manufactured"),
+    "propulsionelements":                 ("Propulsion Elements", 3, "Manufactured"),
+    "sensorfragment":           ("Sensor Fragment", 3, "Manufactured"),
+    "unknowntechnology":        ("Unknown Technology", 3, "Manufactured"),
+    "unknowncarapace":          ("Unknown Carapace", 3, "Manufactured"),
+    "unknownorganiccircuitry":  ("Unknown Organic Circuitry", 3, "Manufactured"),
+    "unknownenergysource":      ("Unknown Energy Source", 3, "Manufactured"),
+    "unknownfragment":          ("Unknown Fragment", 3, "Manufactured"),
 }
 
 # Back-compat: MATERIAL_NAMES derived from MATERIAL_DATA
@@ -297,7 +277,7 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
     for cat in ("Raw", "Encoded", "Manufactured"):
         for item in snapshot.get(cat, []):
             name = pretty_name(item.get("Name", "Unknown"))
-            count = item.get("Count", 0)
+            count = item.get("Count", 0, "Manufactured")
             stock[name] = (cat, count)
 
     # Phase 2: scan forward from snapshot for delta events
@@ -329,13 +309,13 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                         for cat in ("Raw", "Encoded", "Manufactured"):
                             for item in entry.get(cat, []):
                                 name = pretty_name(item.get("Name", "Unknown"))
-                                count = item.get("Count", 0)
+                                count = item.get("Count", 0, "Manufactured")
                                 stock[name] = (cat, count)
 
                     elif event == "MaterialCollected":
                         name = pretty_name(entry.get("Name", "Unknown"))
                         cat = _classify(entry) or "Manufactured"
-                        qty = entry.get("Count", 1)
+                        qty = entry.get("Count", 1, "Manufactured")
                         if name in stock:
                             old_cat, old_qty = stock[name]
                             stock[name] = (old_cat, old_qty + qty)
@@ -345,7 +325,7 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                     elif event == "MaterialDiscarded":
                         name = pretty_name(entry.get("Name", "Unknown"))
                         cat = _classify(entry) or "Manufactured"
-                        qty = entry.get("Count", 1)
+                        qty = entry.get("Count", 1, "Manufactured")
                         if name in stock:
                             old_cat, old_qty = stock[name]
                             stock[name] = (old_cat, max(0, old_qty - qty))
@@ -355,13 +335,13 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                         received = entry.get("Received", {})
                         if paid:
                             pname = pretty_name(paid.get("Material", ""))
-                            pqty = paid.get("Quantity", 0)
+                            pqty = paid.get("Quantity", 0, "Manufactured")
                             if pname in stock:
                                 old_cat, old_qty = stock[pname]
                                 stock[pname] = (old_cat, max(0, old_qty - pqty))
                         if received:
                             rname = pretty_name(received.get("Material", ""))
-                            rqty = received.get("Quantity", 0)
+                            rqty = received.get("Quantity", 0, "Manufactured")
                             rcat = _classify(received) or "Manufactured"
                             if rname in stock:
                                 old_cat, old_qty = stock[rname]
@@ -376,6 +356,10 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
     for name, (cat, count) in stock.items():
         if count > 0:
             result[cat][name] = count
+    # Add all known materials at 0 so nothing is hidden
+    for _key, (_display, _grade, _cat) in MATERIAL_DATA.items():
+        if _display not in result.get(_cat, {}):
+            result[_cat][_display] = 0
     return result
 
 
@@ -418,7 +402,7 @@ class MaterialTracker:
         style.configure("TLabel", background=COLORS["bg"], foreground=COLORS["text"], font=FONT)
         style.configure("Title.TLabel", font=FONT_TITLE, foreground=COLORS["orange"])
         style.configure("Status.TLabel", font=FONT, foreground=COLORS["text_dim"])
-        style.configure("Path.TLabel", font=("Consolas", 9), foreground=COLORS["text_dim"])
+        style.configure("Path.TLabel", font=("Consolas", 9, "Manufactured"), foreground=COLORS["text_dim"])
         style.configure("TButton", background=COLORS["orange"], foreground=COLORS["text_bright"],
                          font=FONT_BOLD, borderwidth=0, padding=(12, 6))
         style.map("TButton", background=[("active", COLORS["orange_dim"])],
@@ -552,8 +536,10 @@ class MaterialTracker:
             total = sum(mats.values())
             parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
                                        values=("",), tags=(cat_tags[cat],), open=True)
-            for i, (name, qty) in enumerate(sorted(mats.items())):
-                # Look up grade and max capacity from MATERIAL_DATA
+            # Sort: non-zero first (desc), then zero-qty alphabetically
+            sorted_items = sorted(mats.items(), key=lambda x: (-x[1], x[0]))
+            for i, (name, qty) in enumerate(sorted_items):
+                # Look up grade from MATERIAL_DATA
                 entry = None
                 for k, v in MATERIAL_DATA.items():
                     if v[0] == name:
