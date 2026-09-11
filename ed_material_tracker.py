@@ -570,8 +570,6 @@ class MaterialTracker:
                     text=f"{qty:>5}  {name}",
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
                     tags=(f"grade_{grade}",))
-                # Apply grade color to the grade column via tag
-                self.tree.tag_configure(f"grade_{grade}_{i}", foreground=gcolor)
 
     def run(self):
         self.root.mainloop()
