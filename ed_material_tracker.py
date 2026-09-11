@@ -215,6 +215,8 @@ MATERIAL_DATA: dict[str, tuple[str, int]] = {
 # Back-compat: MATERIAL_NAMES derived from MATERIAL_DATA
 MATERIAL_NAMES: dict[str, str] = {k: v[0] for k, v in MATERIAL_DATA.items()}
 
+GRADE_COLORS = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
+
 # Category detection for MaterialTrade events (maps Category field → our bucket)
 _CAT_MAP = {
     "$MICRORESOURCE_category_raw;": "Raw",
@@ -457,7 +459,7 @@ class MaterialTracker:
         self.tree.tag_configure("cat_raw",         font=FONT_CAT, foreground="#ff9e3d")
         self.tree.tag_configure("cat_encoded",     font=FONT_CAT, foreground="#ff7100")
         self.tree.tag_configure("cat_manufactured", font=FONT_CAT, foreground="#cc5a00")
-        for g, c in grade_colors.items():
+        for g, c in GRADE_COLORS.items():
             self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT)
         self.tree.tag_configure("grade_0", foreground=COLORS["text"], font=FONT)
 
@@ -542,7 +544,7 @@ class MaterialTracker:
         self.tree.delete(*self.tree.get_children())
         cat_tags = {"Raw": "cat_raw", "Encoded": "cat_encoded", "Manufactured": "cat_manufactured"}
         # Grade color bands (bright = high grade)
-        grade_colors = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
+        # Grade color bands (bright = high grade)
         for cat in ("Raw", "Encoded", "Manufactured"):
             mats = self.materials.get(cat, {})
             if not mats:
