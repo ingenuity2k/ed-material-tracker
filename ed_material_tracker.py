@@ -457,8 +457,9 @@ class MaterialTracker:
         self.tree.tag_configure("cat_raw",         font=FONT_CAT, foreground="#ff9e3d")
         self.tree.tag_configure("cat_encoded",     font=FONT_CAT, foreground="#ff7100")
         self.tree.tag_configure("cat_manufactured", font=FONT_CAT, foreground="#cc5a00")
-        self.tree.tag_configure("item",            font=FONT,     foreground=COLORS["text"])
-        self.tree.tag_configure("item_alt",        font=FONT,     foreground=COLORS["text_dim"])
+        for g, c in grade_colors.items():
+            self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT)
+        self.tree.tag_configure("grade_0", foreground=COLORS["text"], font=FONT)
 
     # ── Status ──
 
@@ -541,18 +542,16 @@ class MaterialTracker:
         self.tree.delete(*self.tree.get_children())
         cat_tags = {"Raw": "cat_raw", "Encoded": "cat_encoded", "Manufactured": "cat_manufactured"}
         # Grade color bands (bright = high grade)
-        grade_colors = {1: "#666666", 2: "#888888", 3: "#aaaaaa", 4: "#cccccc", 5: "#ff9e3d"}
+        grade_colors = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
         for cat in ("Raw", "Encoded", "Manufactured"):
             mats = self.materials.get(cat, {})
             if not mats:
                 continue
             total = sum(mats.values())
-            parent = self.tree.insert("", tk.END, text=f"  {cat.upper()}  ({total})",
+            parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
                                        values=("",), tags=(cat_tags[cat],), open=True)
             for i, (name, qty) in enumerate(sorted(mats.items())):
-                tag = "item_alt" if i % 2 else "item"
                 # Look up grade and max capacity from MATERIAL_DATA
-                norm = name.replace(" ", "").lower()
                 entry = None
                 for k, v in MATERIAL_DATA.items():
                     if v[0] == name:
@@ -565,12 +564,10 @@ class MaterialTracker:
                 filled = int(pct * 20)
                 bar = "█" * filled + "░" * (20 - filled)
                 grade_label = f"G{grade}" if grade else ""
-                # Insert: qty first, then name with grade
-                gcolor = grade_colors.get(grade, "#888888")
                 item_id = self.tree.insert(parent, tk.END,
-                    text=f"  {qty:>5}  {name}",
+                    text=f"{qty:>5}  {name}",
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
-                    tags=(tag,))
+                    tags=(f"grade_{grade}",))
                 # Apply grade color to the grade column via tag
                 self.tree.tag_configure(f"grade_{grade}_{i}", foreground=gcolor)
 
