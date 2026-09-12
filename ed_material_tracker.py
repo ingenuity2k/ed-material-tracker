@@ -11,8 +11,16 @@ import os
 import sys
 import glob
 import tkinter as tk
+import tkinter.messagebox
 from tkinter import ttk, filedialog
 from datetime import datetime
+
+try:
+    from engineering_data import ENGINEERS, ENGINEER_LOCATIONS, ROLLS_PER_GRADE
+except ImportError:
+    ENGINEERS = {}
+    ENGINEER_LOCATIONS = {}
+    ROLLS_PER_GRADE = {1: 1, 2: 2, 3: 3, 4: 4, 5: 6}
 
 
 # ── Theme ───────────────────────────────────────────────────────────────────
@@ -430,6 +438,7 @@ class MaterialTracker:
         ttk.Label(tb, text="◆ ED Material Tracker", style="Title.TLabel").pack(side=tk.LEFT)
         btn_frame = ttk.Frame(tb)
         btn_frame.pack(side=tk.RIGHT)
+        ttk.Button(btn_frame, text="🔧 Engineering", command=self._open_engineering).pack(side=tk.LEFT, padx=(0, 6))
         ttk.Button(btn_frame, text="⟳ Refresh", command=self._manual_refresh).pack(side=tk.LEFT, padx=(0, 6))
         ttk.Button(btn_frame, text="📋 Copy JSON", command=self._export_json).pack(side=tk.LEFT, padx=(0, 6))
         ttk.Button(btn_frame, text="📁 Change Dir", command=self._pick_directory).pack(side=tk.LEFT)
@@ -641,8 +650,447 @@ class MaterialTracker:
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
                     tags=(f"grade_{grade}",))
 
+    def _open_engineering(self):
+        if not ENGINEERS:
+            tk.messagebox.showerror("Error", "engineering_data.py not found or failed to import.")
+            return
+        EngineeringCalculator(self.root, self.materials)
+
     def run(self):
         self.root.mainloop()
+
+
+# ── Engineering Calculator ─────────────────────────────────────────────────
+
+class EngineeringCalculator:
+    """Modal window for planning engineering material requirements."""
+
+    def __init__(self, parent, materials):
+        self.parent = parent
+        self.materials = materials  # {cat: {name: qty}}
+        self.win = tk.Toplevel(parent)
+        self.win.title("Engineering Calculator")
+        self.win.geometry("900x700")
+        self.win.configure(bg=COLORS["bg"])
+        self.win.transient(parent)
+        self.win.grab_set()
+
+        # Build lookup: all material names -> (category, current_qty)
+        self._mat_lookup = {}
+        for cat, mats in materials.items():
+            for name, qty in mats.items():
+                self._mat_lookup[name] = (cat, qty)
+
+        # Gather all engineerable module types
+        self._all_modules = sorted(set(
+            mod for eng in ENGINEERS.values()
+            for mod in eng["modules"]
+        ))
+
+        self._build_ui()
+        self._update_module_list("")
+
+    # ── Material lookup helper ──
+
+    # EDEngineer name -> MATERIAL_DATA display name aliases
+    _MAT_ALIASES = {
+        "Abnormal Compact Emission Data": "Abnormal Compact Emissions Data",
+        "Atypical Encryption Archives": "Tagged Encryption Codes",
+        "Military Grade Alloys": "Phase Alloys",
+        "Peculiar Shield Frequency Data": "Decoded Shield Data",
+        "Thermic Alloys": "Galvanising Alloys",
+        "Unidentified Scan Archives": "Classified Scan Fragment",
+        "Untypical Shield Scans": "Distorted Shield Cycle Recordings",
+    }
+
+    def _resolve_mat_name(self, name):
+        """Resolve EDEngineer material name to MATERIAL_DATA display name."""
+        aliased = self._MAT_ALIASES.get(name)
+        if aliased:
+            return aliased
+        key = name.strip().replace(" ", "").replace("_", "").lower()
+        from ed_material_tracker import MATERIAL_DATA
+        md = MATERIAL_DATA.get(key)
+        if md:
+            return md[0]
+        return name
+
+    def _get_mat_qty(self, name):
+        """Return current qty for a material name (display name)."""
+        # Direct lookup
+        entry = self._mat_lookup.get(name)
+        if entry:
+            return entry[1]
+        # Alias lookup
+        aliased = self._MAT_ALIASES.get(name)
+        if aliased:
+            entry = self._mat_lookup.get(aliased)
+            if entry:
+                return entry[1]
+        # Normalized lookup via MATERIAL_DATA
+        key = name.strip().replace(" ", "").replace("_", "").lower()
+        from ed_material_tracker import MATERIAL_DATA
+        md = MATERIAL_DATA.get(key)
+        if md:
+            display = md[0]
+            entry = self._mat_lookup.get(display)
+            if entry:
+                return entry[1]
+        return 0
+
+    # ── UI Construction ──
+
+    def _build_ui(self):
+        # Top: module picker
+        top = ttk.Frame(self.win)
+        top.pack(fill=tk.X, padx=12, pady=(12, 4))
+        ttk.Label(top, text="Module Type:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+
+        self.module_var = tk.StringVar()
+        self.module_entry = ttk.Entry(top, textvariable=self.module_var,
+                                      font=FONT, width=30)
+        self.module_entry.pack(side=tk.LEFT, padx=(8, 0))
+        self.module_entry.bind("<KeyRelease>", self._on_module_type)
+        self.module_entry.bind("<Return>", self._on_module_select)
+
+        # Module listbox (autocomplete dropdown)
+        self.module_list_frame = ttk.Frame(self.win)
+        self.module_list_frame.pack(fill=tk.X, padx=12)
+        self.module_listbox = tk.Listbox(self.module_list_frame, font=FONT,
+                                          bg=COLORS["bg_light"], fg=COLORS["text"],
+                                          selectbackground=COLORS["orange_dim"],
+                                          height=6, borderwidth=0,
+                                          highlightthickness=0)
+        self.module_listbox.pack(fill=tk.X)
+        self.module_listbox.bind("<<ListboxSelect>>", self._on_module_pick)
+        self.module_listbox.bind("<Return>", self._on_module_pick)
+        self._module_list_visible = False
+
+        # Middle: engineer info + blueprint/experiment pickers
+        mid = ttk.Frame(self.win)
+        mid.pack(fill=tk.X, padx=12, pady=(8, 4))
+
+        # Engineers label
+        self.eng_label = ttk.Label(mid, text="Engineers: —", font=FONT,
+                                    foreground=COLORS["text_dim"])
+        self.eng_label.pack(anchor=tk.W)
+
+        # Blueprint picker row
+        bp_row = ttk.Frame(mid)
+        bp_row.pack(fill=tk.X, pady=(6, 2))
+        ttk.Label(bp_row, text="Blueprint:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        self.bp_var = tk.StringVar()
+        self.bp_combo = ttk.Combobox(bp_row, textvariable=self.bp_var,
+                                      font=FONT, state="readonly", width=30)
+        self.bp_combo.pack(side=tk.LEFT, padx=(8, 0))
+        self.bp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
+
+        # Experiment picker row
+        exp_row = ttk.Frame(mid)
+        exp_row.pack(fill=tk.X, pady=(2, 2))
+        ttk.Label(exp_row, text="Experiment:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        self.exp_var = tk.StringVar()
+        self.exp_combo = ttk.Combobox(exp_row, textvariable=self.exp_var,
+                                       font=FONT, state="readonly", width=30)
+        self.exp_combo.pack(side=tk.LEFT, padx=(8, 0))
+        self.exp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
+
+        # Grade slider row
+        grade_row = ttk.Frame(mid)
+        grade_row.pack(fill=tk.X, pady=(6, 2))
+        ttk.Label(grade_row, text="Target Grade:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        self.grade_var = tk.IntVar(value=5)
+        self.grade_scale = tk.Scale(grade_row, from_=1, to=5, orient=tk.HORIZONTAL,
+                                     variable=self.grade_var, font=FONT_BOLD,
+                                     bg=COLORS["bg"], fg=COLORS["orange"],
+                                     troughcolor=COLORS["bg_light"],
+                                     highlightthickness=0, length=200,
+                                     command=lambda _: self._update_requirements())
+        self.grade_scale.pack(side=tk.LEFT, padx=(8, 0))
+        self.grade_label = ttk.Label(grade_row, text="G5", font=FONT_TITLE,
+                                      foreground=COLORS["orange"])
+        self.grade_label.pack(side=tk.LEFT, padx=(12, 0))
+
+        # Rolls estimate
+        self.rolls_label = ttk.Label(mid, text="", font=FONT,
+                                      foreground=COLORS["text_dim"])
+        self.rolls_label.pack(anchor=tk.W, pady=(2, 0))
+
+        # Separator
+        sep = ttk.Separator(self.win, orient=tk.HORIZONTAL)
+        sep.pack(fill=tk.X, padx=12, pady=8)
+
+        # Requirements panel (scrollable)
+        req_label = ttk.Label(self.win, text="Material Requirements",
+                              font=FONT_CAT, foreground=COLORS["orange"])
+        req_label.pack(anchor=tk.W, padx=12)
+
+        req_container = ttk.Frame(self.win)
+        req_container.pack(fill=tk.BOTH, expand=True, padx=12, pady=(4, 12))
+
+        self.req_tree = ttk.Treeview(req_container,
+                                      columns=("need", "have", "status"),
+                                      show="tree headings", selectmode="none")
+        self.req_tree.heading("#0", text="Material", anchor=tk.W)
+        self.req_tree.heading("need", text="Need", anchor=tk.CENTER)
+        self.req_tree.heading("have", text="Have", anchor=tk.CENTER)
+        self.req_tree.heading("status", text="Status", anchor=tk.CENTER)
+        self.req_tree.column("#0", width=300, minwidth=150)
+        self.req_tree.column("need", width=70, minwidth=50, anchor=tk.CENTER)
+        self.req_tree.column("have", width=70, minwidth=50, anchor=tk.CENTER)
+        self.req_tree.column("status", width=80, minwidth=60, anchor=tk.CENTER)
+
+        vsb = ttk.Scrollbar(req_container, orient=tk.VERTICAL, command=self.req_tree.yview)
+        self.req_tree.configure(yscrollcommand=vsb.set)
+        self.req_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        vsb.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self.req_tree.tag_configure("ok", foreground="#00ff88", font=FONT)
+        self.req_tree.tag_configure("missing", foreground="#ff4444", font=FONT)
+        self.req_tree.tag_configure("grade_header", font=FONT_CAT,
+                                     foreground=COLORS["orange"])
+        self.req_tree.tag_configure("exp_header", font=FONT_CAT,
+                                     foreground="#cc88ff")
+        self.req_tree.tag_configure("total", font=FONT_BOLD,
+                                     foreground=COLORS["text_bright"])
+
+        # Summary bar at bottom
+        self.summary_var = tk.StringVar(value="Select a module to begin.")
+        summary = ttk.Label(self.win, textvariable=self.summary_var,
+                            font=FONT_BOLD, foreground=COLORS["orange"])
+        summary.pack(anchor=tk.W, padx=12, pady=(0, 12))
+
+    # ── Module autocomplete ──
+
+    def _on_module_type(self, event=None):
+        query = self.module_var.get().strip().lower()
+        self._update_module_list(query)
+
+    def _update_module_list(self, query):
+        self.module_listbox.delete(0, tk.END)
+        matches = [m for m in self._all_modules if query in m.lower()]
+        for m in matches:
+            self.module_listbox.insert(tk.END, m)
+        if matches and query:
+            self.module_list_frame.pack(fill=tk.X, padx=12)
+            self._module_list_visible = True
+        else:
+            self.module_list_frame.pack_forget()
+            self._module_list_visible = False
+
+    def _on_module_pick(self, event=None):
+        sel = self.module_listbox.curselection()
+        if not sel:
+            return
+        name = self.module_listbox.get(sel[0])
+        self.module_var.set(name)
+        self.module_list_frame.pack_forget()
+        self._module_list_visible = False
+        self._select_module(name)
+
+    def _on_module_select(self, event=None):
+        query = self.module_var.get().strip()
+        # Try exact match first
+        if query in self._all_modules:
+            self._select_module(query)
+            return
+        # Try first match
+        matches = [m for m in self._all_modules if query.lower() in m.lower()]
+        if matches:
+            self.module_var.set(matches[0])
+            self._select_module(matches[0])
+
+    def _select_module(self, module_name):
+        """Populate engineers, blueprints, experiments for the selected module."""
+        self._current_module = module_name
+
+        # Find all engineers that work on this module
+        engineers = []
+        all_bps = set()
+        all_exps = set()
+        for eng_name, eng_data in ENGINEERS.items():
+            mod_data = eng_data["modules"].get(module_name)
+            if mod_data:
+                loc = eng_data.get("location", "Unknown")
+                engineers.append(f"{eng_name} ({loc})")
+                all_bps.update(mod_data["blueprints"].keys())
+                all_exps.update(mod_data.get("experiments", {}).keys())
+
+        self.eng_label.config(text="Engineers: " + (", ".join(e.split(" (")[0] for e in engineers) if engineers else "None found"))
+
+        # Blueprint combo
+        bp_list = sorted(all_bps)
+        self.bp_combo["values"] = bp_list
+        if bp_list:
+            self.bp_var.set(bp_list[0])
+        else:
+            self.bp_var.set("")
+
+        # Experiment combo
+        exp_list = ["(None)"] + sorted(all_exps)
+        self.exp_combo["values"] = exp_list
+        self.exp_var.set("(None)")
+
+        # Set max grade based on blueprint
+        self._update_max_grade()
+        self._update_requirements()
+
+    def _on_bp_change(self, event=None):
+        self._update_max_grade()
+        self._update_requirements()
+
+    def _update_max_grade(self):
+        """Update the grade slider max based on selected blueprint."""
+        bp_name = self.bp_var.get()
+        module = getattr(self, "_current_module", None)
+        if not module or not bp_name:
+            return
+        max_g = 1
+        for eng_data in ENGINEERS.values():
+            mod_data = eng_data["modules"].get(module)
+            if mod_data:
+                bp_data = mod_data["blueprints"].get(bp_name)
+                if bp_data:
+                    grades = bp_data.get("grades", {})
+                    if grades:
+                        max_g = max(max_g, max(grades.keys()))
+        self.grade_scale.config(to=max_g)
+        if self.grade_var.get() > max_g:
+            self.grade_var.set(max_g)
+        self.grade_label.config(text=f"G{self.grade_var.get()}")
+
+    def _update_requirements(self, event=None):
+        """Calculate and display material requirements."""
+        self.grade_label.config(text=f"G{self.grade_var.get()}")
+        self.req_tree.delete(*self.req_tree.get_children())
+
+        module = getattr(self, "_current_module", None)
+        bp_name = self.bp_var.get()
+        target_grade = self.grade_var.get()
+        exp_name = self.exp_var.get()
+
+        if not module or not bp_name:
+            self.summary_var.set("Select a module and blueprint.")
+            return
+
+        # Collect blueprint materials for grades 1 through target_grade
+        # Use the first engineer that has this blueprint to get material data
+        bp_grades = None
+        for eng_data in ENGINEERS.values():
+            mod_data = eng_data["modules"].get(module)
+            if mod_data:
+                bp_data = mod_data["blueprints"].get(bp_name)
+                if bp_data:
+                    bp_grades = bp_data.get("grades", {})
+                    if bp_grades:
+                        break
+
+        if not bp_grades:
+            self.summary_var.set("No blueprint data found.")
+            return
+
+        # Aggregate materials: each grade needs ROLLS_PER_GRADE[grade] rolls
+        # Each roll costs the materials listed for that grade
+        total_needed = {}  # material_name -> total_qty_needed
+        grade_totals = {}  # grade -> {mat_name: qty}
+        for g in range(1, target_grade + 1):
+            mats = bp_grades.get(g, [])
+            if not mats:
+                continue
+            rolls = ROLLS_PER_GRADE.get(g, 1)
+            g_total = {}
+            for mat_name, qty_per_roll in mats:
+                total = qty_per_roll * rolls
+                total_needed[mat_name] = total_needed.get(mat_name, 0) + total
+                g_total[mat_name] = g_total.get(mat_name, 0) + total
+            grade_totals[g] = g_total
+
+        # Add experimental effect materials
+        exp_mats = {}
+        if exp_name and exp_name != "(None)":
+            for eng_data in ENGINEERS.values():
+                mod_data = eng_data["modules"].get(module)
+                if mod_data:
+                    exp_data = mod_data.get("experiments", {}).get(exp_name)
+                    if exp_data:
+                        for mat_name, qty in exp_data:
+                            exp_mats[mat_name] = exp_mats.get(mat_name, 0) + qty
+                            total_needed[mat_name] = total_needed.get(mat_name, 0) + qty
+                        break
+
+        # Populate tree
+        total_have = 0
+        total_missing = 0
+
+        # Grade-by-grade sections
+        for g in range(1, target_grade + 1):
+            g_total = grade_totals.get(g, {})
+            if not g_total:
+                continue
+            rolls = ROLLS_PER_GRADE.get(g, 1)
+            parent = self.req_tree.insert("", tk.END,
+                text=f"Grade {g}  ({rolls} roll{'s' if rolls > 1 else ''})",
+                values=("", "", ""), tags=("grade_header",), open=True)
+            for mat_name in sorted(g_total.keys()):
+                display_name = self._resolve_mat_name(mat_name)
+                need = g_total[mat_name]
+                have = self._get_mat_qty(mat_name)
+                if have >= need:
+                    status = "✅"
+                    tag = "ok"
+                    total_have += need
+                else:
+                    status = "❌"
+                    tag = "missing"
+                    total_have += have
+                    total_missing += need - have
+                self.req_tree.insert(parent, tk.END,
+                    text=f"  {display_name}",
+                    values=(str(need), str(have), status),
+                    tags=(tag,))
+
+        # Experimental effect section
+        if exp_mats:
+            parent = self.req_tree.insert("", tk.END,
+                text=f"Experimental: {exp_name}",
+                values=("", "", ""), tags=("exp_header",), open=True)
+            for mat_name in sorted(exp_mats.keys()):
+                display_name = self._resolve_mat_name(mat_name)
+                need = exp_mats[mat_name]
+                have = self._get_mat_qty(mat_name)
+                if have >= need:
+                    status = "✅"
+                    tag = "ok"
+                    total_have += need
+                else:
+                    status = "❌"
+                    tag = "missing"
+                    total_have += have
+                    total_missing += need - have
+                self.req_tree.insert(parent, tk.END,
+                    text=f"  {display_name}",
+                    values=(str(need), str(have), status),
+                    tags=(tag,))
+
+        # Totals
+        all_total = sum(total_needed.values())
+        self.req_tree.insert("", tk.END,
+            text=f"TOTAL: {all_total} materials needed",
+            values=(str(all_total), str(total_have),
+                    f"{'✅' if total_missing == 0 else '❌'} {total_missing} missing"),
+            tags=("total",))
+
+        # Summary
+        if total_missing == 0:
+            self.summary_var.set(f"✅ You have all {all_total} materials for {bp_name} G{target_grade}" +
+                                 (f" + {exp_name}" if exp_name != "(None)" else "") + "!")
+        else:
+            self.summary_var.set(f"❌ Missing {total_missing} materials for {bp_name} G{target_grade}" +
+                                 (f" + {exp_name}" if exp_name != "(None)" else ""))
 
 
 if __name__ == "__main__":
