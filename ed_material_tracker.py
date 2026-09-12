@@ -451,22 +451,22 @@ class MaterialTracker:
             self.tab_buttons[cat] = btn
         self._highlight_tab("ALL")
 
-        # Sort bar
+        # Sort controls — right side of tab bar
         self.sort_mode = tk.StringVar(value="qty")  # name, qty, grade
         self.sort_desc = tk.BooleanVar(value=True)
-        sort_frame = ttk.Frame(self.root)
-        sort_frame.pack(fill=tk.X, padx=10, pady=(4, 0))
-        ttk.Label(sort_frame, text="Sort:", font=FONT, foreground=COLORS["text_dim"]).pack(side=tk.LEFT)
+        tk.Label(self.tab_frame, text="│", font=FONT,
+                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.LEFT, padx=(8, 4))
+        tk.Label(self.tab_frame, text="Sort:", font=FONT,
+                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.LEFT)
         self.sort_buttons = {}
         for mode, label in [("name", "Name"), ("qty", "Qty"), ("grade", "Grade")]:
-            btn = tk.Label(sort_frame, text=label, font=FONT,
+            btn = tk.Label(self.tab_frame, text=label, font=FONT,
                           bg=COLORS["bg_panel"], fg=COLORS["text_dim"],
-                          padx=10, pady=3, cursor="hand2")
+                          padx=10, pady=6, cursor="hand2")
             btn.pack(side=tk.LEFT, padx=(6, 0))
             btn.bind("<Button-1>", lambda e, m=mode: self._set_sort(m))
             self.sort_buttons[mode] = btn
-        # Direction arrow
-        self.sort_arrow = tk.Label(sort_frame, text="▼", font=FONT,
+        self.sort_arrow = tk.Label(self.tab_frame, text="▼", font=FONT,
                                    bg=COLORS["bg"], fg=COLORS["orange"])
         self.sort_arrow.pack(side=tk.LEFT, padx=(4, 0))
         self._highlight_sort("qty")
@@ -625,17 +625,9 @@ class MaterialTracker:
             if mode == "name":
                 items_with_grade.sort(key=lambda x: x[0].lower(), reverse=desc)
             elif mode == "qty":
-                items_with_grade.sort(key=lambda x: (x[1] == 0, x[1] if desc else -x[1]), reverse=False)
-                if desc:
-                    items_with_grade.sort(key=lambda x: (x[1] == 0, -x[1]))
-                else:
-                    items_with_grade.sort(key=lambda x: (x[1] == 0, x[1]))
+                items_with_grade.sort(key=lambda x: x[1], reverse=desc)
             elif mode == "grade":
-                items_with_grade.sort(key=lambda x: (x[2] == 0, x[2] if desc else -x[2]), reverse=False)
-                if desc:
-                    items_with_grade.sort(key=lambda x: (x[2] == 0, -x[2]))
-                else:
-                    items_with_grade.sort(key=lambda x: (x[2] == 0, x[2]))
+                items_with_grade.sort(key=lambda x: x[2], reverse=desc)
 
             for i, (name, qty, grade) in enumerate(items_with_grade):
                 max_cap = _max_cap(grade, cat) if grade else 300
