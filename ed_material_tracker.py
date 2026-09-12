@@ -127,40 +127,40 @@ MATERIAL_DATA: dict[str, tuple[str, int, str]] = {
     "guardianvesselblueprintfragment": ("Guardian Vessel Blueprint Fragment", 5, "Encoded"),
 
     # ── Manufactured (5 grades) ──
-    "chemicalstorageunits":    ("Chemical Storage Units", 1, "Manufactured"),
+    "chemicalstorageunits":    ("Chemical Storage Units", 1),
     "chemicalprocessors":      ("Chemical Processors", 2, "Manufactured"),
     "chemicaldistillery":      ("Chemical Distillery", 3, "Manufactured"),
     "chemicalmanipulators":    ("Chemical Manipulators", 4, "Manufactured"),
     "chemicalworkshop":        ("Chemical Workshop", 4, "Manufactured"),
-    "heatconductionwiring":    ("Heat Conduction Wiring", 1, "Manufactured"),
+    "heatconductionwiring":    ("Heat Conduction Wiring", 1),
     "heatdispersionplate":     ("Heat Dispersion Plate", 2, "Manufactured"),
     "heatexchangers":          ("Heat Exchangers", 3, "Manufactured"),
     "heatvanes":               ("Heat Vanes", 4, "Manufactured"),
     "protoheatradiators":      ("Proto Heat Radiators", 5, "Manufactured"),
-    "temperedalloys":          ("Tempered Alloys", 1, "Manufactured"),
+    "temperedalloys":          ("Tempered Alloys", 1),
     "precipitatedalloys":      ("Precipitated Alloys", 2, "Manufactured"),
     "salvagedalloys":          ("Salvaged Alloys", 3, "Manufactured"),
     "galvanisingalloys":       ("Galvanising Alloys", 4, "Manufactured"),
     "phasealloys":             ("Phase Alloys", 5, "Manufactured"),
-    "crystalshards":           ("Crystal Shards", 1, "Manufactured"),
+    "crystalshards":           ("Crystal Shards", 1),
     "uncutfocuscrystals":      ("Flawed Focus Crystals", 2, "Manufactured"),
     "focuscrystals":           ("Focus Crystals", 3, "Manufactured"),
     "refinedfocuscrystals":    ("Refined Focus Crystals", 4, "Manufactured"),
     "dazzlingfocuscrystals":   ("Dazzling Focus Crystals", 4, "Manufactured"),
     "exquisitefocuscrystals":  ("Exquisite Focus Crystals", 5, "Manufactured"),
-    "basicconductors":         ("Basic Conductors", 1, "Manufactured"),
+    "basicconductors":         ("Basic Conductors", 1),
     "conductivecomponents":    ("Conductive Components", 2, "Manufactured"),
     "conductiveceramics":      ("Conductive Ceramics", 3, "Manufactured"),
     "conductivepolymers":      ("Conductive Polymers", 4, "Manufactured"),
-    "mechanicalscrap":         ("Mechanical Scrap", 1, "Manufactured"),
+    "mechanicalscrap":         ("Mechanical Scrap", 1),
     "mechanicalequipment":     ("Mechanical Equipment", 2, "Manufactured"),
     "mechanicalcomponents":    ("Mechanical Components", 3, "Manufactured"),
     "configurablecomponents":  ("Configurable Components", 4, "Manufactured"),
-    "wornshieldemitters":      ("Worn Shield Emitters", 1, "Manufactured"),
+    "wornshieldemitters":      ("Worn Shield Emitters", 1),
     "shieldemitters":          ("Shield Emitters", 2, "Manufactured"),
     "shieldingsensors":        ("Shielding Sensors", 3, "Manufactured"),
     "compoundshielding":       ("Compound Shielding", 4, "Manufactured"),
-    "gridresistors":           ("Grid Resistors", 1, "Manufactured"),
+    "gridresistors":           ("Grid Resistors", 1),
     "hybridcapacitors":        ("Hybrid Capacitors", 2, "Manufactured"),
     "electrochemicalarrays":   ("Electrochemical Arrays", 3, "Manufactured"),
     "polymercapacitors":       ("Polymer Capacitors", 4, "Manufactured"),
@@ -277,7 +277,7 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
     for cat in ("Raw", "Encoded", "Manufactured"):
         for item in snapshot.get(cat, []):
             name = pretty_name(item.get("Name", "Unknown"))
-            count = item.get("Count", 0, "Manufactured")
+            count = item.get("Count", 0)
             stock[name] = (cat, count)
 
     # Phase 2: scan forward from snapshot for delta events
@@ -309,13 +309,13 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                         for cat in ("Raw", "Encoded", "Manufactured"):
                             for item in entry.get(cat, []):
                                 name = pretty_name(item.get("Name", "Unknown"))
-                                count = item.get("Count", 0, "Manufactured")
+                                count = item.get("Count", 0)
                                 stock[name] = (cat, count)
 
                     elif event == "MaterialCollected":
                         name = pretty_name(entry.get("Name", "Unknown"))
                         cat = _classify(entry) or "Manufactured"
-                        qty = entry.get("Count", 1, "Manufactured")
+                        qty = entry.get("Count", 1)
                         if name in stock:
                             old_cat, old_qty = stock[name]
                             stock[name] = (old_cat, old_qty + qty)
@@ -325,7 +325,7 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                     elif event == "MaterialDiscarded":
                         name = pretty_name(entry.get("Name", "Unknown"))
                         cat = _classify(entry) or "Manufactured"
-                        qty = entry.get("Count", 1, "Manufactured")
+                        qty = entry.get("Count", 1)
                         if name in stock:
                             old_cat, old_qty = stock[name]
                             stock[name] = (old_cat, max(0, old_qty - qty))
@@ -335,13 +335,13 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                         received = entry.get("Received", {})
                         if paid:
                             pname = pretty_name(paid.get("Material", ""))
-                            pqty = paid.get("Quantity", 0, "Manufactured")
+                            pqty = paid.get("Quantity", 0)
                             if pname in stock:
                                 old_cat, old_qty = stock[pname]
                                 stock[pname] = (old_cat, max(0, old_qty - pqty))
                         if received:
                             rname = pretty_name(received.get("Material", ""))
-                            rqty = received.get("Quantity", 0, "Manufactured")
+                            rqty = received.get("Quantity", 0)
                             rcat = _classify(received) or "Manufactured"
                             if rname in stock:
                                 old_cat, old_qty = stock[rname]
