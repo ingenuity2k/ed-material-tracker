@@ -451,6 +451,26 @@ class MaterialTracker:
             self.tab_buttons[cat] = btn
         self._highlight_tab("ALL")
 
+        # Sort bar
+        self.sort_mode = tk.StringVar(value="qty")  # name, qty, grade
+        self.sort_desc = tk.BooleanVar(value=True)
+        sort_frame = ttk.Frame(self.root)
+        sort_frame.pack(fill=tk.X, padx=10, pady=(4, 0))
+        ttk.Label(sort_frame, text="Sort:", font=FONT, foreground=COLORS["text_dim"]).pack(side=tk.LEFT)
+        self.sort_buttons = {}
+        for mode, label in [("name", "Name"), ("qty", "Qty"), ("grade", "Grade")]:
+            btn = tk.Label(sort_frame, text=label, font=FONT,
+                          bg=COLORS["bg_panel"], fg=COLORS["text_dim"],
+                          padx=10, pady=3, cursor="hand2")
+            btn.pack(side=tk.LEFT, padx=(6, 0))
+            btn.bind("<Button-1>", lambda e, m=mode: self._set_sort(m))
+            self.sort_buttons[mode] = btn
+        # Direction arrow
+        self.sort_arrow = tk.Label(sort_frame, text="▼", font=FONT,
+                                   bg=COLORS["bg"], fg=COLORS["orange"])
+        self.sort_arrow.pack(side=tk.LEFT, padx=(4, 0))
+        self._highlight_sort("qty")
+
         # Tree container
         container = ttk.Frame(self.root)
         container.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 10))
@@ -478,6 +498,24 @@ class MaterialTracker:
     def _switch_tab(self, cat):
         self.active_tab.set(cat)
         self._highlight_tab(cat)
+        self._refresh_tree()
+
+    def _highlight_sort(self, active):
+        for mode, btn in self.sort_buttons.items():
+            if mode == active:
+                btn.configure(bg=COLORS["orange"], fg=COLORS["text_bright"])
+            else:
+                btn.configure(bg=COLORS["bg_panel"], fg=COLORS["text_dim"])
+
+    def _set_sort(self, mode):
+        if self.sort_mode.get() == mode:
+            # Toggle direction
+            self.sort_desc.set(not self.sort_desc.get())
+        else:
+            self.sort_mode.set(mode)
+            self.sort_desc.set(True)
+        self._highlight_sort(mode)
+        self.sort_arrow.configure(text="▼" if self.sort_desc.get() else "▲")
         self._refresh_tree()
 
     # ── Status ──
@@ -570,16 +608,36 @@ class MaterialTracker:
             # Category header
             parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
                                        values=("",), tags=("cat_header",), open=True)
-            # Sort: non-zero first (desc), then zero-qty alphabetically
-            sorted_items = sorted(mats.items(), key=lambda x: (-x[1], x[0]))
-            for i, (name, qty) in enumerate(sorted_items):
-                # Look up grade from MATERIAL_DATA
+            # Build items with grade info for sorting
+            items_with_grade = []
+            for name, qty in mats.items():
                 entry = None
                 for k, v in MATERIAL_DATA.items():
                     if v[0] == name:
                         entry = v
                         break
                 grade = entry[1] if entry else 0
+                items_with_grade.append((name, qty, grade))
+
+            # Sort based on current mode
+            mode = self.sort_mode.get()
+            desc = self.sort_desc.get()
+            if mode == "name":
+                items_with_grade.sort(key=lambda x: x[0].lower(), reverse=desc)
+            elif mode == "qty":
+                items_with_grade.sort(key=lambda x: (x[1] == 0, x[1] if desc else -x[1]), reverse=False)
+                if desc:
+                    items_with_grade.sort(key=lambda x: (x[1] == 0, -x[1]))
+                else:
+                    items_with_grade.sort(key=lambda x: (x[1] == 0, x[1]))
+            elif mode == "grade":
+                items_with_grade.sort(key=lambda x: (x[2] == 0, x[2] if desc else -x[2]), reverse=False)
+                if desc:
+                    items_with_grade.sort(key=lambda x: (x[2] == 0, -x[2]))
+                else:
+                    items_with_grade.sort(key=lambda x: (x[2] == 0, x[2]))
+
+            for i, (name, qty, grade) in enumerate(items_with_grade):
                 max_cap = _max_cap(grade, cat) if grade else 300
                 # Bar relative to max capacity
                 pct = min(qty / max_cap, 1.0) if max_cap else 0
