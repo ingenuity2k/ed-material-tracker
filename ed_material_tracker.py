@@ -451,24 +451,24 @@ class MaterialTracker:
             self.tab_buttons[cat] = btn
         self._highlight_tab("ALL")
 
-        # Sort controls — right side of tab bar
-        self.sort_mode = tk.StringVar(value="qty")  # name, qty, grade
+        # Sort controls — right-anchored in tab bar
+        self.sort_mode = tk.StringVar(value="qty")
         self.sort_desc = tk.BooleanVar(value=True)
-        tk.Label(self.tab_frame, text="│", font=FONT,
-                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.LEFT, padx=(8, 4))
-        tk.Label(self.tab_frame, text="Sort:", font=FONT,
-                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.LEFT)
+        self.sort_arrow = tk.Label(self.tab_frame, text="▼", font=FONT,
+                                   bg=COLORS["bg"], fg=COLORS["orange"])
+        self.sort_arrow.pack(side=tk.RIGHT, padx=(0, 4))
         self.sort_buttons = {}
-        for mode, label in [("name", "Name"), ("qty", "Qty"), ("grade", "Grade")]:
+        for mode, label in [("grade", "Grade"), ("qty", "Qty"), ("name", "Name")]:
             btn = tk.Label(self.tab_frame, text=label, font=FONT,
                           bg=COLORS["bg_panel"], fg=COLORS["text_dim"],
                           padx=10, pady=6, cursor="hand2")
-            btn.pack(side=tk.LEFT, padx=(6, 0))
+            btn.pack(side=tk.RIGHT, padx=(0, 2))
             btn.bind("<Button-1>", lambda e, m=mode: self._set_sort(m))
             self.sort_buttons[mode] = btn
-        self.sort_arrow = tk.Label(self.tab_frame, text="▼", font=FONT,
-                                   bg=COLORS["bg"], fg=COLORS["orange"])
-        self.sort_arrow.pack(side=tk.LEFT, padx=(4, 0))
+        tk.Label(self.tab_frame, text="Sort:", font=FONT,
+                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.RIGHT, padx=(0, 6))
+        tk.Label(self.tab_frame, text="│", font=FONT,
+                  fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.RIGHT, padx=(0, 6))
         self._highlight_sort("qty")
 
         # Tree container
