@@ -22,6 +22,77 @@ except ImportError:
     ENGINEER_LOCATIONS = {}
     ROLLS_PER_GRADE = {1: 1, 2: 2, 3: 3, 4: 4, 5: 6}
 
+# ── Icon Loading ────────────────────────────────────────────────────────────
+_ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+_ENG_ICON_PATH = os.path.join(_ASSETS_DIR, "engineer_icon.png")
+_GRADE_ICON_PATHS = {g: os.path.join(_ASSETS_DIR, f"grade-{g}.png") for g in range(1, 6)}
+_PIL_AVAILABLE = False
+try:
+    from PIL import Image, ImageTk
+    _PIL_AVAILABLE = True
+except ImportError:
+    pass
+
+# Cache for loaded icons
+_icon_cache: dict[str, tk.PhotoImage] = {}
+
+def _load_icon(path: str, size: int = 16) -> tk.PhotoImage | None:
+    """Load and scale an icon image. Returns None if unavailable."""
+    cache_key = f"{path}_{size}"
+    if cache_key in _icon_cache:
+        return _icon_cache[cache_key]
+    if not _PIL_AVAILABLE or not os.path.exists(path):
+        return None
+    try:
+        img = Image.open(path).convert("RGBA")
+        img = img.resize((size, size), Image.Resampling.LANCZOS)
+        photo = ImageTk.PhotoImage(img)
+        _icon_cache[cache_key] = photo
+        return photo
+    except Exception:
+        return None
+
+def _load_grade_icon(grade: int, size: int = 16) -> tk.PhotoImage | None:
+    """Load grade-specific icon (1-5)."""
+    path = _GRADE_ICON_PATHS.get(grade)
+    return _load_icon(path, size) if path else None
+
+def _load_engineer_icon(size: int = 16) -> tk.PhotoImage | None:
+    """Load the engineer icon."""
+    return _load_icon(_ENG_ICON_PATH, size)
+
+def _render_grade_icon(parent, grade: int, size: int = 16) -> tk.Label:
+    """Create a label with the grade icon. Falls back to colored dots."""
+    icon = _load_grade_icon(grade, size)
+    if icon:
+        lbl = tk.Label(parent, image=icon, bg=COLORS["bg"])
+        lbl.image = icon  # prevent GC
+        return lbl
+    colors = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
+    lbl = tk.Label(parent, text="●" * grade, font=("Consolas", max(8, size - 4)),
+                   fg=colors.get(grade, COLORS["text"]), bg=COLORS["bg"])
+    return lbl
+
+def _render_engineer_icons(parent, count: int, size: int = 16) -> tk.Frame:
+    """Create a frame with N engineer icon images in a row. Falls back to ⚙ if no icon."""
+    frame = tk.Frame(parent, bg=COLORS["bg"])
+    icon = _load_engineer_icon(size)
+    for _ in range(count):
+        if icon:
+            lbl = tk.Label(frame, image=icon, bg=COLORS["bg"])
+            lbl.image = icon  # prevent GC
+            lbl.pack(side=tk.LEFT, padx=1)
+        else:
+            lbl = tk.Label(frame, text="⚙", font=("Consolas", max(8, size - 4)),
+                          fg=COLORS["orange"], bg=COLORS["bg"])
+            lbl.pack(side=tk.LEFT, padx=1)
+    return frame
+
+def _grade_unicode_dots(grade: int) -> str:
+    """Return colored circle characters for grade display in treeviews."""
+    return "●" * grade
+
+
 
 # ── Theme ───────────────────────────────────────────────────────────────────
 
@@ -644,7 +715,7 @@ class MaterialTracker:
                 pct = min(qty / max_cap, 1.0) if max_cap else 0
                 filled = int(pct * 20)
                 bar = "█" * filled + "░" * (20 - filled)
-                grade_label = f"G{grade}" if grade else ""
+                grade_label = _grade_unicode_dots(grade) if grade else ""
                 item_id = self.tree.insert(parent, tk.END,
                     text=f"{qty:>5}  {name}",
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
@@ -771,10 +842,10 @@ class EngineeringCalculator:
         mid = ttk.Frame(self.win)
         mid.pack(fill=tk.X, padx=12, pady=(8, 4))
 
-        # Engineers label
-        self.eng_label = ttk.Label(mid, text="Engineers: —", font=FONT,
-                                    foreground=COLORS["text_dim"])
-        self.eng_label.pack(anchor=tk.W)
+        # Engineers list (replaces old eng_label)
+        self.eng_frame = ttk.Frame(mid)
+        self.eng_frame.pack(fill=tk.X, pady=(0, 2))
+        self._engineer_max_grades = {}  # {eng_name: max_grade} for current module+bp
 
         # Blueprint picker row
         bp_row = ttk.Frame(mid)
@@ -811,9 +882,8 @@ class EngineeringCalculator:
                                      highlightthickness=0, length=200,
                                      command=lambda _: self._update_requirements())
         self.grade_scale.pack(side=tk.LEFT, padx=(8, 0))
-        self.grade_label = ttk.Label(grade_row, text="G5", font=FONT_TITLE,
-                                      foreground=COLORS["orange"])
-        self.grade_label.pack(side=tk.LEFT, padx=(12, 0))
+        self.grade_icon_frame = ttk.Frame(grade_row)
+        self.grade_icon_frame.pack(side=tk.LEFT, padx=(12, 0))
 
         # Rolls estimate
         self.rolls_label = ttk.Label(mid, text="", font=FONT,
@@ -908,19 +978,27 @@ class EngineeringCalculator:
         """Populate engineers, blueprints, experiments for the selected module."""
         self._current_module = module_name
 
-        # Find all engineers that work on this module
+        # Find all engineers that work on this module and their max grades
         engineers = []
         all_bps = set()
         all_exps = set()
+        self._engineer_max_grades = {}
         for eng_name, eng_data in ENGINEERS.items():
             mod_data = eng_data["modules"].get(module_name)
             if mod_data:
                 loc = eng_data.get("location", "Unknown")
-                engineers.append(f"{eng_name} ({loc})")
+                engineers.append(eng_name)
                 all_bps.update(mod_data["blueprints"].keys())
                 all_exps.update(mod_data.get("experiments", {}).keys())
+                # Find max grade across all blueprints for this module
+                max_g = 1
+                for bp_data in mod_data["blueprints"].values():
+                    grades = bp_data.get("grades", {})
+                    if grades:
+                        max_g = max(max_g, max(grades.keys()))
+                self._engineer_max_grades[eng_name] = max_g
 
-        self.eng_label.config(text="Engineers: " + (", ".join(e.split(" (")[0] for e in engineers) if engineers else "None found"))
+        self._update_engineer_list()
 
         # Blueprint combo
         bp_list = sorted(all_bps)
@@ -961,11 +1039,65 @@ class EngineeringCalculator:
         self.grade_scale.config(to=max_g)
         if self.grade_var.get() > max_g:
             self.grade_var.set(max_g)
-        self.grade_label.config(text=f"G{self.grade_var.get()}")
+        self._update_grade_icons()
+        self._update_engineer_list()
+
+    def _update_grade_icons(self):
+        """Update the grade icon display next to the slider."""
+        for w in self.grade_icon_frame.winfo_children():
+            w.destroy()
+        n = self.grade_var.get()
+        _render_engineer_icons(self.grade_icon_frame, n, size=16).pack(side=tk.LEFT)
+
+    def _update_engineer_list(self):
+        """Filter and display engineers whose max grade >= selected grade."""
+        for w in self.eng_frame.winfo_children():
+            w.destroy()
+        selected_grade = self.grade_var.get()
+        bp_name = self.bp_var.get()
+        module = getattr(self, "_current_module", None)
+        if not module or not ENGINEERS:
+            return
+
+        # Recalculate per-engineer max grade for current blueprint
+        eng_grades = {}
+        for eng_name in self._engineer_max_grades:
+            eng_data = ENGINEERS.get(eng_name)
+            if not eng_data:
+                continue
+            mod_data = eng_data["modules"].get(module)
+            if not mod_data:
+                continue
+            # Max grade for this specific blueprint from this engineer
+            bp_data = mod_data["blueprints"].get(bp_name)
+            if bp_data:
+                grades = bp_data.get("grades", {})
+                if grades:
+                    eng_grades[eng_name] = max(grades.keys())
+
+        # Filter: only engineers whose max grade >= selected grade
+        filtered = [(name, g) for name, g in eng_grades.items() if g >= selected_grade]
+        if not filtered:
+            lbl = tk.Label(self.eng_frame, text="No engineers for this grade",
+                          font=FONT, fg=COLORS["text_dim"], bg=COLORS["bg"])
+            lbl.pack(anchor=tk.W)
+            return
+
+        for eng_name, max_g in sorted(filtered, key=lambda x: (-x[1], x[0])):
+            row = tk.Frame(self.eng_frame, bg=COLORS["bg"])
+            row.pack(fill=tk.X, pady=1)
+            # Icons (N = max grade for this blueprint)
+            _render_engineer_icons(row, max_g, size=16).pack(side=tk.LEFT)
+            # Name and location
+            loc = ENGINEERS.get(eng_name, {}).get("location", "Unknown")
+            info = tk.Label(row, text=f"  {eng_name} — {loc}",
+                          font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
+            info.pack(side=tk.LEFT)
 
     def _update_requirements(self, event=None):
         """Calculate and display material requirements."""
-        self.grade_label.config(text=f"G{self.grade_var.get()}")
+        self._update_grade_icons()
+        self._update_engineer_list()
         self.req_tree.delete(*self.req_tree.get_children())
 
         module = getattr(self, "_current_module", None)
@@ -1033,7 +1165,7 @@ class EngineeringCalculator:
                 continue
             rolls = ROLLS_PER_GRADE.get(g, 1)
             parent = self.req_tree.insert("", tk.END,
-                text=f"Grade {g}  ({rolls} roll{'s' if rolls > 1 else ''})",
+                text=f"{_grade_unicode_dots(g)}  ({rolls} roll{'s' if rolls > 1 else ''})",
                 values=("", "", ""), tags=("grade_header",), open=True)
             for mat_name in sorted(g_total.keys()):
                 display_name = self._resolve_mat_name(mat_name)
