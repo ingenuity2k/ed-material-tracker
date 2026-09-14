@@ -551,6 +551,13 @@ class MaterialTracker:
                   fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.RIGHT, padx=(0, 6))
         self._highlight_sort("qty")
 
+        # Pre-load grade icons for treeview
+        self._grade_icons = {}
+        for g in range(1, 6):
+            icon = _load_grade_icon(g, 16)
+            if icon:
+                self._grade_icons[g] = icon
+
         # Tree container
         container = ttk.Frame(self.root)
         container.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 10))
@@ -716,10 +723,12 @@ class MaterialTracker:
                 filled = int(pct * 20)
                 bar = "█" * filled + "░" * (20 - filled)
                 grade_label = _grade_unicode_dots(grade) if grade else ""
+                img = self._grade_icons.get(grade)
+                kwargs = {"image": img} if img else {}
                 item_id = self.tree.insert(parent, tk.END,
                     text=f"{qty:>5}  {name}",
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
-                    tags=(f"grade_{grade}",))
+                    tags=(f"grade_{grade}",), **kwargs)
 
     def _open_engineering(self):
         if not ENGINEERS:
@@ -757,6 +766,13 @@ class EngineeringCalculator:
             mod for eng in ENGINEERS.values()
             for mod in eng["modules"]
         ))
+
+        # Pre-load grade icons for treeview
+        self._grade_icons = {}
+        for g in range(1, 6):
+            icon = _load_grade_icon(g, 16)
+            if icon:
+                self._grade_icons[g] = icon
 
         self._build_ui()
         self._update_module_list("")
@@ -1047,7 +1063,13 @@ class EngineeringCalculator:
         for w in self.grade_icon_frame.winfo_children():
             w.destroy()
         n = self.grade_var.get()
-        _render_engineer_icons(self.grade_icon_frame, n, size=16).pack(side=tk.LEFT)
+        icon = self._grade_icons.get(n)
+        if icon:
+            lbl = tk.Label(self.grade_icon_frame, image=icon, bg=COLORS["bg"])
+            lbl.image = icon
+            lbl.pack(side=tk.LEFT)
+        else:
+            _render_engineer_icons(self.grade_icon_frame, n, size=16).pack(side=tk.LEFT)
 
     def _update_engineer_list(self):
         """Filter and display engineers whose max grade >= selected grade."""
@@ -1164,13 +1186,23 @@ class EngineeringCalculator:
             if not g_total:
                 continue
             rolls = ROLLS_PER_GRADE.get(g, 1)
+            g_icon = self._grade_icons.get(g)
+            g_kwargs = {"image": g_icon} if g_icon else {}
             parent = self.req_tree.insert("", tk.END,
-                text=f"{_grade_unicode_dots(g)}  ({rolls} roll{'s' if rolls > 1 else ''})",
-                values=("", "", ""), tags=("grade_header",), open=True)
+                text=f"  ({rolls} roll{'s' if rolls > 1 else ''})",
+                values=("", "", ""), tags=("grade_header",), open=True, **g_kwargs)
             for mat_name in sorted(g_total.keys()):
                 display_name = self._resolve_mat_name(mat_name)
                 need = g_total[mat_name]
                 have = self._get_mat_qty(mat_name)
+                # Find material grade for icon
+                mat_grade = 0
+                for k, v in MATERIAL_DATA.items():
+                    if v[0] == display_name:
+                        mat_grade = v[1]
+                        break
+                m_icon = self._grade_icons.get(mat_grade)
+                m_kwargs = {"image": m_icon} if m_icon else {}
                 if have >= need:
                     status = "✅"
                     tag = "ok"
@@ -1183,7 +1215,7 @@ class EngineeringCalculator:
                 self.req_tree.insert(parent, tk.END,
                     text=f"  {display_name}",
                     values=(str(need), str(have), status),
-                    tags=(tag,))
+                    tags=(tag,), **m_kwargs)
 
         # Experimental effect section
         if exp_mats:
@@ -1194,6 +1226,14 @@ class EngineeringCalculator:
                 display_name = self._resolve_mat_name(mat_name)
                 need = exp_mats[mat_name]
                 have = self._get_mat_qty(mat_name)
+                # Find material grade for icon
+                mat_grade = 0
+                for k, v in MATERIAL_DATA.items():
+                    if v[0] == display_name:
+                        mat_grade = v[1]
+                        break
+                m_icon = self._grade_icons.get(mat_grade)
+                m_kwargs = {"image": m_icon} if m_icon else {}
                 if have >= need:
                     status = "✅"
                     tag = "ok"
@@ -1206,7 +1246,7 @@ class EngineeringCalculator:
                 self.req_tree.insert(parent, tk.END,
                     text=f"  {display_name}",
                     values=(str(need), str(have), status),
-                    tags=(tag,))
+                    tags=(tag,), **m_kwargs)
 
         # Totals
         all_total = sum(total_needed.values())
