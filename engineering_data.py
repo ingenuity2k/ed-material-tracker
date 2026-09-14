@@ -53,12 +53,11 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Fuel Scoop": {
                 "blueprints": {
@@ -67,12 +66,11 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Kill Warrant Scanner": {
                 "blueprints": {
@@ -81,8 +79,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -90,8 +86,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -99,8 +93,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -108,8 +100,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -117,8 +107,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -126,12 +114,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Life Support": {
                 "blueprints": {
@@ -140,8 +127,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Radiolic Alloys", 1), ("Proto Light Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -149,8 +134,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -158,12 +141,11 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Manifest Scanner": {
                 "blueprints": {
@@ -172,8 +154,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -181,8 +161,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -190,8 +168,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -199,8 +175,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -208,8 +182,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -217,12 +189,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Plasma Accelerator": {
                 "blueprints": {
@@ -320,12 +291,11 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Sensors": {
                 "blueprints": {
@@ -357,7 +327,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Surface Scanner": {
                 "blueprints": {
@@ -371,7 +342,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Wake Scanner": {
                 "blueprints": {
@@ -380,8 +352,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -389,8 +359,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -398,8 +366,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -407,8 +373,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -416,8 +380,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -425,12 +387,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -685,8 +646,6 @@ ENGINEERS = {
                             1: [("Grid Resistors", 1)],
                             2: [("Chromium", 1), ("Grid Resistors", 1)],
                             3: [("Grid Resistors", 1), ("Heat Dispersion Plate", 1), ("Selenium", 1)],
-                            4: [("Cadmium", 1), ("Heat Exchangers", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Electrochemical Arrays", 1), ("Heat Vanes", 1), ("Tellurium", 1)],
                         }
                     },
                     "Increased FSD Range": {
@@ -694,8 +653,6 @@ ENGINEERS = {
                             1: [("Atypical Disrupted Wake Echoes", 1)],
                             2: [("Atypical Disrupted Wake Echoes", 1), ("Chemical Processors", 1)],
                             3: [("Chemical Processors", 1), ("Phosphorus", 1), ("Strange Wake Solutions", 1)],
-                            4: [("Chemical Distillery", 1), ("Eccentric Hyperspace Trajectories", 1), ("Manganese", 1)],
-                            5: [("Arsenic", 1), ("Chemical Manipulators", 1), ("Datamined Wake Exceptions", 1)],
                         }
                     },
                     "Shielded FSD": {
@@ -703,8 +660,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("Shielding Sensors", 1), ("Zinc", 1)],
-                            4: [("Compound Shielding", 1), ("High Density Composites", 1), ("Vanadium", 1)],
-                            5: [("Imperial Shielding", 1), ("Proprietary Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
@@ -766,8 +721,6 @@ ENGINEERS = {
                             1: [("Grid Resistors", 1)],
                             2: [("Chromium", 1), ("Grid Resistors", 1)],
                             3: [("Grid Resistors", 1), ("Heat Dispersion Plate", 1), ("Selenium", 1)],
-                            4: [("Cadmium", 1), ("Heat Exchangers", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Electrochemical Arrays", 1), ("Heat Vanes", 1), ("Tellurium", 1)],
                         }
                     },
                     "Increased FSD Range": {
@@ -775,8 +728,6 @@ ENGINEERS = {
                             1: [("Atypical Disrupted Wake Echoes", 1)],
                             2: [("Atypical Disrupted Wake Echoes", 1), ("Chemical Processors", 1)],
                             3: [("Chemical Processors", 1), ("Phosphorus", 1), ("Strange Wake Solutions", 1)],
-                            4: [("Chemical Distillery", 1), ("Eccentric Hyperspace Trajectories", 1), ("Manganese", 1)],
-                            5: [("Arsenic", 1), ("Chemical Manipulators", 1), ("Datamined Wake Exceptions", 1)],
                         }
                     },
                     "Shielded FSD": {
@@ -784,8 +735,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("Shielding Sensors", 1), ("Zinc", 1)],
-                            4: [("Compound Shielding", 1), ("High Density Composites", 1), ("Vanadium", 1)],
-                            5: [("Imperial Shielding", 1), ("Proprietary Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
@@ -805,7 +754,6 @@ ENGINEERS = {
                             2: [("Mechanical Equipment", 1), ("Unusual Encrypted Files", 1)],
                             3: [("Grid Resistors", 1), ("Mechanical Components", 1), ("Tagged Encryption Codes", 1)],
                             4: [("Divergent Scan Data", 1), ("Mechanical Equipment", 1), ("Strange Wake Solutions", 1)],
-                            5: [("Classified Scan Fragment", 1), ("Eccentric Hyperspace Trajectories", 1), ("Mechanical Components", 1)],
                         }
                     },
                     "Long Range FSD Interdictor": {
@@ -814,11 +762,11 @@ ENGINEERS = {
                             2: [("Atypical Disrupted Wake Echoes", 1), ("Tagged Encryption Codes", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Anomalous FSD Telemetry", 1), ("Open Symmetric Keys", 1)],
                             4: [("Unidentified Scan Archives", 1), ("Strange Wake Solutions", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Eccentric Hyperspace Trajectories", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -889,8 +837,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1), ("Precipitated Alloys", 1)],
-                            4: [("Inconsistent Shield Soak Analysis", 1), ("Niobium", 1), ("Thermic Alloys", 1)],
-                            5: [("Military Grade Alloys", 1), ("Tin", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Kinetic Resistant Shields": {
@@ -898,8 +844,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Modified Consumer Firmware", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Modified Consumer Firmware", 1), ("Selenium", 1)],
-                            4: [("Focus Crystals", 1), ("Inconsistent Shield Soak Analysis", 1), ("Mercury", 1)],
-                            5: [("Refined Focus Crystals", 1), ("Ruthenium", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Reinforced Shields": {
@@ -907,8 +851,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Conductive Components", 1), ("Phosphorus", 1)],
                             3: [("Conductive Components", 1), ("Mechanical Components", 1), ("Phosphorus", 1)],
-                            4: [("Conductive Ceramics", 1), ("Configurable Components", 1), ("Manganese", 1)],
-                            5: [("Arsenic", 1), ("Conductive Polymers", 1), ("Improvised Components", 1)],
                         }
                     },
                     "Thermal Resistant Shields": {
@@ -916,8 +858,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1), ("Selenium", 1)],
-                            4: [("Focus Crystals", 1), ("Inconsistent Shield Soak Analysis", 1), ("Mercury", 1)],
-                            5: [("Refined Focus Crystals", 1), ("Ruthenium", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                 },
@@ -980,17 +920,11 @@ ENGINEERS = {
                     "Rapid Charge": {
                         "grades": {
                             1: [("Sulphur", 1)],
-                            2: [("Chromium", 1), ("Grid Resistors", 1)],
-                            3: [("Hybrid Capacitors", 1), ("Precipitated Alloys", 1), ("Sulphur", 1)],
-                            4: [("Chromium", 1), ("Electrochemical Arrays", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Specialised": {
                         "grades": {
                             1: [("Specialised Legacy Firmware", 1)],
-                            2: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1)],
-                            3: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Exceptional Scrambled Emission Data", 1)],
-                            4: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Yttrium", 1)],
                         }
                     },
                 },
@@ -1009,8 +943,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1), ("Precipitated Alloys", 1)],
-                            4: [("Inconsistent Shield Soak Analysis", 1), ("Niobium", 1), ("Thermic Alloys", 1)],
-                            5: [("Military Grade Alloys", 1), ("Tin", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Kinetic Resistant Shields": {
@@ -1018,8 +950,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Modified Consumer Firmware", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Modified Consumer Firmware", 1), ("Selenium", 1)],
-                            4: [("Focus Crystals", 1), ("Inconsistent Shield Soak Analysis", 1), ("Mercury", 1)],
-                            5: [("Refined Focus Crystals", 1), ("Ruthenium", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Reinforced Shields": {
@@ -1027,8 +957,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Conductive Components", 1), ("Phosphorus", 1)],
                             3: [("Conductive Components", 1), ("Mechanical Components", 1), ("Phosphorus", 1)],
-                            4: [("Conductive Ceramics", 1), ("Configurable Components", 1), ("Manganese", 1)],
-                            5: [("Arsenic", 1), ("Conductive Polymers", 1), ("Improvised Components", 1)],
                         }
                     },
                     "Thermal Resistant Shields": {
@@ -1036,8 +964,6 @@ ENGINEERS = {
                             1: [("Distorted Shield Cycle Recordings", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Germanium", 1), ("Selenium", 1)],
-                            4: [("Focus Crystals", 1), ("Inconsistent Shield Soak Analysis", 1), ("Mercury", 1)],
-                            5: [("Refined Focus Crystals", 1), ("Ruthenium", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                 },
@@ -1058,27 +984,18 @@ ENGINEERS = {
                         "grades": {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1)],
-                            3: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Conductive Ceramics", 1), ("Decoded Emission Data", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Abnormal Compact Emission Data", 1), ("Conductive Ceramics", 1), ("Tin", 1)],
                         }
                     },
                     "Dirty Drive Tuning": {
                         "grades": {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Mechanical Equipment", 1), ("Specialised Legacy Firmware", 1)],
-                            3: [("Chromium", 1), ("Mechanical Components", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Configurable Components", 1), ("Modified Consumer Firmware", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Cracked Industrial Firmware", 1), ("Pharmaceutical Isolators", 1)],
                         }
                     },
                     "Drive Strengthening": {
                         "grades": {
                             1: [("Carbon", 1)],
                             2: [("Heat Conduction Wiring", 1), ("Vanadium", 1)],
-                            3: [("Heat Conduction Wiring", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            4: [("Compound Shielding", 1), ("Heat Dispersion Plate", 1), ("High Density Composites", 1)],
-                            5: [("Heat Exchangers", 1), ("Imperial Shielding", 1), ("Proprietary Composites", 1)],
                         }
                     },
                 },
@@ -1095,65 +1012,6 @@ ENGINEERS = {
     "Etienne Dorn": {
         "location": "Luchtaine, The Moorings",
         "modules": {
-            "Kill Warrant Scanner": {
-                "blueprints": {
-                    "Fast Scanner": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
-                            3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
-                        }
-                    },
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Scanner": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Iron", 1), ("Hybrid Capacitors", 1)],
-                            3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                    "Wide Angle Scanner": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Scrap", 1), ("Germanium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
             "Life Support": {
                 "blueprints": {
                     "Lightweight": {
@@ -1184,154 +1042,7 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
-            },
-            "Manifest Scanner": {
-                "blueprints": {
-                    "Fast Scanner": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
-                            3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
-                        }
-                    },
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Scanner": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Iron", 1), ("Hybrid Capacitors", 1)],
-                            3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                    "Wide Angle Scanner": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Scrap", 1), ("Germanium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
-            "Plasma Accelerator": {
-                "blueprints": {
-                    "Efficient Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
-                        }
-                    },
-                    "Focused Weapon": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
-                            4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
-                        }
-                    },
-                    "Lightweight Mount": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
-                        }
-                    },
-                    "Overcharged Weapon": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
-                        }
-                    },
-                    "Rapid Fire Modification": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
-                            3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Short Range Blaster": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Sturdy Mount": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                },
                 "experiments": {
-                    "Dazzle Shell": [("Mechanical Scrap", 5), ("Manganese", 4), ("Hybrid Capacitors", 5), ("Mechanical Components", 5)],
-                    "Dispersal Field": [("Conductive Components", 5), ("Hybrid Capacitors", 5), ("Irregular Emission Data", 5), ("Worn Shield Emitters", 5)],
-                    "Double Braced": [("Mechanical Scrap", 5), ("Compact Composites", 5), ("Vanadium", 3)],
-                    "Flow Control": [("Mechanical Scrap", 5), ("Hybrid Capacitors", 3), ("Modified Embedded Firmware", 1)],
-                    "Multi-Servos": [("Mechanical Scrap", 5), ("Focus Crystals", 4), ("Conductive Polymers", 2), ("Configurable Components", 2)],
-                    "Oversized": [("Mechanical Scrap", 5), ("Mechanical Components", 3), ("Ruthenium", 1)],
-                    "Phasing Sequence": [("Focus Crystals", 5), ("Aberrant Shield Pattern Analysis", 3), ("Niobium", 3), ("Configurable Components", 3)],
-                    "Plasma Slug": [("Heat Exchangers", 3), ("Modified Embedded Firmware", 2), ("Refined Focus Crystals", 2), ("Mercury", 4)],
-                    "Stripped Down": [("Salvaged Alloys", 5), ("Carbon", 5), ("Tin", 1)],
-                    "Target Lock Breaker": [("Selenium", 5), ("Security Firmware Patch", 3), ("Adaptive Encryptors Capture", 1)],
-                    "Thermal Conduit": [("Heat Dispersion Plate", 5), ("Sulphur", 5), ("Tempered Alloys", 5)],
                 },
             },
             "Power Distributor": {
@@ -1341,8 +1052,6 @@ ENGINEERS = {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Chemical Processors", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chemical Distillery", 1), ("Grid Resistors", 1), ("Modified Consumer Firmware", 1)],
-                            4: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Engine Focused": {
@@ -1350,8 +1059,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "High Charge Capacity": {
@@ -1359,8 +1066,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Chromium", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chromium", 1), ("High Density Composites", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Modified Consumer Firmware", 1), ("Proprietary Composites", 1), ("Selenium", 1)],
-                            5: [("Cracked Industrial Firmware", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Shielded": {
@@ -1368,8 +1073,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "System Focused": {
@@ -1377,8 +1080,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "Weapon Focused": {
@@ -1386,8 +1087,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Hybrid Capacitors", 1), ("Selenium", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Electrochemical Arrays", 1), ("Cadmium", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Polymer Capacitors", 1), ("Tellurium", 1)],
                         }
                     },
                 },
@@ -1436,65 +1135,6 @@ ENGINEERS = {
                     "Thermal Spread": [("Grid Resistors", 5), ("Vanadium", 3), ("Heat Vanes", 1)],
                 },
             },
-            "Rail Gun": {
-                "blueprints": {
-                    "High Capacity Magazine": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
-                        }
-                    },
-                    "Lightweight Mount": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Thermic Alloys", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Short Range Blaster": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Sturdy Mount": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                },
-                "experiments": {
-                    "Double Braced": [("Mechanical Scrap", 5), ("Compact Composites", 5), ("Vanadium", 3)],
-                    "Feedback Cascade": [("Open Symmetric Keys", 5), ("Shield Emitters", 5), ("Filament Composites", 5)],
-                    "Flow Control": [("Mechanical Scrap", 5), ("Hybrid Capacitors", 3), ("Modified Embedded Firmware", 1)],
-                    "Multi-Servos": [("Mechanical Scrap", 5), ("Focus Crystals", 4), ("Conductive Polymers", 2), ("Configurable Components", 2)],
-                    "Oversized": [("Mechanical Scrap", 5), ("Mechanical Components", 3), ("Ruthenium", 1)],
-                    "Plasma Slug": [("Heat Exchangers", 3), ("Modified Embedded Firmware", 2), ("Refined Focus Crystals", 2), ("Mercury", 4)],
-                    "Stripped Down": [("Salvaged Alloys", 5), ("Carbon", 5), ("Tin", 1)],
-                    "Super Penetrator": [("Proto Light Alloys", 3), ("Refined Focus Crystals", 3), ("Zirconium", 3), ("Untypical Shield Scans", 5)],
-                },
-            },
             "Sensors": {
                 "blueprints": {
                     "Light Weight Scanner": {
@@ -1525,80 +1165,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
-            },
-            "Surface Scanner": {
-                "blueprints": {
-                    "Expanded Probe Scanning Radius": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Scrap", 1), ("Germanium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Phase Alloys", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Proto Light Alloys", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
+                "experiments": {
                 },
-                "experiments": {},
-            },
-            "Wake Scanner": {
-                "blueprints": {
-                    "Fast Scanner": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
-                            3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
-                        }
-                    },
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Scanner": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Iron", 1), ("Hybrid Capacitors", 1)],
-                            3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                    "Wide Angle Scanner": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Scrap", 1), ("Germanium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
             },
         }
     },
@@ -1648,51 +1216,32 @@ ENGINEERS = {
                     "Expanded FSD Interdictor Capture Arc": {
                         "grades": {
                             1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Equipment", 1), ("Unusual Encrypted Files", 1)],
-                            3: [("Grid Resistors", 1), ("Mechanical Components", 1), ("Tagged Encryption Codes", 1)],
-                            4: [("Divergent Scan Data", 1), ("Mechanical Equipment", 1), ("Strange Wake Solutions", 1)],
-                            5: [("Classified Scan Fragment", 1), ("Eccentric Hyperspace Trajectories", 1), ("Mechanical Components", 1)],
                         }
                     },
                     "Long Range FSD Interdictor": {
                         "grades": {
                             1: [("Unusual Encrypted Files", 1)],
-                            2: [("Atypical Disrupted Wake Echoes", 1), ("Tagged Encryption Codes", 1)],
-                            3: [("Anomalous Bulk Scan Data", 1), ("Anomalous FSD Telemetry", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Strange Wake Solutions", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Eccentric Hyperspace Trajectories", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Power Plant": {
                 "blueprints": {
                     "Armoured": {
                         "grades": {
                             1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Low Emissions": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Iron", 1), ("Irregular Emission Data", 1)],
-                            3: [("Heat Exchangers", 1), ("Iron", 1), ("Irregular Emission Data", 1)],
-                            4: [("Germanium", 1), ("Unexpected Emission Data", 1), ("Heat Vanes", 1)],
-                            5: [("Niobium", 1), ("Decoded Emission Data", 1), ("Proto Heat Radiators", 1)],
                         }
                     },
                     "Overcharged": {
                         "grades": {
                             1: [("Sulphur", 1)],
-                            2: [("Conductive Components", 1), ("Heat Conduction Wiring", 1)],
-                            3: [("Conductive Components", 1), ("Heat Conduction Wiring", 1), ("Selenium", 1)],
-                            4: [("Cadmium", 1), ("Conductive Ceramics", 1), ("Heat Dispersion Plate", 1)],
-                            5: [("Chemical Manipulators", 1), ("Conductive Ceramics", 1), ("Tellurium", 1)],
                         }
                     },
                 },
@@ -1710,8 +1259,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Salvaged Alloys", 1), ("Manganese", 1)],
                             3: [("Salvaged Alloys", 1), ("Manganese", 1), ("Conductive Ceramics", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -1719,8 +1266,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -1728,58 +1273,37 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Germanium", 1), ("Mechanical Scrap", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Shield Booster": {
                 "blueprints": {
                     "Blast Resistant": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Conductive Components", 1), ("Focus Crystals", 1), ("Iron", 1)],
-                            4: [("Germanium", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Niobium", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Heavy Duty": {
                         "grades": {
                             1: [("Grid Resistors", 1)],
-                            2: [("Distorted Shield Cycle Recordings", 1), ("Hybrid Capacitors", 1)],
-                            3: [("Distorted Shield Cycle Recordings", 1), ("Hybrid Capacitors", 1), ("Niobium", 1)],
-                            4: [("Electrochemical Arrays", 1), ("Inconsistent Shield Soak Analysis", 1), ("Tin", 1)],
-                            5: [("Antimony", 1), ("Polymer Capacitors", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Kinetic Resistant": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Germanium", 1), ("Grid Resistors", 1)],
-                            3: [("Focus Crystals", 1), ("Hybrid Capacitors", 1), ("Salvaged Alloys", 1)],
-                            4: [("Galvanising Alloys", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Phase Alloys", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Resistance Augmented": {
                         "grades": {
                             1: [("Phosphorus", 1)],
-                            2: [("Conductive Components", 1), ("Phosphorus", 1)],
-                            3: [("Conductive Components", 1), ("Focus Crystals", 1), ("Phosphorus", 1)],
-                            4: [("Conductive Ceramics", 1), ("Manganese", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Conductive Ceramics", 1), ("Imperial Shielding", 1), ("Refined Focus Crystals", 1)],
                         }
                     },
                     "Thermal Resistant": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Germanium", 1), ("Heat Conduction Wiring", 1)],
-                            3: [("Focus Crystals", 1), ("Heat Conduction Wiring", 1), ("Heat Dispersion Plate", 1)],
-                            4: [("Heat Dispersion Plate", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Heat Exchangers", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                 },
@@ -1799,12 +1323,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Phase Alloys", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Proto Light Alloys", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Thrusters": {
                 "blueprints": {
@@ -1813,8 +1336,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Conductive Ceramics", 1), ("Decoded Emission Data", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Abnormal Compact Emission Data", 1), ("Conductive Ceramics", 1), ("Tin", 1)],
                         }
                     },
                     "Dirty Drive Tuning": {
@@ -1822,8 +1343,6 @@ ENGINEERS = {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Mechanical Equipment", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chromium", 1), ("Mechanical Components", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Configurable Components", 1), ("Modified Consumer Firmware", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Cracked Industrial Firmware", 1), ("Pharmaceutical Isolators", 1)],
                         }
                     },
                     "Drive Strengthening": {
@@ -1831,8 +1350,6 @@ ENGINEERS = {
                             1: [("Carbon", 1)],
                             2: [("Heat Conduction Wiring", 1), ("Vanadium", 1)],
                             3: [("Heat Conduction Wiring", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            4: [("Compound Shielding", 1), ("Heat Dispersion Plate", 1), ("High Density Composites", 1)],
-                            5: [("Heat Exchangers", 1), ("Imperial Shielding", 1), ("Proprietary Composites", 1)],
                         }
                     },
                 },
@@ -1856,8 +1373,6 @@ ENGINEERS = {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Chemical Processors", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chemical Distillery", 1), ("Grid Resistors", 1), ("Modified Consumer Firmware", 1)],
-                            4: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Engine Focused": {
@@ -1865,8 +1380,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "High Charge Capacity": {
@@ -1874,8 +1387,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Chromium", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chromium", 1), ("High Density Composites", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Modified Consumer Firmware", 1), ("Proprietary Composites", 1), ("Selenium", 1)],
-                            5: [("Cracked Industrial Firmware", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Shielded": {
@@ -1883,8 +1394,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "System Focused": {
@@ -1892,8 +1401,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "Weapon Focused": {
@@ -1901,8 +1408,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Hybrid Capacitors", 1), ("Selenium", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Electrochemical Arrays", 1), ("Cadmium", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Polymer Capacitors", 1), ("Tellurium", 1)],
                         }
                     },
                 },
@@ -1958,8 +1463,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Salvaged Alloys", 1), ("Manganese", 1)],
                             3: [("Salvaged Alloys", 1), ("Manganese", 1), ("Conductive Ceramics", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -1967,8 +1470,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -1976,12 +1477,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Germanium", 1), ("Mechanical Scrap", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Surface Scanner": {
                 "blueprints": {
@@ -1995,7 +1495,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -2061,8 +1562,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
                             3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -2070,8 +1569,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -2079,8 +1576,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Precipitated Alloys", 1), ("Configurable Components", 1), ("Technetium", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -2088,8 +1583,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -2137,7 +1630,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Surface Scanner": {
                 "blueprints": {
@@ -2151,7 +1645,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Torpedo Pylon": {
                 "blueprints": {
@@ -2160,8 +1655,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -2169,8 +1662,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -2219,7 +1710,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Shield Booster": {
                 "blueprints": {
@@ -2228,8 +1720,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Conductive Components", 1), ("Iron", 1)],
                             3: [("Conductive Components", 1), ("Focus Crystals", 1), ("Iron", 1)],
-                            4: [("Germanium", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Niobium", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Heavy Duty": {
@@ -2237,8 +1727,6 @@ ENGINEERS = {
                             1: [("Grid Resistors", 1)],
                             2: [("Distorted Shield Cycle Recordings", 1), ("Hybrid Capacitors", 1)],
                             3: [("Distorted Shield Cycle Recordings", 1), ("Hybrid Capacitors", 1), ("Niobium", 1)],
-                            4: [("Electrochemical Arrays", 1), ("Inconsistent Shield Soak Analysis", 1), ("Tin", 1)],
-                            5: [("Antimony", 1), ("Polymer Capacitors", 1), ("Untypical Shield Scans", 1)],
                         }
                     },
                     "Kinetic Resistant": {
@@ -2246,8 +1734,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Germanium", 1), ("Grid Resistors", 1)],
                             3: [("Focus Crystals", 1), ("Hybrid Capacitors", 1), ("Salvaged Alloys", 1)],
-                            4: [("Galvanising Alloys", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Phase Alloys", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Resistance Augmented": {
@@ -2255,8 +1741,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Conductive Components", 1), ("Phosphorus", 1)],
                             3: [("Conductive Components", 1), ("Focus Crystals", 1), ("Phosphorus", 1)],
-                            4: [("Conductive Ceramics", 1), ("Manganese", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Conductive Ceramics", 1), ("Imperial Shielding", 1), ("Refined Focus Crystals", 1)],
                         }
                     },
                     "Thermal Resistant": {
@@ -2264,8 +1748,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Germanium", 1), ("Heat Conduction Wiring", 1)],
                             3: [("Focus Crystals", 1), ("Heat Conduction Wiring", 1), ("Heat Dispersion Plate", 1)],
-                            4: [("Heat Dispersion Plate", 1), ("Untypical Shield Scans", 1), ("Refined Focus Crystals", 1)],
-                            5: [("Heat Exchangers", 1), ("Aberrant Shield Pattern Analysis", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                 },
@@ -2340,7 +1822,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -2352,46 +1835,26 @@ ENGINEERS = {
                     "Blast Resistant": {
                         "grades": {
                             1: [("Nickel", 1)],
-                            2: [("Carbon", 1), ("Zinc", 1)],
-                            3: [("Salvaged Alloys", 1), ("Vanadium", 1), ("Zirconium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Mercury", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Ruthenium", 1)],
                         }
                     },
                     "Heavy Duty": {
                         "grades": {
                             1: [("Carbon", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Kinetic Resistant": {
                         "grades": {
                             1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Vanadium", 1)],
-                            3: [("High Density Composites", 1), ("Salvaged Alloys", 1), ("Vanadium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Proprietary Composites", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Core Dynamics Composites", 1)],
                         }
                     },
                     "Lightweight": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Conductive Components", 1), ("High Density Composites", 1), ("Iron", 1)],
-                            4: [("Germanium", 1), ("Conductive Ceramics", 1), ("Proprietary Composites", 1)],
-                            5: [("Conductive Ceramics", 1), ("Tin", 1), ("Military Grade Alloys", 1)],
                         }
                     },
                     "Thermal Resistant": {
                         "grades": {
                             1: [("Heat Conduction Wiring", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Nickel", 1)],
-                            3: [("Heat Exchangers", 1), ("Salvaged Alloys", 1), ("Vanadium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Heat Vanes", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Proto Heat Radiators", 1)],
                         }
                     },
                 },
@@ -2407,46 +1870,26 @@ ENGINEERS = {
                     "Blast Resistant Hull Reinforcement": {
                         "grades": {
                             1: [("Nickel", 1)],
-                            2: [("Carbon", 1), ("Zinc", 1)],
-                            3: [("Salvaged Alloys", 1), ("Vanadium", 1), ("Zirconium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Mercury", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Ruthenium", 1)],
                         }
                     },
                     "Heavy Duty Hull Reinforcement": {
                         "grades": {
                             1: [("Carbon", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Kinetic Resistant Hull Reinforcement": {
                         "grades": {
                             1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Vanadium", 1)],
-                            3: [("High Density Composites", 1), ("Salvaged Alloys", 1), ("Vanadium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Proprietary Composites", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Core Dynamics Composites", 1)],
                         }
                     },
                     "Lightweight Hull Reinforcement": {
                         "grades": {
                             1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Conductive Components", 1), ("High Density Composites", 1), ("Iron", 1)],
-                            4: [("Conductive Ceramics", 1), ("Germanium", 1), ("Proprietary Composites", 1)],
-                            5: [("Conductive Ceramics", 1), ("Military Grade Alloys", 1), ("Tin", 1)],
                         }
                     },
                     "Thermal Resistant Hull Reinforcement": {
                         "grades": {
                             1: [("Heat Conduction Wiring", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Nickel", 1)],
-                            3: [("Heat Exchangers", 1), ("Salvaged Alloys", 1), ("Vanadium", 1)],
-                            4: [("Galvanising Alloys", 1), ("Tungsten", 1), ("Heat Vanes", 1)],
-                            5: [("Phase Alloys", 1), ("Molybdenum", 1), ("Proto Heat Radiators", 1)],
                         }
                     },
                 },
@@ -2464,8 +1907,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
                             3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -2473,8 +1914,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Radiolic Alloys", 1), ("Proto Light Alloys", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -2482,8 +1921,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Technetium", 1), ("Precipitated Alloys", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -2491,8 +1928,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -2606,11 +2041,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Fuel Scoop": {
                 "blueprints": {
@@ -2620,11 +2055,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Kill Warrant Scanner": {
                 "blueprints": {
@@ -2633,8 +2068,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -2642,8 +2075,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -2651,8 +2082,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -2660,8 +2089,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -2669,8 +2096,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -2678,12 +2103,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Life Support": {
                 "blueprints": {
@@ -2693,7 +2117,6 @@ ENGINEERS = {
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
                             4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Radiolic Alloys", 1), ("Proto Light Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -2702,7 +2125,6 @@ ENGINEERS = {
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
                             4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -2711,11 +2133,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Manifest Scanner": {
                 "blueprints": {
@@ -2724,8 +2146,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -2733,8 +2153,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -2742,8 +2160,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -2751,8 +2167,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -2760,8 +2174,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -2769,12 +2181,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Refinery": {
                 "blueprints": {
@@ -2784,11 +2195,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Sensors": {
                 "blueprints": {
@@ -2820,7 +2231,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Shield Cell Bank": {
                 "blueprints": {
@@ -2829,7 +2241,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Chromium", 1), ("Grid Resistors", 1)],
                             3: [("Hybrid Capacitors", 1), ("Precipitated Alloys", 1), ("Sulphur", 1)],
-                            4: [("Chromium", 1), ("Electrochemical Arrays", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Specialised": {
@@ -2837,7 +2248,6 @@ ENGINEERS = {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Exceptional Scrambled Emission Data", 1)],
-                            4: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Yttrium", 1)],
                         }
                     },
                 },
@@ -2861,7 +2271,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Wake Scanner": {
                 "blueprints": {
@@ -2870,8 +2281,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Phosphorus", 1), ("Flawed Focus Crystals", 1)],
                             3: [("Phosphorus", 1), ("Flawed Focus Crystals", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Manganese", 1), ("Focus Crystals", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Arsenic", 1), ("Refined Focus Crystals", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                     "Lightweight": {
@@ -2879,8 +2288,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Scanner": {
@@ -2888,8 +2295,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Iron", 1), ("Hybrid Capacitors", 1)],
                             3: [("Iron", 1), ("Hybrid Capacitors", 1), ("Unexpected Emission Data", 1)],
-                            4: [("Germanium", 1), ("Electrochemical Arrays", 1), ("Decoded Emission Data", 1)],
-                            5: [("Niobium", 1), ("Polymer Capacitors", 1), ("Abnormal Compact Emission Data", 1)],
                         }
                     },
                     "Reinforced": {
@@ -2897,8 +2302,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -2906,8 +2309,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Wide Angle Scanner": {
@@ -2915,12 +2316,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Classified Scan Databanks", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Divergent Scan Data", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Classified Scan Fragment", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -2934,8 +2334,6 @@ ENGINEERS = {
                             1: [("Specialised Legacy Firmware", 1)],
                             2: [("Chemical Processors", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chemical Distillery", 1), ("Grid Resistors", 1), ("Modified Consumer Firmware", 1)],
-                            4: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Chemical Manipulators", 1), ("Cracked Industrial Firmware", 1), ("Exquisite Focus Crystals", 1)],
                         }
                     },
                     "Engine Focused": {
@@ -2943,8 +2341,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "High Charge Capacity": {
@@ -2952,8 +2348,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Chromium", 1), ("Specialised Legacy Firmware", 1)],
                             3: [("Chromium", 1), ("High Density Composites", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Modified Consumer Firmware", 1), ("Proprietary Composites", 1), ("Selenium", 1)],
-                            5: [("Cracked Industrial Firmware", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Shielded": {
@@ -2961,8 +2355,6 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "System Focused": {
@@ -2970,8 +2362,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Chromium", 1), ("Electrochemical Arrays", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Selenium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Cadmium", 1), ("Military Supercapacitors", 1)],
                         }
                     },
                     "Weapon Focused": {
@@ -2979,8 +2369,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Conductive Components", 1), ("Sulphur", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Hybrid Capacitors", 1), ("Selenium", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Electrochemical Arrays", 1), ("Cadmium", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Polymer Capacitors", 1), ("Tellurium", 1)],
                         }
                     },
                 },
@@ -3000,7 +2388,6 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                     "Low Emissions": {
@@ -3009,7 +2396,6 @@ ENGINEERS = {
                             2: [("Iron", 1), ("Irregular Emission Data", 1)],
                             3: [("Heat Exchangers", 1), ("Iron", 1), ("Irregular Emission Data", 1)],
                             4: [("Germanium", 1), ("Unexpected Emission Data", 1), ("Heat Vanes", 1)],
-                            5: [("Niobium", 1), ("Decoded Emission Data", 1), ("Proto Heat Radiators", 1)],
                         }
                     },
                     "Overcharged": {
@@ -3018,7 +2404,6 @@ ENGINEERS = {
                             2: [("Conductive Components", 1), ("Heat Conduction Wiring", 1)],
                             3: [("Conductive Components", 1), ("Heat Conduction Wiring", 1), ("Selenium", 1)],
                             4: [("Cadmium", 1), ("Conductive Ceramics", 1), ("Heat Dispersion Plate", 1)],
-                            5: [("Chemical Manipulators", 1), ("Conductive Ceramics", 1), ("Tellurium", 1)],
                         }
                     },
                 },
@@ -3123,38 +2508,6 @@ ENGINEERS = {
                     "Thermal Cascade": [("Heat Conduction Wiring", 5), ("Hybrid Capacitors", 4), ("High Density Composites", 3), ("Phosphorus", 5)],
                 },
             },
-            "Collector Limpet Controller": {
-                "blueprints": {
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
             "Fragment Cannon": {
                 "blueprints": {
                     "Double Shot": {
@@ -3246,71 +2599,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
-            },
-            "Fuel Transfer Limpet Controller": {
-                "blueprints": {
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
+                "experiments": {
                 },
-                "experiments": {},
-            },
-            "Hatch Breaker Limpet Controller": {
-                "blueprints": {
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
             },
             "Multi-cannon": {
                 "blueprints": {
@@ -3401,38 +2691,6 @@ ENGINEERS = {
                     "Thermal Shock": [("Flawed Focus Crystals", 5), ("Heat Resistant Ceramics", 3), ("Conductive Components", 3), ("Tungsten", 3)],
                 },
             },
-            "Prospector Limpet Controller": {
-                "blueprints": {
-                    "Lightweight": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Reinforced": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
             "Refinery": {
                 "blueprints": {
                     "Shielded": {
@@ -3445,170 +2703,14 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
     "Mel Brandon": {
         "location": "Luchtaine, The Shallows",
         "modules": {
-            "Beam Laser": {
-                "blueprints": {
-                    "Efficient Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
-                        }
-                    },
-                    "Lightweight Mount": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1), ("Biotech Conductors", 1)],
-                        }
-                    },
-                    "Overcharged Weapon": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
-                        }
-                    },
-                    "Short Range Blaster": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Sturdy Mount": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                },
-                "experiments": {
-                    "Concordant Sequence": [("Focus Crystals", 5), ("Modified Embedded Firmware", 3), ("Zirconium", 1)],
-                    "Double Braced": [("Mechanical Scrap", 5), ("Compact Composites", 5), ("Vanadium", 3)],
-                    "Flow Control": [("Mechanical Scrap", 5), ("Hybrid Capacitors", 3), ("Modified Embedded Firmware", 1)],
-                    "Oversized": [("Mechanical Scrap", 5), ("Mechanical Components", 3), ("Ruthenium", 1)],
-                    "Regeneration Sequence": [("Refined Focus Crystals", 3), ("Shielding Sensors", 4), ("Peculiar Shield Frequency Data", 1)],
-                    "Stripped Down": [("Salvaged Alloys", 5), ("Carbon", 5), ("Tin", 1)],
-                    "Thermal Conduit": [("Heat Dispersion Plate", 5), ("Sulphur", 5), ("Tempered Alloys", 5)],
-                    "Thermal Shock": [("Flawed Focus Crystals", 5), ("Heat Resistant Ceramics", 3), ("Conductive Components", 3), ("Tungsten", 3)],
-                    "Thermal Vent": [("Flawed Focus Crystals", 5), ("Conductive Polymers", 3), ("Precipitated Alloys", 3)],
-                },
-            },
-            "Burst Laser": {
-                "blueprints": {
-                    "Efficient Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
-                        }
-                    },
-                    "Focused Weapon": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
-                            4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
-                        }
-                    },
-                    "Lightweight Mount": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Thermic Alloys", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Overcharged Weapon": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
-                        }
-                    },
-                    "Rapid Fire Modification": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
-                            3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Precipitated Alloys", 1), ("Configurable Components", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Short Range Blaster": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
-                        }
-                    },
-                    "Sturdy Mount": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                },
-                "experiments": {
-                    "Concordant Sequence": [("Focus Crystals", 5), ("Modified Embedded Firmware", 3), ("Zirconium", 1)],
-                    "Double Braced": [("Mechanical Scrap", 5), ("Compact Composites", 5), ("Vanadium", 3)],
-                    "Flow Control": [("Mechanical Scrap", 5), ("Hybrid Capacitors", 3), ("Modified Embedded Firmware", 1)],
-                    "Inertial Impact": [("Flawed Focus Crystals", 5), ("Distorted Shield Cycle Recordings", 5), ("Atypical Disrupted Wake Echoes", 5)],
-                    "Multi-Servos": [("Mechanical Scrap", 5), ("Focus Crystals", 4), ("Conductive Polymers", 2), ("Configurable Components", 2)],
-                    "Oversized": [("Mechanical Scrap", 5), ("Mechanical Components", 3), ("Ruthenium", 1)],
-                    "Phasing Sequence": [("Focus Crystals", 5), ("Aberrant Shield Pattern Analysis", 3), ("Niobium", 3), ("Configurable Components", 3)],
-                    "Scramble Spectrum": [("Crystal Shards", 5), ("Untypical Shield Scans", 3), ("Exceptional Scrambled Emission Data", 5)],
-                    "Stripped Down": [("Salvaged Alloys", 5), ("Carbon", 5), ("Tin", 1)],
-                    "Thermal Shock": [("Flawed Focus Crystals", 5), ("Heat Resistant Ceramics", 3), ("Conductive Components", 3), ("Tungsten", 3)],
-                },
-            },
             "Frame Shift Drive": {
                 "blueprints": {
                     "Faster FSD Boot Sequence": {
@@ -3645,108 +2747,6 @@ ENGINEERS = {
                     "Mass Manager": [("Atypical Disrupted Wake Echoes", 5), ("Galvanising Alloys", 3), ("Eccentric Hyperspace Trajectories", 1)],
                     "Stripped Down": [("Atypical Disrupted Wake Echoes", 5), ("Galvanising Alloys", 3), ("Proto Light Alloys", 1)],
                     "Thermal Spread": [("Atypical Disrupted Wake Echoes", 5), ("Galvanising Alloys", 3), ("Heat Vanes", 1), ("Grid Resistors", 3)],
-                },
-            },
-            "Frame Shift Drive Interdictor": {
-                "blueprints": {
-                    "Expanded FSD Interdictor Capture Arc": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Mechanical Equipment", 1), ("Unusual Encrypted Files", 1)],
-                            3: [("Grid Resistors", 1), ("Mechanical Components", 1), ("Tagged Encryption Codes", 1)],
-                            4: [("Divergent Scan Data", 1), ("Mechanical Equipment", 1), ("Strange Wake Solutions", 1)],
-                            5: [("Classified Scan Fragment", 1), ("Eccentric Hyperspace Trajectories", 1), ("Mechanical Components", 1)],
-                        }
-                    },
-                    "Long Range FSD Interdictor": {
-                        "grades": {
-                            1: [("Unusual Encrypted Files", 1)],
-                            2: [("Atypical Disrupted Wake Echoes", 1), ("Tagged Encryption Codes", 1)],
-                            3: [("Anomalous Bulk Scan Data", 1), ("Anomalous FSD Telemetry", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Strange Wake Solutions", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Eccentric Hyperspace Trajectories", 1), ("Adaptive Encryptors Capture", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
-            "Pulse Laser": {
-                "blueprints": {
-                    "Efficient Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
-                        }
-                    },
-                    "Focused Weapon": {
-                        "grades": {
-                            1: [("Iron", 1)],
-                            2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
-                            4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
-                        }
-                    },
-                    "Lightweight Mount": {
-                        "grades": {
-                            1: [("Phosphorus", 1)],
-                            2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
-                        }
-                    },
-                    "Long Range Weapon": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
-                        }
-                    },
-                    "Overcharged Weapon": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
-                        }
-                    },
-                    "Rapid Fire Modification": {
-                        "grades": {
-                            1: [("Mechanical Scrap", 1)],
-                            2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
-                            3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
-                        }
-                    },
-                    "Sturdy Mount": {
-                        "grades": {
-                            1: [("Nickel", 1)],
-                            2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
-                        }
-                    },
-                },
-                "experiments": {
-                    "Concordant Sequence": [("Focus Crystals", 5), ("Modified Embedded Firmware", 3), ("Zirconium", 1)],
-                    "Double Braced": [("Mechanical Scrap", 5), ("Compact Composites", 5), ("Vanadium", 3)],
-                    "Emissive Munitions": [("Mechanical Equipment", 4), ("Unexpected Emission Data", 3), ("Heat Exchangers", 3), ("Manganese", 3)],
-                    "Flow Control": [("Mechanical Scrap", 5), ("Hybrid Capacitors", 3), ("Modified Embedded Firmware", 1)],
-                    "Multi-Servos": [("Mechanical Scrap", 5), ("Focus Crystals", 4), ("Conductive Polymers", 2), ("Configurable Components", 2)],
-                    "Oversized": [("Mechanical Scrap", 5), ("Mechanical Components", 3), ("Ruthenium", 1)],
-                    "Phasing Sequence": [("Focus Crystals", 5), ("Aberrant Shield Pattern Analysis", 3), ("Niobium", 3), ("Configurable Components", 3)],
-                    "Scramble Spectrum": [("Crystal Shards", 5), ("Untypical Shield Scans", 3), ("Exceptional Scrambled Emission Data", 5)],
-                    "Stripped Down": [("Salvaged Alloys", 5), ("Carbon", 5), ("Tin", 1)],
-                    "Thermal Shock": [("Flawed Focus Crystals", 5), ("Heat Resistant Ceramics", 3), ("Conductive Components", 3), ("Tungsten", 3)],
                 },
             },
             "Shield Booster": {
@@ -3804,33 +2804,6 @@ ENGINEERS = {
                     "Force Block": [("Unidentified Scan Archives", 5), ("Shielding Sensors", 3), ("Aberrant Shield Pattern Analysis", 2)],
                     "Super Capacitor": [("Untypical Shield Scans", 3), ("Compact Composites", 5), ("Cadmium", 2)],
                     "Thermo Block": [("Anomalous Bulk Scan Data", 5), ("Conductive Ceramics", 3), ("Heat Vanes", 3)],
-                },
-            },
-            "Shield Cell Bank": {
-                "blueprints": {
-                    "Rapid Charge": {
-                        "grades": {
-                            1: [("Sulphur", 1)],
-                            2: [("Chromium", 1), ("Grid Resistors", 1)],
-                            3: [("Hybrid Capacitors", 1), ("Precipitated Alloys", 1), ("Sulphur", 1)],
-                            4: [("Chromium", 1), ("Electrochemical Arrays", 1), ("Thermic Alloys", 1)],
-                        }
-                    },
-                    "Specialised": {
-                        "grades": {
-                            1: [("Specialised Legacy Firmware", 1)],
-                            2: [("Conductive Components", 1), ("Specialised Legacy Firmware", 1)],
-                            3: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Exceptional Scrambled Emission Data", 1)],
-                            4: [("Conductive Components", 1), ("Cracked Industrial Firmware", 1), ("Yttrium", 1)],
-                        }
-                    },
-                },
-                "experiments": {
-                    "Boss Cells": [("Chemical Storage Units", 5), ("Chromium", 3), ("Polymer Capacitors", 1)],
-                    "Double Braced": [("Chemical Storage Units", 5), ("Chromium", 3), ("Yttrium", 1)],
-                    "Flow Control": [("Chemical Storage Units", 5), ("Chromium", 3), ("Conductive Polymers", 1)],
-                    "Recycling Cells": [("Chemical Storage Units", 5), ("Chromium", 3), ("Configurable Components", 1)],
-                    "Stripped Down": [("Chemical Storage Units", 5), ("Chromium", 3), ("Proto Light Alloys", 1)],
                 },
             },
             "Shield Generator": {
@@ -3981,20 +2954,6 @@ ENGINEERS = {
                     "Reflective Plating": [("Compact Composites", 5), ("Heat Dispersion Plate", 3), ("Thermic Alloys", 2)],
                 },
             },
-            "Auto Field-Maintenance Unit": {
-                "blueprints": {
-                    "Shielded": {
-                        "grades": {
-                            1: [("Worn Shield Emitters", 1)],
-                            2: [("Carbon", 1), ("Shield Emitters", 1)],
-                            3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Core Dynamics Composites", 1), ("Compound Shielding", 1), ("Tungsten", 1)],
-                        }
-                    },
-                },
-                "experiments": {},
-            },
             "Chaff Launcher": {
                 "blueprints": {
                     "Ammo Capacity": {
@@ -4030,7 +2989,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Electronic Countermeasure": {
                 "blueprints": {
@@ -4062,7 +3022,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Heat Sink Launcher": {
                 "blueprints": {
@@ -4298,7 +3259,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Torpedo Pylon": {
                 "blueprints": {
@@ -4343,8 +3305,6 @@ ENGINEERS = {
                             1: [("Grid Resistors", 1)],
                             2: [("Chromium", 1), ("Grid Resistors", 1)],
                             3: [("Grid Resistors", 1), ("Heat Dispersion Plate", 1), ("Selenium", 1)],
-                            4: [("Cadmium", 1), ("Heat Exchangers", 1), ("Hybrid Capacitors", 1)],
-                            5: [("Electrochemical Arrays", 1), ("Heat Vanes", 1), ("Tellurium", 1)],
                         }
                     },
                     "Increased FSD Range": {
@@ -4352,8 +3312,6 @@ ENGINEERS = {
                             1: [("Atypical Disrupted Wake Echoes", 1)],
                             2: [("Atypical Disrupted Wake Echoes", 1), ("Chemical Processors", 1)],
                             3: [("Chemical Processors", 1), ("Phosphorus", 1), ("Strange Wake Solutions", 1)],
-                            4: [("Chemical Distillery", 1), ("Eccentric Hyperspace Trajectories", 1), ("Manganese", 1)],
-                            5: [("Arsenic", 1), ("Chemical Manipulators", 1), ("Datamined Wake Exceptions", 1)],
                         }
                     },
                     "Shielded FSD": {
@@ -4361,8 +3319,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("Shielding Sensors", 1), ("Zinc", 1)],
-                            4: [("Compound Shielding", 1), ("High Density Composites", 1), ("Vanadium", 1)],
-                            5: [("Imperial Shielding", 1), ("Proprietary Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
@@ -4452,7 +3408,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Collector Limpet Controller": {
                 "blueprints": {
@@ -4462,7 +3419,6 @@ ENGINEERS = {
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
                             4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -4471,7 +3427,6 @@ ENGINEERS = {
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
                             4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -4480,11 +3435,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Electronic Countermeasure": {
                 "blueprints": {
@@ -4516,7 +3471,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Fuel Transfer Limpet Controller": {
                 "blueprints": {
@@ -4526,7 +3482,6 @@ ENGINEERS = {
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
                             4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -4535,7 +3490,6 @@ ENGINEERS = {
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
                             4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -4544,11 +3498,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Hatch Breaker Limpet Controller": {
                 "blueprints": {
@@ -4557,8 +3511,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -4566,8 +3518,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -4575,12 +3525,11 @@ ENGINEERS = {
                             1: [("Worn Shield Emitters", 1)],
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
-                            4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Heat Sink Launcher": {
                 "blueprints": {
@@ -4656,7 +3605,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Prospector Limpet Controller": {
                 "blueprints": {
@@ -4666,7 +3616,6 @@ ENGINEERS = {
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
                             4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Reinforced": {
@@ -4675,7 +3624,6 @@ ENGINEERS = {
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
                             4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                     "Shielded": {
@@ -4684,11 +3632,11 @@ ENGINEERS = {
                             2: [("Carbon", 1), ("Shield Emitters", 1)],
                             3: [("Carbon", 1), ("High Density Composites", 1), ("Shield Emitters", 1)],
                             4: [("Proprietary Composites", 1), ("Shielding Sensors", 1), ("Vanadium", 1)],
-                            5: [("Compound Shielding", 1), ("Core Dynamics Composites", 1), ("Tungsten", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -4817,8 +3765,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
                             3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -4826,8 +3772,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
@@ -4835,8 +3779,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1), ("Biotech Conductors", 1)],
                         }
                     },
                     "Overcharged Weapon": {
@@ -4844,8 +3786,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
                             3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Short Range Blaster": {
@@ -4853,8 +3793,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
                             3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -4862,8 +3800,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -4886,8 +3822,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
                             3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "Focused Weapon": {
@@ -4895,8 +3829,6 @@ ENGINEERS = {
                             1: [("Iron", 1)],
                             2: [("Conductive Components", 1), ("Iron", 1)],
                             3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
-                            4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -4904,8 +3836,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
@@ -4913,8 +3843,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Thermic Alloys", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Overcharged Weapon": {
@@ -4922,8 +3850,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
                             3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -4931,8 +3857,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Precipitated Alloys", 1), ("Configurable Components", 1), ("Technetium", 1)],
                         }
                     },
                     "Short Range Blaster": {
@@ -4940,8 +3864,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
                             3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -4949,8 +3871,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -5040,7 +3960,6 @@ ENGINEERS = {
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
                             3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
                             4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "Focused Weapon": {
@@ -5049,7 +3968,6 @@ ENGINEERS = {
                             2: [("Conductive Components", 1), ("Iron", 1)],
                             3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
                             4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -5058,7 +3976,6 @@ ENGINEERS = {
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
                             4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
@@ -5067,7 +3984,6 @@ ENGINEERS = {
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Overcharged Weapon": {
@@ -5076,7 +3992,6 @@ ENGINEERS = {
                             2: [("Conductive Components", 1), ("Nickel", 1)],
                             3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
                             4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -5085,7 +4000,6 @@ ENGINEERS = {
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
                             4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -5094,7 +4008,6 @@ ENGINEERS = {
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
                             4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -5235,7 +4148,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Fuel Transfer Limpet Controller": {
                 "blueprints": {
@@ -5267,7 +4181,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Hatch Breaker Limpet Controller": {
                 "blueprints": {
@@ -5299,7 +4214,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Prospector Limpet Controller": {
                 "blueprints": {
@@ -5331,7 +4247,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Rail Gun": {
                 "blueprints": {
@@ -5340,8 +4257,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
                             3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -5349,8 +4264,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
@@ -5358,8 +4271,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Thermic Alloys", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Short Range Blaster": {
@@ -5367,8 +4278,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
                             3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -5376,8 +4285,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -5427,7 +4334,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Frame Shift Drive Interdictor": {
                 "blueprints": {
@@ -5436,8 +4344,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Equipment", 1), ("Unusual Encrypted Files", 1)],
                             3: [("Grid Resistors", 1), ("Mechanical Components", 1), ("Tagged Encryption Codes", 1)],
-                            4: [("Divergent Scan Data", 1), ("Mechanical Equipment", 1), ("Strange Wake Solutions", 1)],
-                            5: [("Classified Scan Fragment", 1), ("Eccentric Hyperspace Trajectories", 1), ("Mechanical Components", 1)],
                         }
                     },
                     "Long Range FSD Interdictor": {
@@ -5445,12 +4351,11 @@ ENGINEERS = {
                             1: [("Unusual Encrypted Files", 1)],
                             2: [("Atypical Disrupted Wake Echoes", 1), ("Tagged Encryption Codes", 1)],
                             3: [("Anomalous Bulk Scan Data", 1), ("Anomalous FSD Telemetry", 1), ("Open Symmetric Keys", 1)],
-                            4: [("Unidentified Scan Archives", 1), ("Strange Wake Solutions", 1), ("Atypical Encryption Archives", 1)],
-                            5: [("Classified Scan Databanks", 1), ("Eccentric Hyperspace Trajectories", 1), ("Adaptive Encryptors Capture", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Fuel Transfer Limpet Controller": {
                 "blueprints": {
@@ -5482,7 +4387,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Hatch Breaker Limpet Controller": {
                 "blueprints": {
@@ -5514,7 +4420,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Kill Warrant Scanner": {
                 "blueprints": {
@@ -5573,7 +4480,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Manifest Scanner": {
                 "blueprints": {
@@ -5632,7 +4540,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Prospector Limpet Controller": {
                 "blueprints": {
@@ -5664,7 +4573,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Sensors": {
                 "blueprints": {
@@ -5696,7 +4606,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Surface Scanner": {
                 "blueprints": {
@@ -5705,12 +4616,11 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Germanium", 1)],
                             3: [("Mechanical Scrap", 1), ("Germanium", 1), ("Phase Alloys", 1)],
-                            4: [("Mechanical Equipment", 1), ("Niobium", 1), ("Proto Light Alloys", 1)],
-                            5: [("Mechanical Components", 1), ("Tin", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
             "Wake Scanner": {
                 "blueprints": {
@@ -5769,7 +4679,8 @@ ENGINEERS = {
                         }
                     },
                 },
-                "experiments": {},
+                "experiments": {
+                },
             },
         }
     },
@@ -5782,72 +4693,48 @@ ENGINEERS = {
                         "grades": {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "High Capacity Magazine": {
                         "grades": {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
-                            3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
                         "grades": {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
                         "grades": {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Overcharged Weapon": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
                         "grades": {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
-                            3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
                         }
                     },
                     "Short Range Blaster": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -5872,8 +4759,6 @@ ENGINEERS = {
                             1: [("Carbon", 1)],
                             2: [("Carbon", 1), ("Mechanical Equipment", 1)],
                             3: [("Carbon", 1), ("Cracked Industrial Firmware", 1), ("Mechanical Equipment", 1)],
-                            4: [("Mechanical Components", 1), ("Security Firmware Patch", 1), ("Vanadium", 1)],
-                            5: [("High Density Composites", 1), ("Configurable Components", 1), ("Modified Embedded Firmware", 1)],
                         }
                     },
                     "Efficient Weapon": {
@@ -5881,8 +4766,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
                             3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "High Capacity Magazine": {
@@ -5890,8 +4773,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
                             3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -5899,8 +4780,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Overcharged Weapon": {
@@ -5908,8 +4787,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
                             3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -5917,8 +4794,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -5926,8 +4801,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -6183,8 +5056,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
                             3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "High Capacity Magazine": {
@@ -6192,8 +5063,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Mechanical Scrap", 1), ("Vanadium", 1)],
                             3: [("Mechanical Scrap", 1), ("Niobium", 1), ("Vanadium", 1)],
-                            4: [("High Density Composites", 1), ("Mechanical Equipment", 1), ("Tin", 1)],
-                            5: [("Mechanical Components", 1), ("Military Supercapacitors", 1), ("Proprietary Composites", 1)],
                         }
                     },
                     "Lightweight Mount": {
@@ -6201,8 +5070,6 @@ ENGINEERS = {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
                             3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
@@ -6210,8 +5077,6 @@ ENGINEERS = {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
                             3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Overcharged Weapon": {
@@ -6219,8 +5084,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
                             3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
@@ -6228,8 +5091,6 @@ ENGINEERS = {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
                             3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
                         }
                     },
                     "Short Range Blaster": {
@@ -6237,8 +5098,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
                             3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
@@ -6246,8 +5105,6 @@ ENGINEERS = {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
                             3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
@@ -6271,72 +5128,48 @@ ENGINEERS = {
                         "grades": {
                             1: [("Sulphur", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Sulphur", 1)],
-                            3: [("Chromium", 1), ("Exceptional Scrambled Emission Data", 1), ("Heat Exchangers", 1)],
-                            4: [("Heat Vanes", 1), ("Irregular Emission Data", 1), ("Selenium", 1)],
-                            5: [("Cadmium", 1), ("Proto Heat Radiators", 1), ("Unexpected Emission Data", 1)],
                         }
                     },
                     "Focused Weapon": {
                         "grades": {
                             1: [("Iron", 1)],
                             2: [("Conductive Components", 1), ("Iron", 1)],
-                            3: [("Chromium", 1), ("Conductive Ceramics", 1), ("Iron", 1)],
-                            4: [("Focus Crystals", 1), ("Germanium", 1), ("Polymer Capacitors", 1)],
-                            5: [("Military Supercapacitors", 1), ("Niobium", 1), ("Refined Focus Crystals", 1)],
                         }
                     },
                     "Lightweight Mount": {
                         "grades": {
                             1: [("Phosphorus", 1)],
                             2: [("Manganese", 1), ("Salvaged Alloys", 1)],
-                            3: [("Conductive Ceramics", 1), ("Manganese", 1), ("Salvaged Alloys", 1)],
-                            4: [("Conductive Components", 1), ("Phase Alloys", 1), ("Proto Light Alloys", 1)],
-                            5: [("Conductive Ceramics", 1), ("Proto Light Alloys", 1), ("Proto Radiolic Alloys", 1)],
                         }
                     },
                     "Long Range Weapon": {
                         "grades": {
                             1: [("Sulphur", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            3: [("Focus Crystals", 1), ("Modified Consumer Firmware", 1), ("Sulphur", 1)],
-                            4: [("Conductive Polymers", 1), ("Focus Crystals", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Cracked Industrial Firmware", 1), ("Thermic Alloys", 1)],
                         }
                     },
                     "Overcharged Weapon": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Conductive Components", 1), ("Nickel", 1)],
-                            3: [("Conductive Components", 1), ("Electrochemical Arrays", 1), ("Nickel", 1)],
-                            4: [("Conductive Ceramics", 1), ("Polymer Capacitors", 1), ("Zinc", 1)],
-                            5: [("Conductive Polymers", 1), ("Modified Embedded Firmware", 1), ("Zirconium", 1)],
                         }
                     },
                     "Rapid Fire Modification": {
                         "grades": {
                             1: [("Mechanical Scrap", 1)],
                             2: [("Heat Dispersion Plate", 1), ("Mechanical Scrap", 1)],
-                            3: [("Mechanical Equipment", 1), ("Precipitated Alloys", 1), ("Specialised Legacy Firmware", 1)],
-                            4: [("Mechanical Components", 1), ("Modified Consumer Firmware", 1), ("Thermic Alloys", 1)],
-                            5: [("Configurable Components", 1), ("Precipitated Alloys", 1), ("Technetium", 1)],
                         }
                     },
                     "Short Range Blaster": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            3: [("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1), ("Nickel", 1)],
-                            4: [("Conductive Polymers", 1), ("Electrochemical Arrays", 1), ("Modified Consumer Firmware", 1)],
-                            5: [("Biotech Conductors", 1), ("Configurable Components", 1), ("Cracked Industrial Firmware", 1)],
                         }
                     },
                     "Sturdy Mount": {
                         "grades": {
                             1: [("Nickel", 1)],
                             2: [("Nickel", 1), ("Shield Emitters", 1)],
-                            3: [("Nickel", 1), ("Shield Emitters", 1), ("Tungsten", 1)],
-                            4: [("Molybdenum", 1), ("Tungsten", 1), ("Zinc", 1)],
-                            5: [("High Density Composites", 1), ("Molybdenum", 1), ("Technetium", 1)],
                         }
                     },
                 },
