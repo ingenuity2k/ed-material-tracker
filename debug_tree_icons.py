@@ -81,7 +81,13 @@ cat = tree2.insert("", tk.END, text="RAW  (500)", values=("",), tags=("cat",), o
 for name, qty, grade in items:
     icon = grade_icons.get(grade)
     tree2.insert(cat, tk.END, text=f"{qty:>5}  {name}",
-                 values=(f"{'●'*grade}",), image=icon if icon else "")
+                 values=(f"{'●'*grade}",), image=icon if icon else "",
+                 tags=(f"grade_{grade}",))
+
+# Configure grade tags with foreground colors (like the app does)
+GRADE_COLORS = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
+for g, c in GRADE_COLORS.items():
+    tree2.tag_configure(f"grade_{g}", foreground=c, font=("Consolas", 10))
 
 # ── TEST 3: Nested tree with tag_configure image ──
 print("\n=== TEST 3: Nested tree + tag_configure image ===")
@@ -102,8 +108,8 @@ for name, qty, grade in items:
                  values=(f"{'●'*grade}",), tags=(f"grade_{grade}",))
 
 # Labels to identify tests
-tk.Label(root, text="Test 1: Flat (image=)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
-tk.Label(root, text="Test 2: Nested (image=)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
-tk.Label(root, text="Test 3: Nested (tag_configure image)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
+tk.Label(root, text="Test 1: Flat (image=, no tags)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
+tk.Label(root, text="Test 2: Nested (image= + foreground tags)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
+tk.Label(root, text="Test 3: Nested (tag_configure image, no foreground)", fg="#ff7100", bg="#1a1a2e", font=("Consolas", 10)).pack(anchor=tk.W, padx=10)
 
 root.mainloop()
