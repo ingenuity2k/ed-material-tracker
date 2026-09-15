@@ -559,7 +559,7 @@ class MaterialTracker:
         # Dark style for comboboxes and entry fields
         style.configure("Dark.TCombobox", fieldbackground=COLORS["bg_panel"],
                          foreground=COLORS["text"], selectbackground=COLORS["bg_panel"],
-                         selectforeground=COLORS["text_bright"])
+                         selectforeground=COLORS["text"])
         style.map("Dark.TCombobox",
                   fieldbackground=[("readonly", COLORS["bg_panel"]), ("active", COLORS["bg_panel"])],
                   foreground=[("readonly", COLORS["text"])])
@@ -616,12 +616,16 @@ class MaterialTracker:
                   fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.RIGHT, padx=(0, 6))
         self._highlight_sort("qty")
 
-        # Pre-load composite grade icons for treeview (engineer icon repeated N times)
-        self._grade_icons = {}
+        # Pre-load icons for treeview
+        self._grade_icons = {}        # Material grade icons (for individual items)
+        self._composite_icons = {}    # Composite engineer icons (for category headers)
         for g in range(1, 6):
-            icon = _load_grade_composite(g, 16)
+            icon = _load_grade_icon(g, 16)
             if icon:
                 self._grade_icons[g] = icon
+            comp = _load_grade_composite(g, 16)
+            if comp:
+                self._composite_icons[g] = comp
 
         # Tree container
         container = ttk.Frame(self.root)
@@ -759,10 +763,13 @@ class MaterialTracker:
             if not mats:
                 continue
             total = sum(max(0, v) for v in mats.values())
-            # Category header
+            # Category header — composite engineer icon (1-5 based on max grade in category)
+            max_g = max((e[1] for e in (MATERIAL_DATA.get(k, ("", 0)) for k in mats.keys())), default=1)
+            cat_icon = self._composite_icons.get(min(max_g, 5), list(self._composite_icons.values())[0] if self._composite_icons else None)
             parent = self.tree.insert("", tk.END, text="",
                                        values=(f"{cat.upper()}  ({total})", ""),
-                                       tags=("cat_header",), open=True)
+                                       tags=("cat_header",), open=True,
+                                       image=cat_icon if cat_icon else "")
             # Build items with grade info for sorting
             items_with_grade = []
             for name, qty in mats.items():
@@ -898,54 +905,58 @@ class EngineeringCalculator:
     # ── UI Construction ──
 
     def _build_ui(self):
-        # Top row: [Module Input] [Blueprint] [Experiment] ---- [Engineer List]
+        # Row 1: Module input + Engineer list (anchored right)
         top = ttk.Frame(self.win)
         top.pack(fill=tk.X, padx=12, pady=(12, 4))
 
-        # Left side: module picker + blueprint + experiment
-        left = ttk.Frame(top)
-        left.pack(side=tk.LEFT, fill=tk.X, expand=False)
+        self._engineer_max_grades = {}
 
-        ttk.Label(left, text="Module:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        ttk.Label(top, text="Module:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT, pady=0)
 
         self.module_var = tk.StringVar()
-        self.module_entry = tk.Entry(left, textvariable=self.module_var,
+        self.module_entry = tk.Entry(top, textvariable=self.module_var,
                                       font=FONT, width=24,
                                       bg=COLORS["bg_panel"], fg=COLORS["text"],
                                       insertbackground=COLORS["text"],
                                       selectbackground=COLORS["orange_dim"],
                                       selectforeground=COLORS["text_bright"],
                                       relief=tk.FLAT, borderwidth=2)
-        self.module_entry.pack(side=tk.LEFT, padx=(8, 12))
+        self.module_entry.pack(side=tk.LEFT, padx=(8, 12), pady=0)
         self.module_entry.bind("<KeyRelease>", self._on_module_type)
-        self.module_entry.bind("<Return>", self._on_module_select)
+        self.module_entry.bind("<Return>", self._on_module_return)
         self.module_entry.bind("<FocusOut>", lambda e: self._hide_module_list())
+        self.module_entry.bind("<Up>", self._on_listbox_up)
+        self.module_entry.bind("<Down>", self._on_listbox_down)
+        self.module_entry.bind("<Escape>", lambda e: self._hide_module_list())
 
-        # Blueprint picker inline
-        ttk.Label(left, text="Blueprint:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
-        self.bp_var = tk.StringVar()
-        self.bp_combo = ttk.Combobox(left, textvariable=self.bp_var,
-                                      font=FONT, state="readonly", width=22,
-                                      style="Dark.TCombobox")
-        self.bp_combo.pack(side=tk.LEFT, padx=(8, 12))
-        self.bp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
-
-        # Experiment picker inline
-        ttk.Label(left, text="Exp:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
-        self.exp_var = tk.StringVar()
-        self.exp_combo = ttk.Combobox(left, textvariable=self.exp_var,
-                                       font=FONT, state="readonly", width=22,
-                                       style="Dark.TCombobox")
-        self.exp_combo.pack(side=tk.LEFT, padx=(8, 0))
-        self.exp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
-
-        # Right side: engineer list (anchored right)
+        # Engineer list anchored right on Row 1
         self.eng_frame = ttk.Frame(top)
         self.eng_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
-        self._engineer_max_grades = {}
+
+        # Row 2: Blueprint dropdown
+        row2 = ttk.Frame(self.win)
+        row2.pack(fill=tk.X, padx=12, pady=(4, 2))
+        ttk.Label(row2, text="Blueprint:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT, pady=0)
+        self.bp_var = tk.StringVar()
+        self.bp_combo = ttk.Combobox(row2, textvariable=self.bp_var,
+                                      font=FONT, state="readonly", width=22,
+                                      style="Dark.TCombobox")
+        self.bp_combo.pack(side=tk.LEFT, padx=(8, 0), pady=0)
+        self.bp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
+
+        # Row 3: Experiment dropdown
+        row3 = ttk.Frame(self.win)
+        row3.pack(fill=tk.X, padx=12, pady=(2, 2))
+        ttk.Label(row3, text="Experiment:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT, pady=0)
+        self.exp_var = tk.StringVar()
+        self.exp_combo = ttk.Combobox(row3, textvariable=self.exp_var,
+                                       font=FONT, state="readonly", width=22,
+                                       style="Dark.TCombobox")
+        self.exp_combo.pack(side=tk.LEFT, padx=(8, 0), pady=0)
+        self.exp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
 
         # Module autocomplete listbox (positioned directly below input field)
         self.module_listbox = tk.Listbox(self.win, font=FONT,
@@ -957,16 +968,15 @@ class EngineeringCalculator:
                                           relief=tk.SOLID)
         self.module_listbox.bind("<<ListboxSelect>>", self._on_module_pick)
         self.module_listbox.bind("<Return>", self._on_module_pick)
+        self.module_listbox.bind("<Up>", self._on_listbox_up)
+        self.module_listbox.bind("<Down>", self._on_listbox_down)
         self._module_list_visible = False
 
-        # Grade slider row (all on one line)
-        mid = ttk.Frame(self.win)
-        mid.pack(fill=tk.X, padx=12, pady=(8, 4))
-
-        grade_row = ttk.Frame(mid)
-        grade_row.pack(fill=tk.X, pady=(6, 2))
+        # Row 4: Grade slider (all elements vertically centered)
+        grade_row = ttk.Frame(self.win)
+        grade_row.pack(fill=tk.X, padx=12, pady=(4, 4))
         ttk.Label(grade_row, text="Grade:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT, pady=0, anchor=tk.CENTER)
         self.grade_var = tk.IntVar(value=5)
         self.grade_scale = tk.Scale(grade_row, from_=1, to=5, orient=tk.HORIZONTAL,
                                      variable=self.grade_var, font=FONT_BOLD,
@@ -974,13 +984,13 @@ class EngineeringCalculator:
                                      troughcolor=COLORS["bg_light"],
                                      highlightthickness=0, length=200,
                                      command=lambda _: self._update_requirements())
-        self.grade_scale.pack(side=tk.LEFT, padx=(8, 0))
+        self.grade_scale.pack(side=tk.LEFT, padx=(8, 0), pady=0, anchor=tk.CENTER)
         self.grade_icon_frame = ttk.Frame(grade_row)
-        self.grade_icon_frame.pack(side=tk.LEFT, padx=(12, 0))
+        self.grade_icon_frame.pack(side=tk.LEFT, padx=(12, 0), pady=0, anchor=tk.CENTER)
         # Rolls estimate on the same line as slider
         self.rolls_label = ttk.Label(grade_row, text="", font=FONT,
                                       foreground=COLORS["text_dim"])
-        self.rolls_label.pack(side=tk.LEFT, padx=(12, 0))
+        self.rolls_label.pack(side=tk.LEFT, padx=(12, 0), pady=0, anchor=tk.CENTER)
 
         # Separator
         sep = ttk.Separator(self.win, orient=tk.HORIZONTAL)
@@ -1057,12 +1067,26 @@ class EngineeringCalculator:
     def _on_module_pick(self, event=None):
         sel = self.module_listbox.curselection()
         if not sel:
-            return
+            return "break"
         name = self.module_listbox.get(sel[0])
         self.module_var.set(name)
         self.module_listbox.place_forget()
         self._module_list_visible = False
         self._select_module(name)
+        return "break"
+
+    def _on_module_return(self, event=None):
+        """Handle Return on the entry: pick from listbox if visible, else search."""
+        if self._module_list_visible:
+            sel = self.module_listbox.curselection()
+            if sel:
+                name = self.module_listbox.get(sel[0])
+                self.module_var.set(name)
+                self.module_listbox.place_forget()
+                self._module_list_visible = False
+                self._select_module(name)
+                return "break"
+        self._on_module_select(event)
 
     def _on_module_select(self, event=None):
         query = self.module_var.get().strip()
@@ -1075,6 +1099,26 @@ class EngineeringCalculator:
         if matches:
             self.module_var.set(matches[0])
             self._select_module(matches[0])
+
+    def _on_listbox_up(self, event):
+        sel = self.module_listbox.curselection()
+        if sel and sel[0] > 0:
+            self.module_listbox.selection_clear(0, tk.END)
+            self.module_listbox.selection_set(sel[0] - 1)
+            self.module_listbox.see(sel[0] - 1)
+        return "break"
+
+    def _on_listbox_down(self, event):
+        sel = self.module_listbox.curselection()
+        count = self.module_listbox.size()
+        if not sel:
+            if count > 0:
+                self.module_listbox.selection_set(0)
+        elif sel[0] < count - 1:
+            self.module_listbox.selection_clear(0, tk.END)
+            self.module_listbox.selection_set(sel[0] + 1)
+            self.module_listbox.see(sel[0] + 1)
+        return "break"
 
     def _select_module(self, module_name):
         """Populate engineers, blueprints, experiments for the selected module."""
