@@ -581,11 +581,7 @@ class MaterialTracker:
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
         for g, c in GRADE_COLORS.items():
-            img = self._grade_icons.get(g)
-            if img:
-                self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT, image=img)
-            else:
-                self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT)
+            self.tree.tag_configure(f"grade_{g}", foreground=c, font=FONT)
         self.tree.tag_configure("grade_0", foreground=COLORS["text"], font=FONT)
         self.tree.tag_configure("cat_header", font=FONT_CAT, foreground=COLORS["orange"])
 
@@ -737,10 +733,12 @@ class MaterialTracker:
                 filled = int(pct * 20)
                 bar = "█" * filled + "░" * (20 - filled)
                 grade_label = _grade_unicode_dots(grade) if grade else ""
+                img = self._grade_icons.get(grade)
                 item_id = self.tree.insert(parent, tk.END,
                     text=f"{qty:>5}  {name}",
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
-                    tags=(f"grade_{grade}",))
+                    tags=(f"grade_{grade}",),
+                    image=img if img else "")
 
     def _open_engineering(self):
         if not ENGINEERS:
