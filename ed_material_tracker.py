@@ -1132,16 +1132,20 @@ class EngineeringCalculator:
             return
 
         # Collect blueprint materials for grades 1 through target_grade
-        # Use the first engineer that has this blueprint to get material data
+        # Get the most complete blueprint data across all engineers (some only have G1-G3)
         bp_grades = None
+        best_max = 0
         for eng_data in ENGINEERS.values():
             mod_data = eng_data["modules"].get(module)
             if mod_data:
                 bp_data = mod_data["blueprints"].get(bp_name)
                 if bp_data:
-                    bp_grades = bp_data.get("grades", {})
-                    if bp_grades:
-                        break
+                    candidate = bp_data.get("grades", {})
+                    if candidate:
+                        candidate_max = max(candidate.keys())
+                        if candidate_max > best_max:
+                            best_max = candidate_max
+                            bp_grades = candidate
 
         if not bp_grades:
             self.summary_var.set("No blueprint data found.")
