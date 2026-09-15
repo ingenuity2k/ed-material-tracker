@@ -36,9 +36,9 @@ except ImportError:
 # Cache for loaded icons
 _icon_cache: dict[str, tk.PhotoImage] = {}
 
-def _load_icon(path: str, size: int = 16, tint: str | None = None) -> tk.PhotoImage | None:
-    """Load and scale an icon image. Optionally tint with a hex color."""
-    cache_key = f"{path}_{size}_{tint}"
+def _load_icon(path: str, size: int = 16) -> tk.PhotoImage | None:
+    """Load and scale an icon image."""
+    cache_key = f"{path}_{size}"
     if cache_key in _icon_cache:
         return _icon_cache[cache_key]
     if not os.path.exists(path):
@@ -47,21 +47,8 @@ def _load_icon(path: str, size: int = 16, tint: str | None = None) -> tk.PhotoIm
         if _PIL_AVAILABLE:
             img = Image.open(path).convert("RGBA")
             img = img.resize((size, size), Image.Resampling.LANCZOS)
-            if tint:
-                r, g, b = int(tint[1:3], 16), int(tint[3:5], 16), int(tint[5:7], 16)
-                pixels = img.load()
-                for y in range(img.height):
-                    for x in range(img.width):
-                        pr, pg, pb, pa = pixels[x, y]
-                        if pa > 0:
-                            pixels[x, y] = (
-                                min(255, int(r * pr / 255)),
-                                min(255, int(g * pg / 255)),
-                                min(255, int(b * pb / 255)),
-                                pa)
             photo = ImageTk.PhotoImage(img)
         else:
-            # tk.PhotoImage can't tint, just load as-is
             photo = tk.PhotoImage(file=path)
             w, h = photo.width(), photo.height()
             if w > size or h > size:
@@ -73,13 +60,13 @@ def _load_icon(path: str, size: int = 16, tint: str | None = None) -> tk.PhotoIm
     except Exception:
         return None
 
-GRADE_COLORS = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
-
 def _load_grade_icon(grade: int, size: int = 16) -> tk.PhotoImage | None:
-    """Load grade-specific icon (1-5), tinted with the grade color."""
+    """Load grade-specific icon (1-5), pre-colored in assets."""
     path = _GRADE_ICON_PATHS.get(grade)
-    color = GRADE_COLORS.get(grade)
-    return _load_icon(path, size, tint=color) if path else None
+    return _load_icon(path, size) if path else None
+
+# Grade colors for treeview tags (used by MaterialTracker and EngineeringCalculator)
+GRADE_COLORS = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
 
 def _load_engineer_icon(size: int = 16) -> tk.PhotoImage | None:
     """Load the engineer icon."""
