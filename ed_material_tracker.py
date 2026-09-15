@@ -704,7 +704,8 @@ class MaterialTracker:
             total = sum(max(0, v) for v in mats.values())
             # Category header
             parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
-                                       values=("",), tags=("cat_header",), open=True)
+                                       values=("",), tags=("cat_header",), open=True,
+                                       image=self._grade_icons.get(1, ""))
             # Build items with grade info for sorting
             items_with_grade = []
             for name, qty in mats.items():
@@ -739,6 +740,8 @@ class MaterialTracker:
                     values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
                     tags=(f"grade_{grade}",),
                     image=img if img else "")
+        # Prevent icon garbage collection
+        self.tree._grade_icons_ref = self._grade_icons
 
     def _open_engineering(self):
         if not ENGINEERS:
