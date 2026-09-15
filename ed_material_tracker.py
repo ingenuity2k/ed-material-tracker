@@ -69,6 +69,32 @@ def _load_grade_icon(grade: int, size: int = 16) -> tk.PhotoImage | None:
     path = _GRADE_ICON_PATHS.get(grade)
     return _load_icon(path, size) if path else None
 
+# Cache for composite grade icons (engineer icon repeated N times)
+_composite_cache: dict[str, tk.PhotoImage] = {}
+
+def _load_grade_composite(grade: int, size: int = 16) -> tk.PhotoImage | None:
+    """Create a composite image of N engineer icons side by side for the given grade."""
+    cache_key = f"composite_{grade}_{size}"
+    if cache_key in _composite_cache:
+        return _composite_cache[cache_key]
+    if not _PIL_AVAILABLE:
+        # Fallback: just return a single engineer icon
+        return _load_engineer_icon(size)
+    eng_icon_path = _ENG_ICON_PATH
+    if not os.path.exists(eng_icon_path):
+        return None
+    try:
+        single = Image.open(eng_icon_path).convert("RGBA")
+        single = single.resize((size, size), Image.Resampling.LANCZOS)
+        composite = Image.new("RGBA", (size * grade, size), (0, 0, 0, 0))
+        for i in range(grade):
+            composite.paste(single, (i * size, 0))
+        photo = ImageTk.PhotoImage(composite)
+        _composite_cache[cache_key] = photo
+        return photo
+    except Exception:
+        return None
+
 # Grade colors for treeview tags (used by MaterialTracker and EngineeringCalculator)
 GRADE_COLORS = {1: "#ffffff", 2: "#00ff88", 3: "#00ddff", 4: "#cc88ff", 5: "#ff7100"}
 
@@ -530,6 +556,15 @@ class MaterialTracker:
                          foreground=COLORS["orange"], font=FONT_HEAD, borderwidth=0)
         style.map("Treeview", background=[("selected", COLORS["orange_dim"])],
                   foreground=[("selected", COLORS["text_bright"])])
+        # Dark style for comboboxes and entry fields
+        style.configure("Dark.TCombobox", fieldbackground=COLORS["bg_panel"],
+                         foreground=COLORS["text"], selectbackground=COLORS["bg_panel"],
+                         selectforeground=COLORS["text_bright"])
+        style.map("Dark.TCombobox",
+                  fieldbackground=[("readonly", COLORS["bg_panel"]), ("active", COLORS["bg_panel"])],
+                  foreground=[("readonly", COLORS["text"])])
+        style.configure("Dark.TEntry", fieldbackground=COLORS["bg_panel"],
+                         foreground=COLORS["text"], insertcolor=COLORS["text"])
 
     # ── Toolbar ──
 
@@ -581,10 +616,10 @@ class MaterialTracker:
                   fg=COLORS["text_dim"], bg=COLORS["bg"]).pack(side=tk.RIGHT, padx=(0, 6))
         self._highlight_sort("qty")
 
-        # Pre-load grade icons for treeview
+        # Pre-load composite grade icons for treeview (engineer icon repeated N times)
         self._grade_icons = {}
         for g in range(1, 6):
-            icon = _load_grade_icon(g, 16)
+            icon = _load_grade_composite(g, 16)
             if icon:
                 self._grade_icons[g] = icon
 
@@ -802,10 +837,10 @@ class EngineeringCalculator:
             for mod in eng["modules"]
         ))
 
-        # Pre-load grade icons for treeview
+        # Pre-load composite grade icons for treeview (engineer icon repeated N times)
         self._grade_icons = {}
         for g in range(1, 6):
-            icon = _load_grade_icon(g, 16)
+            icon = _load_grade_composite(g, 16)
             if icon:
                 self._grade_icons[g] = icon
 
@@ -863,67 +898,74 @@ class EngineeringCalculator:
     # ── UI Construction ──
 
     def _build_ui(self):
-        # Top: module picker
+        # Top row: [Module Input] [Blueprint] [Experiment] ---- [Engineer List]
         top = ttk.Frame(self.win)
         top.pack(fill=tk.X, padx=12, pady=(12, 4))
-        ttk.Label(top, text="Module Type:", font=FONT_BOLD,
+
+        # Left side: module picker + blueprint + experiment
+        left = ttk.Frame(top)
+        left.pack(side=tk.LEFT, fill=tk.X, expand=False)
+
+        ttk.Label(left, text="Module:", font=FONT_BOLD,
                   foreground=COLORS["orange"]).pack(side=tk.LEFT)
 
         self.module_var = tk.StringVar()
-        self.module_entry = ttk.Entry(top, textvariable=self.module_var,
-                                      font=FONT, width=30)
-        self.module_entry.pack(side=tk.LEFT, padx=(8, 0))
+        self.module_entry = tk.Entry(left, textvariable=self.module_var,
+                                      font=FONT, width=24,
+                                      bg=COLORS["bg_panel"], fg=COLORS["text"],
+                                      insertbackground=COLORS["text"],
+                                      selectbackground=COLORS["orange_dim"],
+                                      selectforeground=COLORS["text_bright"],
+                                      relief=tk.FLAT, borderwidth=2)
+        self.module_entry.pack(side=tk.LEFT, padx=(8, 12))
         self.module_entry.bind("<KeyRelease>", self._on_module_type)
         self.module_entry.bind("<Return>", self._on_module_select)
+        self.module_entry.bind("<FocusOut>", lambda e: self._hide_module_list())
 
-        # Module listbox (autocomplete dropdown)
-        self.module_list_frame = ttk.Frame(self.win)
-        self.module_list_frame.pack(fill=tk.X, padx=12)
-        self.module_listbox = tk.Listbox(self.module_list_frame, font=FONT,
+        # Blueprint picker inline
+        ttk.Label(left, text="Blueprint:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        self.bp_var = tk.StringVar()
+        self.bp_combo = ttk.Combobox(left, textvariable=self.bp_var,
+                                      font=FONT, state="readonly", width=22,
+                                      style="Dark.TCombobox")
+        self.bp_combo.pack(side=tk.LEFT, padx=(8, 12))
+        self.bp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
+
+        # Experiment picker inline
+        ttk.Label(left, text="Exp:", font=FONT_BOLD,
+                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
+        self.exp_var = tk.StringVar()
+        self.exp_combo = ttk.Combobox(left, textvariable=self.exp_var,
+                                       font=FONT, state="readonly", width=22,
+                                       style="Dark.TCombobox")
+        self.exp_combo.pack(side=tk.LEFT, padx=(8, 0))
+        self.exp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
+
+        # Right side: engineer list (anchored right)
+        self.eng_frame = ttk.Frame(top)
+        self.eng_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=(12, 0))
+        self._engineer_max_grades = {}
+
+        # Module autocomplete listbox (positioned directly below input field)
+        self.module_listbox = tk.Listbox(self.win, font=FONT,
                                           bg=COLORS["bg_light"], fg=COLORS["text"],
                                           selectbackground=COLORS["orange_dim"],
-                                          height=6, borderwidth=0,
-                                          highlightthickness=0)
-        self.module_listbox.pack(fill=tk.X)
+                                          selectforeground=COLORS["text_bright"],
+                                          height=6, borderwidth=1,
+                                          highlightthickness=0,
+                                          relief=tk.SOLID)
         self.module_listbox.bind("<<ListboxSelect>>", self._on_module_pick)
         self.module_listbox.bind("<Return>", self._on_module_pick)
         self._module_list_visible = False
 
-        # Middle: engineer info + blueprint/experiment pickers
+        # Grade slider row (all on one line)
         mid = ttk.Frame(self.win)
         mid.pack(fill=tk.X, padx=12, pady=(8, 4))
 
-        # Engineers list (replaces old eng_label)
-        self.eng_frame = ttk.Frame(mid)
-        self.eng_frame.pack(fill=tk.X, pady=(0, 2))
-        self._engineer_max_grades = {}  # {eng_name: max_grade} for current module+bp
-
-        # Blueprint picker row
-        bp_row = ttk.Frame(mid)
-        bp_row.pack(fill=tk.X, pady=(6, 2))
-        ttk.Label(bp_row, text="Blueprint:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
-        self.bp_var = tk.StringVar()
-        self.bp_combo = ttk.Combobox(bp_row, textvariable=self.bp_var,
-                                      font=FONT, state="readonly", width=30)
-        self.bp_combo.pack(side=tk.LEFT, padx=(8, 0))
-        self.bp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
-
-        # Experiment picker row
-        exp_row = ttk.Frame(mid)
-        exp_row.pack(fill=tk.X, pady=(2, 2))
-        ttk.Label(exp_row, text="Experiment:", font=FONT_BOLD,
-                  foreground=COLORS["orange"]).pack(side=tk.LEFT)
-        self.exp_var = tk.StringVar()
-        self.exp_combo = ttk.Combobox(exp_row, textvariable=self.exp_var,
-                                       font=FONT, state="readonly", width=30)
-        self.exp_combo.pack(side=tk.LEFT, padx=(8, 0))
-        self.exp_combo.bind("<<ComboboxSelected>>", self._on_bp_change)
-
-        # Grade slider row
         grade_row = ttk.Frame(mid)
         grade_row.pack(fill=tk.X, pady=(6, 2))
-        ttk.Label(grade_row, text="Target Grade:", font=FONT_BOLD,
+        ttk.Label(grade_row, text="Grade:", font=FONT_BOLD,
                   foreground=COLORS["orange"]).pack(side=tk.LEFT)
         self.grade_var = tk.IntVar(value=5)
         self.grade_scale = tk.Scale(grade_row, from_=1, to=5, orient=tk.HORIZONTAL,
@@ -935,11 +977,10 @@ class EngineeringCalculator:
         self.grade_scale.pack(side=tk.LEFT, padx=(8, 0))
         self.grade_icon_frame = ttk.Frame(grade_row)
         self.grade_icon_frame.pack(side=tk.LEFT, padx=(12, 0))
-
-        # Rolls estimate
-        self.rolls_label = ttk.Label(mid, text="", font=FONT,
+        # Rolls estimate on the same line as slider
+        self.rolls_label = ttk.Label(grade_row, text="", font=FONT,
                                       foreground=COLORS["text_dim"])
-        self.rolls_label.pack(anchor=tk.W, pady=(2, 0))
+        self.rolls_label.pack(side=tk.LEFT, padx=(12, 0))
 
         # Separator
         sep = ttk.Separator(self.win, orient=tk.HORIZONTAL)
@@ -997,11 +1038,21 @@ class EngineeringCalculator:
         for m in matches:
             self.module_listbox.insert(tk.END, m)
         if matches and query:
-            self.module_list_frame.pack(fill=tk.X, padx=12)
+            # Position listbox directly below the input field
+            x = self.module_entry.winfo_rootx() - self.win.winfo_rootx()
+            y = self.module_entry.winfo_rooty() - self.win.winfo_rooty() + self.module_entry.winfo_height()
+            w = self.module_entry.winfo_width()
+            self.module_listbox.place(x=x, y=y, width=w)
+            self.module_listbox.lift()
             self._module_list_visible = True
         else:
-            self.module_list_frame.pack_forget()
+            self.module_listbox.place_forget()
             self._module_list_visible = False
+
+    def _hide_module_list(self):
+        """Hide the autocomplete listbox (called on focus out)."""
+        self.module_listbox.place_forget()
+        self._module_list_visible = False
 
     def _on_module_pick(self, event=None):
         sel = self.module_listbox.curselection()
@@ -1009,7 +1060,7 @@ class EngineeringCalculator:
             return
         name = self.module_listbox.get(sel[0])
         self.module_var.set(name)
-        self.module_list_frame.pack_forget()
+        self.module_listbox.place_forget()
         self._module_list_visible = False
         self._select_module(name)
 
@@ -1098,7 +1149,7 @@ class EngineeringCalculator:
         for w in self.grade_icon_frame.winfo_children():
             w.destroy()
         n = self.grade_var.get()
-        icon = self._grade_icons.get(n)
+        icon = _load_grade_composite(n, 16)
         if icon:
             lbl = tk.Label(self.grade_icon_frame, image=icon, bg=COLORS["bg"])
             lbl.image = icon
@@ -1125,7 +1176,6 @@ class EngineeringCalculator:
             mod_data = eng_data["modules"].get(module)
             if not mod_data:
                 continue
-            # Max grade for this specific blueprint from this engineer
             bp_data = mod_data["blueprints"].get(bp_name)
             if bp_data:
                 grades = bp_data.get("grades", {})
@@ -1135,20 +1185,17 @@ class EngineeringCalculator:
         # Filter: only engineers whose max grade >= selected grade
         filtered = [(name, g) for name, g in eng_grades.items() if g >= selected_grade]
         if not filtered:
-            lbl = tk.Label(self.eng_frame, text="No engineers for this grade",
-                          font=FONT, fg=COLORS["text_dim"], bg=COLORS["bg"])
-            lbl.pack(anchor=tk.W)
+            lbl = tk.Label(self.eng_frame, text="No engineers",
+                          font=("Consolas", 8), fg=COLORS["text_dim"], bg=COLORS["bg"])
+            lbl.pack(anchor=tk.E)
             return
 
         # Calculate distances if we know the player's current position
         def _eng_distance(eng_name):
-            """Return distance in ly from current system to engineer, or inf if unknown."""
             if not self.current_coords:
                 return float('inf')
-            # Get system name from ENGINEER_LOCATIONS (format: "System, Settlement")
             loc = ENGINEER_LOCATIONS.get(eng_name, "")
             sys_name = loc.split(",")[0].strip() if loc else ""
-            # Check ENGINEER_SYSTEM_MAP for alternate names
             coords_key = ENGINEER_SYSTEM_MAP.get(sys_name, sys_name)
             coords = ENGINEER_COORDS.get(coords_key)
             if not coords:
@@ -1161,21 +1208,21 @@ class EngineeringCalculator:
         # Sort by distance (closest first), then by max grade descending, then name
         filtered.sort(key=lambda x: (_eng_distance(x[0]), -x[1], x[0]))
 
+        # Compact vertical list for right-anchored position
+        ttk.Label(self.eng_frame, text="Engineers:", font=("Consolas", 8, "bold"),
+                  foreground=COLORS["orange"], background=COLORS["bg"]).pack(anchor=tk.E)
         for eng_name, max_g in filtered:
-            row = tk.Frame(self.eng_frame, bg=COLORS["bg"])
-            row.pack(fill=tk.X, pady=1)
-            # Icons (N = max grade for this blueprint)
-            _render_engineer_icons(row, max_g, size=16).pack(side=tk.LEFT)
-            # Name, location, and distance
             loc = ENGINEERS.get(eng_name, {}).get("location", "Unknown")
             dist = _eng_distance(eng_name)
             if self.current_coords and dist != float('inf'):
-                info = tk.Label(row, text=f"  {eng_name} — {loc} ({dist:.1f} ly)",
-                              font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
+                text = f"{eng_name} G{max_g} ({dist:.0f}ly)"
             else:
-                info = tk.Label(row, text=f"  {eng_name} — {loc}",
-                              font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
-            info.pack(side=tk.LEFT)
+                text = f"{eng_name} G{max_g}"
+            row = tk.Frame(self.eng_frame, bg=COLORS["bg"])
+            row.pack(fill=tk.X, anchor=tk.E)
+            _render_engineer_icons(row, max_g, size=10).pack(side=tk.LEFT)
+            tk.Label(row, text=text, font=("Consolas", 8),
+                     fg=COLORS["text"], bg=COLORS["bg"]).pack(side=tk.LEFT, padx=2)
 
     def _update_requirements(self, event=None):
         """Calculate and display material requirements."""

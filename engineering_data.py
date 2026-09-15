@@ -6,7 +6,7 @@ and experimental effects.
 """
 
 # Estimated rolls per grade to complete a blueprint
-ROLLS_PER_GRADE = {1: 1, 2: 2, 3: 3, 4: 4, 5: 6}
+ROLLS_PER_GRADE = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
 
 # Engineer locations
 ENGINEER_LOCATIONS = {
