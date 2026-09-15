@@ -15,12 +15,16 @@ import tkinter.messagebox
 from tkinter import ttk, filedialog
 from datetime import datetime
 
+import math
+
 try:
-    from engineering_data import ENGINEERS, ENGINEER_LOCATIONS, ROLLS_PER_GRADE
+    from engineering_data import ENGINEERS, ENGINEER_LOCATIONS, ROLLS_PER_GRADE, ENGINEER_COORDS, ENGINEER_SYSTEM_MAP
 except ImportError:
     ENGINEERS = {}
     ENGINEER_LOCATIONS = {}
     ROLLS_PER_GRADE = {1: 1, 2: 2, 3: 3, 4: 4, 5: 6}
+    ENGINEER_COORDS = {}
+    ENGINEER_SYSTEM_MAP = {}
 
 # ── Icon Loading ────────────────────────────────────────────────────────────
 _ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
@@ -334,13 +338,16 @@ def _classify(item: dict) -> str | None:
 
 # ── Journal Scan ────────────────────────────────────────────────────────────
 
-def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
+def scan_journal(journal_path: str) -> tuple[dict[str, dict[str, int]], str | None, tuple[float, float, float] | None]:
     """Return current material stock by applying deltas on top of the latest
-    Materials snapshot, scanning all journal files chronologically."""
+    Materials snapshot, scanning all journal files chronologically.
+    Also extracts the player's current system and coordinates from the latest
+    LoadGame, FSDJump, or Location event.
+    Returns (materials, current_system, current_coords)."""
     pattern = os.path.join(journal_path, "Journal.*.log")
     files = sorted(glob.glob(pattern))
     if not files:
-        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}
+        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}, None, None
 
     # Phase 1: find the LATEST Materials snapshot across all files
     snapshot: dict | None = None
@@ -366,7 +373,11 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
             continue
 
     if not snapshot:
-        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}
+        return {"Raw": {}, "Encoded": {}, "Manufactured": {}}, None, None
+
+    # Track player's current system from journal events
+    current_system: str | None = None
+    current_coords: tuple[float, float, float] | None = None
 
     # Parse snapshot into mutable stock dict  {display_name: (category, count)}
     stock: dict[str, tuple[str, int]] = {}
@@ -398,6 +409,14 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
                     # Only process events AFTER the snapshot
                     if fpath == snapshot_file and ts <= snapshot_ts:
                         continue
+
+                    # Track player location from navigation events
+                    if event in ("FSDJump", "LoadGame", "Location"):
+                        sys_name = entry.get("StarSystem")
+                        star_pos = entry.get("StarPos")
+                        if sys_name and star_pos and len(star_pos) == 3:
+                            current_system = sys_name
+                            current_coords = (star_pos[0], star_pos[1], star_pos[2])
 
                     if event == "Materials":
                         # New snapshot — reset stock
@@ -456,7 +475,7 @@ def scan_journal(journal_path: str) -> dict[str, dict[str, int]]:
     for _key, (_display, _grade, _cat) in MATERIAL_DATA.items():
         if _display not in result.get(_cat, {}):
             result[_cat][_display] = 0
-    return result
+    return result, current_system, current_coords
 
 
 # ── GUI ─────────────────────────────────────────────────────────────────────
@@ -470,6 +489,8 @@ class MaterialTracker:
         self.root.resizable(True, True)
 
         self.materials = {"Raw": {}, "Encoded": {}, "Manufactured": {}}
+        self.current_system = None
+        self.current_coords = None
         self.journal_path = None
         self.polling = False
 
@@ -646,7 +667,7 @@ class MaterialTracker:
     def _poll_once(self):
         if not self.journal_path:
             return
-        self.materials = scan_journal(self.journal_path)
+        self.materials, self.current_system, self.current_coords = scan_journal(self.journal_path)
         total = sum(sum(v.values()) for v in self.materials.values())
         self.status_var.set(f"✔ {total} materials tracked  |  Last scan: {datetime.now().strftime('%H:%M:%S')}")
         self._refresh_tree()
@@ -748,7 +769,7 @@ class MaterialTracker:
         if not ENGINEERS:
             tk.messagebox.showerror("Error", "engineering_data.py not found or failed to import.")
             return
-        EngineeringCalculator(self.root, self.materials)
+        EngineeringCalculator(self.root, self.materials, self.current_system, self.current_coords)
 
     def run(self):
         self.root.mainloop()
@@ -759,9 +780,11 @@ class MaterialTracker:
 class EngineeringCalculator:
     """Modal window for planning engineering material requirements."""
 
-    def __init__(self, parent, materials):
+    def __init__(self, parent, materials, current_system=None, current_coords=None):
         self.parent = parent
         self.materials = materials  # {cat: {name: qty}}
+        self.current_system = current_system
+        self.current_coords = current_coords
         self.win = tk.Toplevel(parent)
         self.win.title("Engineering Calculator")
         self.win.geometry("900x700")
@@ -1084,7 +1107,7 @@ class EngineeringCalculator:
             _render_engineer_icons(self.grade_icon_frame, n, size=16).pack(side=tk.LEFT)
 
     def _update_engineer_list(self):
-        """Filter and display engineers whose max grade >= selected grade."""
+        """Filter and display engineers whose max grade >= selected grade, sorted by proximity."""
         for w in self.eng_frame.winfo_children():
             w.destroy()
         selected_grade = self.grade_var.get()
@@ -1117,15 +1140,41 @@ class EngineeringCalculator:
             lbl.pack(anchor=tk.W)
             return
 
-        for eng_name, max_g in sorted(filtered, key=lambda x: (-x[1], x[0])):
+        # Calculate distances if we know the player's current position
+        def _eng_distance(eng_name):
+            """Return distance in ly from current system to engineer, or inf if unknown."""
+            if not self.current_coords:
+                return float('inf')
+            # Get system name from ENGINEER_LOCATIONS (format: "System, Settlement")
+            loc = ENGINEER_LOCATIONS.get(eng_name, "")
+            sys_name = loc.split(",")[0].strip() if loc else ""
+            # Check ENGINEER_SYSTEM_MAP for alternate names
+            coords_key = ENGINEER_SYSTEM_MAP.get(sys_name, sys_name)
+            coords = ENGINEER_COORDS.get(coords_key)
+            if not coords:
+                return float('inf')
+            dx = coords[0] - self.current_coords[0]
+            dy = coords[1] - self.current_coords[1]
+            dz = coords[2] - self.current_coords[2]
+            return math.sqrt(dx*dx + dy*dy + dz*dz)
+
+        # Sort by distance (closest first), then by max grade descending, then name
+        filtered.sort(key=lambda x: (_eng_distance(x[0]), -x[1], x[0]))
+
+        for eng_name, max_g in filtered:
             row = tk.Frame(self.eng_frame, bg=COLORS["bg"])
             row.pack(fill=tk.X, pady=1)
             # Icons (N = max grade for this blueprint)
             _render_engineer_icons(row, max_g, size=16).pack(side=tk.LEFT)
-            # Name and location
+            # Name, location, and distance
             loc = ENGINEERS.get(eng_name, {}).get("location", "Unknown")
-            info = tk.Label(row, text=f"  {eng_name} — {loc}",
-                          font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
+            dist = _eng_distance(eng_name)
+            if self.current_coords and dist != float('inf'):
+                info = tk.Label(row, text=f"  {eng_name} — {loc} ({dist:.1f} ly)",
+                              font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
+            else:
+                info = tk.Label(row, text=f"  {eng_name} — {loc}",
+                              font=FONT, fg=COLORS["text"], bg=COLORS["bg"])
             info.pack(side=tk.LEFT)
 
     def _update_requirements(self, event=None):
