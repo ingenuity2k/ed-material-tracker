@@ -41,12 +41,22 @@ def _load_icon(path: str, size: int = 16) -> tk.PhotoImage | None:
     cache_key = f"{path}_{size}"
     if cache_key in _icon_cache:
         return _icon_cache[cache_key]
-    if not _PIL_AVAILABLE or not os.path.exists(path):
+    if not os.path.exists(path):
         return None
     try:
-        img = Image.open(path).convert("RGBA")
-        img = img.resize((size, size), Image.Resampling.LANCZOS)
-        photo = ImageTk.PhotoImage(img)
+        if _PIL_AVAILABLE:
+            img = Image.open(path).convert("RGBA")
+            img = img.resize((size, size), Image.Resampling.LANCZOS)
+            photo = ImageTk.PhotoImage(img)
+        else:
+            # Fallback: use native tk.PhotoImage (supports PNG on Tcl/Tk 8.6+)
+            photo = tk.PhotoImage(file=path)
+            # Scale if needed (tk.PhotoImage doesn't have resize, use subsample)
+            w, h = photo.width(), photo.height()
+            if w > size or h > size:
+                factor_x = max(1, w // size)
+                factor_y = max(1, h // size)
+                photo = photo.subsample(factor_x, factor_y)
         _icon_cache[cache_key] = photo
         return photo
     except Exception:
