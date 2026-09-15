@@ -844,12 +844,16 @@ class EngineeringCalculator:
             for mod in eng["modules"]
         ))
 
-        # Pre-load composite grade icons for treeview (engineer icon repeated N times)
-        self._grade_icons = {}
+        # Pre-load icons for treeview
+        self._grade_icons = {}        # Material grade icons (for material rows)
+        self._composite_icons = {}    # Composite engineer icons (for grade headers + slider)
         for g in range(1, 6):
-            icon = _load_grade_composite(g, 16)
+            icon = _load_grade_icon(g, 16)
             if icon:
                 self._grade_icons[g] = icon
+            comp = _load_grade_composite(g, 16)
+            if comp:
+                self._composite_icons[g] = comp
 
         self._build_ui()
         self._update_module_list("")
@@ -1368,7 +1372,7 @@ class EngineeringCalculator:
             if not g_total:
                 continue
             rolls = ROLLS_PER_GRADE.get(g, 1)
-            g_icon = self._grade_icons.get(g)
+            g_icon = self._composite_icons.get(g)
             g_kwargs = {"image": g_icon} if g_icon else {}
             parent = self.req_tree.insert("", tk.END,
                 text=f"  ({rolls} roll{'s' if rolls > 1 else ''})",
