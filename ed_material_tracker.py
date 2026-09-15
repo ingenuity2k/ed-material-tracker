@@ -571,11 +571,13 @@ class MaterialTracker:
         # Tree container
         container = ttk.Frame(self.root)
         container.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 10))
-        self.tree = ttk.Treeview(container, columns=("info",), show="tree headings", selectmode="none")
-        self.tree.heading("#0", text="Qty  Material", anchor=tk.W)
-        self.tree.heading("info", text="Grade / Capacity", anchor=tk.W)
-        self.tree.column("#0", width=350, minwidth=200)
-        self.tree.column("info", width=300, minwidth=150)
+        self.tree = ttk.Treeview(container, columns=("material", "info"), show="tree headings", selectmode="none")
+        self.tree.heading("#0", text="Grade", anchor=tk.CENTER)
+        self.tree.heading("material", text="Qty  Material", anchor=tk.W)
+        self.tree.heading("info", text="Capacity", anchor=tk.W)
+        self.tree.column("#0", width=50, minwidth=50, stretch=False, anchor=tk.CENTER)
+        self.tree.column("material", width=300, minwidth=150)
+        self.tree.column("info", width=270, minwidth=100)
         vsb = ttk.Scrollbar(container, orient=tk.VERTICAL, command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -703,9 +705,9 @@ class MaterialTracker:
                 continue
             total = sum(max(0, v) for v in mats.values())
             # Category header
-            parent = self.tree.insert("", tk.END, text=f"{cat.upper()}  ({total})",
-                                       values=("",), tags=("cat_header",), open=True,
-                                       image=self._grade_icons.get(1, ""))
+            parent = self.tree.insert("", tk.END, text="",
+                                       values=(f"{cat.upper()}  ({total})", ""),
+                                       tags=("cat_header",), open=True)
             # Build items with grade info for sorting
             items_with_grade = []
             for name, qty in mats.items():
@@ -736,8 +738,8 @@ class MaterialTracker:
                 grade_label = _grade_unicode_dots(grade) if grade else ""
                 img = self._grade_icons.get(grade)
                 item_id = self.tree.insert(parent, tk.END,
-                    text=f"{qty:>5}  {name}",
-                    values=(f"{grade_label}  {bar}  {qty}/{max_cap}",),
+                    text="",
+                    values=(f"{qty:>5}  {name}", f"{bar}  {qty}/{max_cap}"),
                     tags=(f"grade_{grade}",),
                     image=img if img else "")
         # Prevent icon garbage collection
