@@ -752,8 +752,6 @@ class EngineeringCalculator:
         self.win.title("Engineering Calculator")
         self.win.geometry("900x700")
         self.win.configure(bg=COLORS["bg"])
-        self.win.transient(parent)
-        self.win.grab_set()
 
         # Build lookup: all material names -> (category, current_qty)
         self._mat_lookup = {}
