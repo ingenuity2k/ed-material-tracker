@@ -634,7 +634,7 @@ class MaterialTracker:
         self.tree.heading("#0", text="Grade", anchor=tk.CENTER)
         self.tree.heading("material", text="Qty  Material", anchor=tk.W)
         self.tree.heading("info", text="Capacity", anchor=tk.W)
-        self.tree.column("#0", width=50, minwidth=50, stretch=False, anchor=tk.CENTER)
+        self.tree.column("#0", width=60, minwidth=60, stretch=False, anchor=tk.CENTER)
         self.tree.column("material", width=300, minwidth=150)
         self.tree.column("info", width=270, minwidth=100)
         vsb = ttk.Scrollbar(container, orient=tk.VERTICAL, command=self.tree.yview)
@@ -972,6 +972,7 @@ class EngineeringCalculator:
                                      troughcolor=COLORS["bg_light"],
                                      highlightthickness=0, length=180,
                                      borderwidth=0, sliderlength=20,
+                                     width=18, showvalue=False,
                                      command=lambda _: self._update_requirements())
         self.grade_scale.pack(side=tk.LEFT, padx=(8, 0))
         self.grade_icon_frame = ttk.Frame(grade_row)
@@ -1047,6 +1048,9 @@ class EngineeringCalculator:
     # ── Module autocomplete ──
 
     def _on_module_type(self, event=None):
+        """Filter autocomplete as user types. Skip navigation keys."""
+        if event and event.keysym in ("Up", "Down", "Return", "Escape", "Tab"):
+            return
         query = self.module_var.get().strip().lower()
         self._update_module_list(query)
 
